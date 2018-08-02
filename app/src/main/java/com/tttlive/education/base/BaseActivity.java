@@ -67,8 +67,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUiIn
         Tools.fullScreen(this);
         findView();
         initView();
-
-
     }
 
     @Override
