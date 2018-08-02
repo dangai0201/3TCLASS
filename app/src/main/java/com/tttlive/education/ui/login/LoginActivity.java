@@ -134,7 +134,7 @@ public class LoginActivity extends BaseActivity implements LoginInterface, View.
         @Override
         public void onServiceDisconnected(ComponentName name) {
             // L.i(LOG_TAG, "Service disconnected.");
-            //测试
+            //测试提交
         }
     };
 
