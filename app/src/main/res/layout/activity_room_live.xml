@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_live_host"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/bt_send_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="发送消息" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <com.tttlive.education.util.LiveView
+                android:id="@+id/lv_author_1"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@color/black"
+                android:layout_height="match_parent"/>
+
+            <com.tttlive.education.util.LiveView
+                android:id="@+id/lv_author_2"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@color/color_FFD5D5D5"
+                android:layout_height="match_parent"/>
+
+            <com.tttlive.education.util.LiveView
+                android:id="@+id/lv_author_3"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@color/color_FF666666"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

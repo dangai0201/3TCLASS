@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:paddingLeft="@dimen/dp10"
+        android:paddingRight="@dimen/dp2"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/local_video_one"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:singleLine="true"
+            android:padding="@dimen/dp2"
+            android:textColor="@color/color_FF0079FF"
+            android:visibility="gone"
+            android:text="@string/main_videoups_up"/>
+
+        <TextView
+            android:id="@+id/local_audio_one"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:singleLine="true"
+            android:padding="@dimen/dp2"
+            android:textColor="@color/color_FF0079FF"
+            android:visibility="gone"
+            android:text="@string/videoly_videodown_down"/>
+
+    </LinearLayout>
+
+</LinearLayout>

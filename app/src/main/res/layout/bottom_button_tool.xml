@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bottom_tool"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/color_FFF8F8F8"
+    android:gravity="center_vertical"
+    android:paddingLeft="@dimen/dp5"
+    android:paddingRight="@dimen/dp5">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ll_tool_chat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:gravity="left|center"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/dp2"
+            android:paddingTop="@dimen/dp2">
+
+            <FrameLayout
+                android:id="@+id/fl_personnel_chat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/img_chat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dp5"
+                    android:layout_marginRight="@dimen/dp5"
+                    android:background="@drawable/icon_chat_normal" />
+
+                <com.tttlive.education.util.MaterialBadgeTextView
+                    android:id="@+id/mbt_personnel_lm"
+                    android:visibility="visible"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="27dp"
+                    android:layout_marginRight="@dimen/dp5"
+                    android:background="@color/color_FFFF3B30"
+                    android:text="0"
+                    android:textColor="@color/color_FFFF3B30"
+                    android:textSize="5sp" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_personnel_live"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_personnel_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/dp5"
+                    android:layout_marginLeft="@dimen/dp5"
+                    android:background="@drawable/icon_userlist_normal" />
+
+                <com.tttlive.education.util.MaterialBadgeTextView
+                    android:id="@+id/materialBadge_textview_chat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="27dp"
+                    android:layout_marginRight="32dp"
+                    android:background="@color/color_FFFF3B30"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:textSize="7sp"/>
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp10"
+            android:layout_weight="0.6"
+            android:gravity="right|center"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/dp2"
+            android:paddingTop="@dimen/dp2">
+
+            <ImageView
+                android:id="@+id/bt_microphone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dp10"
+                android:background="@drawable/microphone_select"
+                android:paddingLeft="@dimen/dp5"
+                android:paddingRight="@dimen/dp5" />
+
+            <ImageView
+                android:id="@+id/bt_camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dp10"
+                android:background="@drawable/camera_select"
+                android:paddingLeft="@dimen/dp5"
+                android:paddingRight="@dimen/dp5" />
+
+            <ImageView
+                android:id="@+id/bt_tool"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dp10"
+                android:background="@drawable/tool_select"
+                android:paddingLeft="@dimen/dp5"
+                android:paddingRight="@dimen/dp5" />
+
+            <ImageView
+                android:id="@+id/bt_radio_courseware"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dp5"
+                android:background="@drawable/icon_course_normal"
+                android:paddingLeft="@dimen/dp5"
+                android:paddingRight="@dimen/dp5" />
+
+            <ImageView
+                android:id="@+id/iv_raise_hand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dp5"
+                android:background="@drawable/icon_hand_normal"
+                android:paddingLeft="@dimen/dp5"
+                android:paddingRight="@dimen/dp5"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/title_view"/>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:paddingTop="9dp"
+        android:paddingLeft="@dimen/dp10"
+        android:paddingRight="@dimen/dp10"
+        android:paddingBottom="@dimen/dp15"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp104">
+        <LinearLayout
+            android:id="@+id/big_class"
+            android:background="@drawable/selector_creat_course_title_left"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <TextView
+                android:textColor="@color/color_creat_course_title"
+                android:id="@+id/tv_big_class"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:text="大班课"
+                android:layout_width="@dimen/dp48"
+                android:layout_height="@dimen/dp22"/>
+            <TextView
+                android:textColor="@color/color_creat_course_num_lim"
+                android:id="@+id/tv_big_num_lim"
+                android:gravity="center"
+                android:text="(大于10人)"
+                android:textSize="@dimen/sp12"
+                android:layout_width="73dp"
+                android:layout_height="17dp"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/middle_class"
+            android:background="@drawable/selector_creat_course_title_middle"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <TextView
+                android:textColor="@color/color_creat_course_title"
+                android:id="@+id/tv_middle_class"
+                android:textSize="16sp"
+                android:text="小班课"
+                android:gravity="center"
+                android:layout_width="@dimen/dp48"
+                android:layout_height="@dimen/dp22"/>
+
+            <TextView
+                android:textColor="@color/color_creat_course_num_lim"
+                android:id="@+id/tv_middle_num_lim"
+                android:textSize="@dimen/sp12"
+                android:gravity="center"
+                android:text="(1-10人)"
+                android:layout_width="61dp"
+                android:layout_height="17dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/small_class"
+            android:background="@drawable/selector_creat_course_title_right"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <TextView
+                android:textColor="@color/color_creat_course_title"
+                android:id="@+id/tv_small_class"
+                android:textSize="16sp"
+                android:text="一对一辅导"
+                android:gravity="center"
+                android:layout_width="@dimen/dp80"
+                android:layout_height="@dimen/dp22"/>
+
+            <TextView
+                android:textColor="@color/color_creat_course_num_lim"
+                android:id="@+id/tv_small_num_lim"
+                android:textSize="@dimen/sp12"
+                android:gravity="center"
+                android:text="(2人)"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <include layout="@layout/layout_course_detail"/>
+
+    <Button
+        android:id="@+id/bt_enter_room"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp54"
+        android:layout_marginTop="@dimen/dp40"
+        android:layout_marginLeft="@dimen/dp33"
+        android:layout_marginRight="@dimen/dp32"
+        android:background="@drawable/shape_login_button_enable_bg"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp20"
+        android:text="@string/start_create"/>
+
+
+</LinearLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_pop_room_nitice_main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/ll_notice_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp10"
+        android:layout_marginRight="@dimen/dp10"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/living_announcement_bg"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_notice_pop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="31dp"
+            android:layout_marginLeft="@dimen/dp50"
+            android:layout_marginRight="@dimen/dp50"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:maxLength="30"
+            android:textSize="@dimen/sp14"
+            android:textColor="@color/color_FF333333"
+            android:text="北京三体云联科技有限公司"/>
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/color_transparent_40"
+    android:layout_height="match_parent">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="0.3"
+        android:layout_height="0dp"
+        android:background="@color/transparent"
+        android:orientation="horizontal"/>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="0.7">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="@dimen/dp10"
+            android:paddingTop="@dimen/dp5"
+            android:paddingBottom="@dimen/dp5"
+            android:paddingLeft="@dimen/dp10"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_answer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:textSize="@dimen/sp14"
+                android:textColor="@color/color_live_chat_name"
+                android:text="@string/live_answer"/>
+
+            <LinearLayout
+                android:id="@+id/ll_tips"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/dp5"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="34dp"
+                android:background="@drawable/living_answer_tips_bg"
+                android:layout_toRightOf="@+id/tv_answer">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/live_answer_tips"
+                    android:textSize="14sp"
+                    android:textColor="@color/color_FF934F"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/ll_answer_time"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/dp5"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:background="@drawable/answer_time_bg"
+                android:layout_toRightOf="@+id/tv_answer">
+
+                <TextView
+                    android:id="@+id/tv_answer_time"
+                    android:layout_marginRight="@dimen/dp10"
+                    android:layout_marginLeft="@dimen/dp10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00:00:00"
+                    android:textSize="14sp"
+                    android:textColor="@color/color_FF934F"
+                    />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_cup_pop_answer_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|right"
+                android:padding="@dimen/dp5"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:background="@drawable/icon_close3"/>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_answer_list"
+                android:layout_marginTop="@dimen/dp10"
+                android:paddingLeft="@dimen/dp4"
+                android:paddingRight="@dimen/dp4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+        <View
+            android:layout_marginTop="@dimen/dp15"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#E6E6E6"
+            android:layout_marginLeft="@dimen/dp20"
+            android:layout_marginRight="@dimen/dp20"
+            />
+
+
+        <RelativeLayout
+            android:layout_marginRight="@dimen/dp15"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_marginLeft="@dimen/dp15"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:id="@+id/tv_tips"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/cplpr_AAAAAA"
+                android:textSize="@dimen/sp12"
+                android:text="@string/live_answer_tips_one"/>
+            <Button
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/dp10"
+                android:id="@+id/bt_add_item_view"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/button_add_sesect"/>
+            <Button
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/dp10"
+                android:layout_marginLeft="@dimen/dp10"
+                android:layout_toRightOf="@+id/bt_add_item_view"
+                android:id="@+id/bt_delete_item_view"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/button_delete_sesect"/>
+
+            <Button
+                android:id="@+id/bt_start_answer"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/dp10"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="开始答题"
+                android:textColor="@color/white"
+                android:background="@drawable/button_answer_bg"
+                />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:visibility="gone"
+        android:id="@+id/fl_student_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_80FFFFFF">
+
+    </FrameLayout>
+</RelativeLayout>
+
+
+
+</LinearLayout>

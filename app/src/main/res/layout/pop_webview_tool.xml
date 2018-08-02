@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout_brush_tool_view"
+    android:layout_width="match_parent"
+    android:layout_height="346dp"
+    android:background="#ffffff"
+    android:divider="@drawable/layout_divider_shape"
+    android:orientation="vertical"
+    android:showDividers="middle">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="7"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="@string/title_webview_tool"
+            android:textColor="@color/color_FF999999"
+            android:textSize="@dimen/sp12" />
+
+        <LinearLayout
+            android:id="@+id/tv_close"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:background="@color/color_FFF6F6F6"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/tool_icon_exit"
+                android:drawablePadding="@dimen/dp6"
+                android:gravity="center"
+                android:text="@string/close_webview_tool"
+                android:textColor="@color/color_FF666666"
+                android:textSize="@dimen/sp14" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_tool"
+        android:layout_marginTop="@dimen/dp20"
+        android:paddingLeft="@dimen/dp4"
+        android:paddingRight="@dimen/dp4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

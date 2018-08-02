@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/land_ll_tool_chat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/dp2"
+            android:paddingTop="@dimen/dp2">
+
+            <FrameLayout
+                android:id="@+id/land_fl_personnel_chat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp10">
+
+                <ImageView
+                    android:id="@+id/land_img_chat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dp5"
+                    android:layout_marginRight="@dimen/dp5"
+                    android:background="@drawable/icon_chat_normal" />
+
+                <com.tttlive.education.util.MaterialBadgeTextView
+                    android:id="@+id/land_mbt_personnel_chat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="27dp"
+                    android:layout_marginRight="@dimen/dp5"
+                    android:background="@color/color_FFFF3B30"
+                    android:text="0"
+                    android:textColor="@color/color_FFFF3B30"
+                    android:textSize="5sp"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/land_fl_personnel_live"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp10">
+
+                <ImageView
+                    android:id="@+id/land_iv_personnel_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dp5"
+                    android:layout_marginRight="@dimen/dp5"
+                    android:background="@drawable/icon_userlist_normal" />
+
+                <com.tttlive.education.util.MaterialBadgeTextView
+                    android:id="@+id/land_materialBadge_textview_chat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="27dp"
+                    android:layout_marginRight="32dp"
+                    android:background="@color/color_FFFF3B30"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:textSize="7sp"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout_start_live"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="bottom"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/land_iv_previous_page"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp10"
+                android:layout_marginRight="@dimen/dp20"
+                android:padding="@dimen/dp5"
+                android:src="@drawable/btn_previous_normal" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/land_tv_start_live"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/shape_start_course"
+                    android:gravity="center"
+                    android:padding="@dimen/dp10"
+                    android:text="开始"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dp20"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/land_iv_animation_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="@dimen/dp10"
+                    android:padding="@dimen/dp10"
+                    android:src="@drawable/btn_play"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+
+            <ImageView
+                android:id="@+id/land_iv_next_page"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp10"
+                android:layout_marginLeft="@dimen/dp20"
+                android:padding="@dimen/dp5"
+                android:src="@drawable/btn_next_normal" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_tool_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp10"
+            android:background="@color/transparent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/linearLayout_right_01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|bottom"
+                android:layout_marginBottom="@dimen/dp10"
+                android:layout_marginRight="@dimen/dp5"
+                android:background="@color/transparent"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/dp2"
+                android:paddingTop="@dimen/dp2">
+
+                <LinearLayout
+                    android:id="@+id/tool_ll_view_displacement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transparent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/land_iv_microphone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/microphone_select"
+                        android:paddingLeft="@dimen/dp5"
+                        android:paddingRight="@dimen/dp5" />
+
+                    <ImageView
+                        android:id="@+id/land_iv_camera"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp10"
+                        android:background="@drawable/camera_select"
+                        android:paddingLeft="@dimen/dp5"
+                        android:paddingRight="@dimen/dp5" />
+
+                    <ImageView
+                        android:id="@+id/land_iv_live_camera_flip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp10"
+                        android:background="@drawable/icon_camera_before"
+                        android:paddingLeft="@dimen/dp5"
+                        android:paddingRight="@dimen/dp5"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout_right_tool"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginBottom="@dimen/dp10"
+                android:background="@color/transparent"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/dp2"
+                android:paddingTop="@dimen/dp2">
+
+                <ImageView
+                    android:id="@+id/land_iv_tool_answer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/living_tool_answer_icon_normal"
+                    android:paddingLeft="@dimen/dp5"
+                    android:paddingRight="@dimen/dp5" />
+
+                <ImageView
+                    android:id="@+id/land_iv_tool_trophy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp5"
+                    android:background="@drawable/living_tool_cup_icon_normal"
+                    android:paddingLeft="@dimen/dp5"
+                    android:paddingRight="@dimen/dp5" />
+
+                <ImageView
+                    android:id="@+id/land_iv_tool_whiteboard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp5"
+                    android:background="@drawable/tool_select"
+                    android:paddingLeft="@dimen/dp5"
+                    android:paddingRight="@dimen/dp5" />
+
+                <ImageView
+                    android:id="@+id/land_iv_radio_courseware"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/icon_course_normal"
+                    android:layout_marginTop="@dimen/dp5"
+                    android:paddingLeft="@dimen/dp5"
+                    android:paddingRight="@dimen/dp5"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/land_iv_raise_hand"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp5"
+                    android:background="@drawable/icon_hand_normal"
+                    android:paddingLeft="@dimen/dp5"
+                    android:paddingRight="@dimen/dp5"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/land_iv_raise_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp5"
+                    android:background="@drawable/icon_menu_normal"
+                    android:paddingLeft="@dimen/dp5"
+                    android:paddingRight="@dimen/dp5"
+                    android:visibility="visible" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/large_ll_right_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp10"
+            android:background="@color/transparent"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/dp5"
+            android:visibility="gone">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp10">
+
+                <ImageView
+                    android:id="@+id/large_iv_chat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dp5"
+                    android:layout_marginRight="@dimen/dp5"
+                    android:background="@drawable/icon_chat_normal" />
+
+                <com.tttlive.education.util.MaterialBadgeTextView
+                    android:id="@+id/large_mbtv_chat_red"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="27dp"
+                    android:layout_marginRight="@dimen/dp5"
+                    android:background="@color/color_FFFF3B30"
+                    android:text="0"
+                    android:textColor="@color/color_FFFF3B30"
+                    android:textSize="5sp"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/large_iv_persone_list"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dp10"
+                android:layout_marginLeft="@dimen/dp5"
+                android:layout_marginRight="@dimen/dp5"
+                android:background="@drawable/icon_userlist_normal"
+                android:padding="@dimen/dp5" />
+
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp10">
+
+                <ImageView
+                    android:id="@+id/large_iv_notice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dp5"
+                    android:layout_marginRight="@dimen/dp5"
+                    android:background="@drawable/icon_announcement_normal" />
+
+                <com.tttlive.education.util.MaterialBadgeTextView
+                    android:id="@+id/large_mbtv_notice_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="27dp"
+                    android:background="@color/color_FFFF3B30"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:textSize="7sp"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</RelativeLayout>

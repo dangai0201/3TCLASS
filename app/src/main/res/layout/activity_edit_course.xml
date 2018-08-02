@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/title_view"/>
+
+    <include layout="@layout/layout_course_detail"/>
+
+
+    <TextView
+        android:id="@+id/course_confirm"
+        android:layout_marginTop="@dimen/dp206"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:background="@drawable/shape_course_confirm"
+        android:layout_width="@dimen/dp310"
+        android:layout_height="@dimen/dp54"
+        android:text="确定"
+        android:textColor="#FFFFFFFF"
+        android:textSize="20sp"
+        />
+</LinearLayout>

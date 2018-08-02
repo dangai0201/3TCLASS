@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/ll_dialog_chat"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:paddingBottom="@dimen/dp8"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="8dp">
+
+            <EditText
+                android:id="@+id/room_edt_chat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:layout_marginRight="@dimen/dp14"
+                android:background="@drawable/bkg_room_edt_chat"
+                android:imeOptions="actionSend|flagNoExtractUi"
+                android:inputType="text"
+                android:layout_marginLeft="@dimen/dp14"
+                android:paddingBottom="@dimen/dp10"
+                android:paddingLeft="@dimen/dp10"
+                android:paddingRight="@dimen/dp10"
+                android:paddingTop="@dimen/dp10"
+                android:textColor="@color/black" />
+
+            <ImageView
+                android:id="@+id/bt_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp5"
+                android:layout_marginRight="@dimen/dp5"
+                android:background="@drawable/chat_icon_images_normal" />
+<!-- -->
+            <ImageView
+                android:id="@+id/bt_em"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp5"
+                android:layout_marginRight="@dimen/dp5"
+                android:background="@drawable/chat_icon_emoji_normal" />
+
+            <Button
+                android:id="@+id/bt_send"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="@dimen/dp5"
+                android:layout_marginRight="@dimen/dp5"
+                android:background="@drawable/radio_bg_select"
+                android:text="发送"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+        <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/recyview_em"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="200dp"-->
+        <!--&gt;-->
+
+        <!--</android.support.v7.widget.RecyclerView>-->
+        <GridView
+            android:id="@+id/recyview_em"
+            android:layout_width="fill_parent"
+            android:layout_height="220dp"
+            android:columnWidth="50dip"
+            android:fadingEdge="none"
+            android:gravity="center"
+            android:numColumns="10"
+            android:scrollingCache="false"
+            android:visibility="visible"
+            android:stretchMode="spacingWidthUniform"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

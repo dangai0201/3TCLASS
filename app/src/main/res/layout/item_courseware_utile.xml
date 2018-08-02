@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp5"
+    android:layout_marginLeft="@dimen/dp10"
+    android:layout_marginRight="@dimen/dp10"
+    android:orientation="horizontal"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center"
+    android:background="@color/color_FFF6F6F6">
+
+
+    <LinearLayout
+        android:id="@+id/ll_item_utile"
+        android:layout_width="0dp"
+        android:layout_weight="0.9"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/dp2"
+        android:paddingLeft="@dimen/dp10"
+        android:paddingRight="@dimen/dp2"
+        android:paddingTop="@dimen/dp2">
+
+        <TextView
+            android:id="@+id/item_course_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp2"
+            android:layout_marginTop="@dimen/dp5"
+            android:ellipsize="end"
+            android:maxEms="20"
+            android:maxLines="1"
+            android:text="我的课件.doc"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp16" />
+
+        <TextView
+            android:id="@+id/item_course_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp5"
+            android:ellipsize="end"
+            android:maxEms="10"
+            android:maxLines="1"
+            android:text="0.3M" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_weight="0.1"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/dp10"
+        android:padding="@dimen/dp2"
+        android:src="@drawable/icon_done_wihte" />
+
+</LinearLayout>

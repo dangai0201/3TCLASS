@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/color_transparent_40"
+    android:layout_height="match_parent">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="0.15"
+        android:layout_height="0dp"
+        android:background="@color/transparent"
+        android:orientation="horizontal"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.85"
+            android:background="@color/white"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingRight="@dimen/dp10"
+                android:paddingTop="@dimen/dp5"
+                android:paddingBottom="@dimen/dp5"
+                android:paddingLeft="@dimen/dp10"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_answer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|left"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:textSize="@dimen/sp14"
+                    android:textColor="@color/color_live_chat_name"
+                    android:text="@string/live_trophy_count"/>
+
+
+
+                <LinearLayout
+                    android:id="@+id/ll_statisics_time"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/dp5"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:background="@drawable/answer_time_bg"
+                    android:layout_toRightOf="@+id/tv_answer">
+
+                    <TextView
+                        android:id="@+id/tv_statisics_time"
+                        android:layout_marginRight="@dimen/dp10"
+                        android:layout_marginLeft="@dimen/dp10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="00:00:00"
+                        android:textSize="14sp"
+                        android:textColor="@color/color_FF934F"
+                        />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/iv_cup_pop_statisics_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|right"
+                    android:padding="@dimen/dp5"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/icon_close3"/>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_marginRight="@dimen/dp20"
+                android:layout_marginLeft="@dimen/dp20"
+                android:layout_width="wrap_content"
+                android:layout_height="188dp"
+                android:background="@drawable/statisics_rl_bg">
+                <LinearLayout
+                   android:gravity="center_vertical"
+                    android:id="@+id/ll_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="学员姓名"/>
+                    <TextView
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="选择答案"/>
+                    <TextView
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="学员姓名"/>
+                    <TextView
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="选择答案"/>
+
+
+                </LinearLayout>
+                <View
+                    android:layout_above="@+id/rv_statisics_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E2E2E2"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_below="@+id/ll_title"
+                    android:id="@+id/rv_statisics_list"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:paddingLeft="@dimen/dp4"
+                    android:paddingRight="@dimen/dp4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginRight="@dimen/dp15"
+                android:layout_marginTop="@dimen/dp10"
+                android:layout_marginLeft="@dimen/dp15"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/bt_over_statisics"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/cplpr_AAAAAA"
+                        android:textSize="@dimen/sp12"
+                        android:text="已答题人数："/>
+
+                    <TextView
+                        android:id="@+id/tv_statisics_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0人"
+                        />
+
+                </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_centerVertical="true"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cplpr_AAAAAA"
+                            android:textSize="@dimen/sp12"
+                            android:text="正确率："/>
+
+                        <TextView
+                            android:id="@+id/tv_statisics_percentage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="n%"
+                            />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_centerVertical="true"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/cplpr_AAAAAA"
+                            android:textSize="@dimen/sp12"
+                            android:text="正确答案"/>
+
+                        <TextView
+                            android:id="@+id/tv_statisics_correct_answer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="n"
+                            />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <Button
+                    android:id="@+id/bt_over_statisics"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="@dimen/dp10"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="结束答题"
+                    android:textColor="@color/one_level_black"
+                    android:background="@drawable/statisics_rl_bg"
+                    />
+
+                <Button
+                    android:visibility="gone"
+                    android:id="@+id/bt_anew_statisics"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="@dimen/dp10"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="重新开始"
+                    android:textColor="@color/white"
+                    android:background="@drawable/button_answer_bg"
+                    />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+
+
+
+
+</LinearLayout>

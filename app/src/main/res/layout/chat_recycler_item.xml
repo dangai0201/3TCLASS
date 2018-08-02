@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:fresco="http://schemas.android.com/tools"
+    android:layout_marginBottom="@dimen/dp5">
+
+    <com.tttlive.education.util.CircleImageView
+        android:id="@+id/sd_user_image"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginBottom="@dimen/dp5"
+        android:layout_marginLeft="@dimen/dp5"
+        android:layout_marginRight="@dimen/dp5"
+        android:layout_marginTop="@dimen/dp5"
+        android:background="@drawable/avatar_teaching_assistant"
+        fresco:roundAsCircle="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp10"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="孤生呦"
+                android:textColor="@color/color_live_chat_name"
+                android:textSize="@dimen/sp14" />
+
+            <TextView
+                android:id="@+id/tv_nickname_teacher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp2"
+                android:text="[教师]"
+                android:textColor="@color/color_live_teacher_name"
+                android:textSize="@dimen/sp14" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_text_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@drawable/shape_bg_chat">
+
+            <TextView
+                android:id="@+id/tv_msg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center|left"
+                android:layout_gravity="center"
+                android:text="三体云联科技有限公司"
+                android:paddingBottom="@dimen/dp10"
+                android:paddingTop="@dimen/dp10"
+                android:paddingRight="@dimen/dp15"
+                android:paddingLeft="@dimen/dp15"
+                android:textColor="@color/one_level_black"
+                android:textSize="@dimen/sp14"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/iv_chat_image"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:paddingLeft="@dimen/dp5"
+                android:paddingRight="@dimen/dp5"
+                android:paddingTop="@dimen/dp5"
+                android:paddingBottom="@dimen/dp5"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="centerCrop"
+                android:visibility="gone"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

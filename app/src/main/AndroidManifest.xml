@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tttlive.basic.education">
+
+    <!-- 访问网络连接，可能产生GPRS流量 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 允许程序在手机屏幕关闭后后台进程仍然运行 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- 允许程序写入外部存储，如SD卡上写文件量 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 允许程序读取外部存储 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- 允许手机振动 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- 挂载、反挂载外部文件系统 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <!-- 获取网络信息状态，如当前的网络连接是否有效 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 获取当前WiFi接入的状态以及WLAN热点的信息 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 录制声音通过手机或耳机的麦克 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- 允许访问摄像头进行拍照 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- 修改声音设置信息 -->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <!-- 允许程序禁用键盘锁 -->
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <!-- 允许当前应用改变配置，如定位 -->
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <!-- 允许一个程序收到广播后快速收到下一个广播 -->
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <!-- 读取系统底层日志 -->
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <!-- 允许程序连接配对过的蓝牙设备 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <!-- 允许程序进行发现和配对新的蓝牙设备 -->
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <!-- 添加访问手机电话状态的权限 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="false"
+        android:xlargeScreens="true" />
+
+    <application
+        android:name="com.tttlive.education.base.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:resizeableActivity="true"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!--适配全面屏手机-->
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" />
+
+        <service
+            android:name="com.tttlive.education.ui.room.socket.WebSocketService"
+            android:exported="false"
+            android:icon="@mipmap/ic_launcher" />
+
+        <activity
+            android:name="com.tttlive.education.ui.login.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tttlive.education.ui.login.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tttlive.education.ui.login.InvitationActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tttlive.education.ui.home.HomeActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tttlive.education.ui.login.TeacherLoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tttlive.education.ui.login.ForgetActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tttlive.education.ui.login.ConfirmPdActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tttlive.education.ui.room.liveLand.TeacherActivityLand"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoBar"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.tttlive.education.ui.room.liveLand.TeacherActivityLand1"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoBar"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.tttlive.education.ui.room.liveLand.StudentActivityLand"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoBar"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name="com.tttlive.education.ui.course.CreateCourseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tttlive.education.ui.course.edit.EditCourseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tttlive.education.ui.course.playback.PlayBackListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tttlive.education.ui.share.ShareCourseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tttlive.education.ui.login.RetrievePasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tttlive.education.ui.login.RegisteredActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 配置分享 -->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent1106932641" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5b34b5c5f29d98124a000067" />
+        <!-- 配置分享结束 -->
+
+        <activity android:name="com.tttlive.education.ui.login.AgreeActivity" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepath" />
+        </provider>
+
+    </application>
+
+</manifest>

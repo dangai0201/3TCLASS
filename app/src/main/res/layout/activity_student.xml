@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:layout_weight="0.4">
+        <WebView
+            android:id="@+id/student_view_web"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="@color/transparent" />
+
+        <include layout="@layout/studio_title_utile" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:visibility="gone">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:layout_marginLeft="@dimen/dp10"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/local_video_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:singleLine="true"
+                    android:padding="@dimen/dp2"
+                    android:textColor="@color/color_FF0079FF"
+                    android:text="@string/main_videoups_up"/>
+                <TextView
+                    android:id="@+id/local_audio_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:singleLine="true"
+                    android:padding="@dimen/dp2"
+                    android:textColor="@color/color_FF0079FF"
+                    android:text="@string/main_videoups_up"/>
+
+                <TextView
+                    android:id="@+id/local_student_user_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:singleLine="true"
+                    android:padding="@dimen/dp2"
+                    android:textColor="@color/color_FF0079FF"
+                    android:text="1111111111"/>
+                <TextView
+                    android:id="@+id/local_student_room_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:singleLine="true"
+                    android:padding="@dimen/dp2"
+                    android:textColor="@color/color_FF0079FF"
+                    android:text="000000000"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/page_textview_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp20"
+            android:layout_marginLeft="@dimen/dp10"
+            android:background="@drawable/shape_page_num"
+            android:gravity="left|center"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="@dimen/dp2"
+            android:paddingLeft="@dimen/dp10"
+            android:paddingRight="@dimen/dp10"
+            android:paddingTop="@dimen/dp2"
+            android:text="1 / 30"
+            android:textColor="@color/color_FF333333"
+            android:textSize="15sp"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+    <include
+        layout="@layout/live_video_utile"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.6" />
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5">
+
+        <include layout="@layout/radio_group_utile" />
+
+        <include layout="@layout/live_bt_utile"/>
+
+    </RelativeLayout>
+    <include  layout="@layout/bottom_button_tool"
+        android:layout_width="match_parent"
+        android:layout_weight="0.08"
+        android:layout_height="0dp"
+        />
+
+</LinearLayout>

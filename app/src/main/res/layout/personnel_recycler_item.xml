@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="@dimen/dp5">
+    <!---->
+    <LinearLayout
+        android:id="@+id/ll_personnel_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <com.tttlive.education.util.CircleImageView
+            android:id="@+id/sd_personnel_image"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginBottom="@dimen/dp5"
+            android:layout_marginLeft="@dimen/dp5"
+            android:layout_marginRight="@dimen/dp5"
+            android:layout_marginTop="@dimen/dp5"
+            android:background="@drawable/avatar_teaching_assistant"
+            fresco:roundAsCircle="true"/>
+
+        <TextView
+            android:id="@+id/tv_personnel_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp5"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="三体云"
+            android:textSize="@dimen/sp14" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_cup_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center">
+
+        <com.tttlive.education.util.CircleImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="@dimen/dp5"
+            android:layout_marginLeft="@dimen/dp5"
+            android:layout_marginRight="@dimen/dp5"
+            android:layout_marginTop="@dimen/dp5"
+            android:background="@drawable/living_small_cup_icon"
+            fresco:roundAsCircle="true" />
+
+        <TextView
+            android:id="@+id/tv_x_personnel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textSize="@dimen/sp12"
+            android:textColor="#666666"
+            android:text="X " />
+
+        <TextView
+            android:id="@+id/tv_cup_num_personnel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="0"
+            android:textColor="#FB7F31"
+            android:textSize="@dimen/sp16" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_personnel_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/dp10"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:paddingTop="@dimen/dp5"
+        android:paddingBottom="@dimen/dp5"
+        android:visibility="gone"
+        android:layout_marginLeft="@dimen/dp15">
+
+        <TextView
+            android:id="@+id/tv_personnel_refused"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/radio_stroke_select"
+            android:gravity="center"
+            android:paddingRight="@dimen/dp15"
+            android:paddingLeft="@dimen/dp15"
+            android:paddingBottom="@dimen/dp8"
+            android:paddingTop="@dimen/dp8"
+            android:text="拒绝"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tv_personnel_accept"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingRight="@dimen/dp15"
+            android:paddingLeft="@dimen/dp15"
+            android:paddingBottom="@dimen/dp8"
+            android:paddingTop="@dimen/dp8"
+            android:layout_marginLeft="@dimen/dp10"
+            android:background="@drawable/radio_stroke_select"
+            android:gravity="center"
+            android:text="接受"
+            android:textColor="@color/color_FF1093ED" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_live_lm_ing"
+        android:layout_width="wrap_content"
+        android:layout_marginRight="@dimen/dp20"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp10"
+            android:background="@drawable/shape_live_in"
+            android:gravity="center"
+            android:text="连麦中..."
+            android:paddingLeft="@dimen/dp14"
+            android:paddingRight="@dimen/sp14"
+            android:paddingBottom="@dimen/dp10"
+            android:paddingTop="@dimen/dp10"
+            android:textSize="@dimen/dp14"
+            android:textColor="@color/one_level_black" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_authorization_white_board"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/dp20"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/living_video_stauts_authorization_icon2"/>
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

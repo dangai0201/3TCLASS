@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:fitsSystemWindows="true"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp">
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/share_title"
+            android:layout_marginTop="@dimen/dp66"
+            android:layout_centerHorizontal="true"
+            android:layout_width="181dp"
+            android:layout_height="@dimen/dp40"
+            android:textColor="@color/color_FF333333"
+            android:textSize="@dimen/sp30"
+            />
+
+        <TextView
+            android:layout_below="@+id/share_title"
+            android:id="@+id/share_time"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp18"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp28"
+            android:textColor="@color/color_FF666666"
+            android:textSize="@dimen/sp20"
+            />
+
+        <LinearLayout
+            android:layout_below="@+id/share_time"
+            android:id="@+id/share_code"
+            android:visibility="visible"
+            android:layout_marginTop="@dimen/dp25"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_width="@dimen/dp230"
+            android:layout_height="@dimen/dp60"
+            android:background="@drawable/shape_login_button_bg">
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/share_tv_code"
+                android:layout_width="@dimen/dp170"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp2"
+                android:textColor="@color/color_FF666666"
+                android:textSize="15sp"
+                />
+        </LinearLayout>
+        <LinearLayout
+           android:layout_alignParentBottom="true"
+            android:id="@+id/share_path"
+            android:visibility="visible"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_width="@dimen/dp180"
+            android:layout_height="@dimen/dp30"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/shape_login_button_bg">
+
+            <TextView
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/share_tv_path"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp16"
+                android:textColor="@color/color_FF666666"
+                android:textSize="14sp"
+                android:text="分享直播间链接到   "
+                />
+            <TextView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp16"
+                android:gravity="center"
+                android:background="@drawable/icon_share_small"/>
+
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+
+    <include layout="@layout/layout_share_student"
+        android:visibility="gone"/>
+    <include layout="@layout/layout_share_teacher"
+             android:visibility="gone"/>
+
+</LinearLayout>

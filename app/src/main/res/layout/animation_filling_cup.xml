@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_animation_filling_cup"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80000000">
+
+
+    <RelativeLayout
+        android:id="@+id/room_live_show_anim_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/ll_trophy_personel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_trophy_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp5"
+                android:paddingRight="@dimen/dp5"
+                android:paddingTop="@dimen/dp5"
+                android:paddingBottom="@dimen/dp5"
+                android:textSize="@dimen/sp16"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:text="user800056"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="@dimen/dp5"
+                android:paddingTop="@dimen/dp5"
+                android:paddingBottom="@dimen/dp5"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp16"
+                android:layout_gravity="center"
+                android:text="获得奖杯"/>
+
+            <LinearLayout
+                android:id="@+id/ll_animation_filling"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <com.tttlive.education.util.MagicTextView
+                    android:id="@+id/mtv_gif_num_x"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="@dimen/dp2"
+                    android:includeFontPadding="false"
+                    android:paddingLeft="@dimen/dp5"
+                    android:text="x"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp25"
+                    android:textStyle="bold"
+                    app:strokeColor="@android:color/white"
+                    app:strokeJoinStyle="miter"
+                    app:strokeWidth="2" />
+
+                <com.tttlive.education.util.MagicTextView
+                    android:id="@+id/mtv_gif_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:paddingRight="@dimen/dp5"
+                    android:layout_marginLeft="@dimen/dp2"
+                    android:text="1"
+                    android:layout_gravity="center"
+                    android:textColor="#FB7F31"
+                    android:textSize="@dimen/sp30"
+                    android:textStyle="bold"
+                    app:strokeColor="@android:color/white"
+                    app:strokeJoinStyle="miter"
+                    app:strokeWidth="2" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_view"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp54"
+        android:layout_marginTop="@dimen/dp176"
+        android:background="@drawable/shape_login_edit_bg"
+        android:layout_marginLeft="@dimen/dp33"
+        android:layout_marginRight="@dimen/dp32">
+
+        <ImageView
+            android:id="@+id/iv_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/nickname"
+            android:layout_marginLeft="@dimen/dp18"
+            android:layout_centerVertical="true"/>
+
+        <EditText
+            android:id="@+id/et_forget_phone"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_toRightOf="@id/iv_nickname"
+            android:hint="@string/et_login_phone"
+            android:textSize="@dimen/sp18"
+            android:layout_marginLeft="@dimen/dp10"
+            android:layout_marginRight="@dimen/dp10"
+            android:layout_centerVertical="true"
+            android:textColor="@color/color_FF333333"
+            android:paddingLeft="@dimen/dp5"
+            android:background="@null"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp30">
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp54"
+            android:layout_weight="1"
+            android:background="@drawable/shape_login_edit_bg"
+            android:layout_marginLeft="@dimen/dp33"
+            android:layout_marginRight="@dimen/dp16"
+            android:hint="@string/input_code"
+            android:textSize="@dimen/sp18"
+            android:paddingLeft="@dimen/dp10"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/get_code"
+            android:textSize="@dimen/sp18"
+            android:textColor="@color/white"
+            android:paddingLeft="@dimen/dp5"
+            android:paddingRight="@dimen/dp5"
+            android:layout_marginRight="@dimen/dp32"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_next_steup"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp54"
+        android:layout_marginTop="@dimen/dp40"
+        android:layout_marginLeft="@dimen/dp33"
+        android:layout_marginRight="@dimen/dp32"
+        android:enabled="false"
+        android:background="@drawable/shape_login_button_bg"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp20"
+        android:text="@string/next_steup"/>
+
+</LinearLayout>

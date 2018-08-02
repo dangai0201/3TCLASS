@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:atts="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp246"
+        android:background="@drawable/profile_bg">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/sd_me_headpic"
+            android:layout_width="@dimen/dp96"
+            android:layout_height="@dimen/dp96"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp34"
+            fresco:actualImageScaleType="focusCrop"
+            fresco:failureImage="@mipmap/ic_launcher_round"
+            fresco:failureImageScaleType="centerInside"
+            fresco:placeholderImage="@mipmap/ic_launcher_round"
+            fresco:placeholderImageScaleType="fitCenter"
+            fresco:roundAsCircle="true"
+            fresco:roundedCornerRadius="@dimen/dp20"
+            fresco:roundingBorderColor="@color/white"
+            fresco:roundingBorderWidth="1dp" />
+
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sd_me_headpic"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp10"
+            android:text="小米美"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp20" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp64"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/iv_profile_mobile"
+            android:layout_width="@dimen/dp24"
+            android:layout_height="@dimen/dp24"
+            android:layout_marginLeft="@dimen/dp20"
+            android:src="@drawable/icon_profile_mobile" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp11"
+            android:layout_toRightOf="@id/iv_profile_mobile"
+            android:text="手机号"
+            android:textColor="#FF333333"
+            android:textSize="@dimen/sp16" />
+
+        <TextView
+            android:id="@+id/tv_me_phone_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp20"
+            android:text="1851082910"
+            android:textColor="#FF999999"
+            android:textSize="@dimen/sp14" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="5dp">
+
+        <include layout="@layout/line_h_mine" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_reset_password"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp64"
+        android:gravity="center_vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/iv_profile_password"
+            android:layout_width="@dimen/dp24"
+            android:layout_height="@dimen/dp24"
+            android:layout_marginLeft="@dimen/dp20"
+            android:src="@drawable/icon_profile_password" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp11"
+            android:layout_toRightOf="@id/iv_profile_password"
+            android:text="修改密码"
+            android:textColor="#FF333333"
+            android:textSize="@dimen/sp16" />
+    </RelativeLayout>
+
+    <include layout="@layout/line_h_mine" />
+
+    <RelativeLayout
+        android:id="@+id/rl_exit_app"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp64"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/iv_profile_exit"
+            android:layout_width="@dimen/dp24"
+            android:layout_height="@dimen/dp24"
+            android:layout_marginLeft="@dimen/dp20"
+            android:src="@drawable/icon_profile_exit" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp11"
+            android:layout_toRightOf="@id/iv_profile_exit"
+            android:text="退出"
+            android:textColor="#FF333333"
+            android:textSize="@dimen/sp16" />
+    </RelativeLayout>
+
+    <include layout="@layout/line_h_mine" />
+
+
+</LinearLayout>

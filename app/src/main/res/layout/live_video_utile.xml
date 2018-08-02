@@ -1,0 +1,818 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/ll_live_video_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.66"
+                android:background="@color/color_ff353535">
+
+                <RelativeLayout
+                    android:id="@+id/teacher_head_video"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/color_ff353535" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_live_microphone_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true">
+
+                    <ImageView
+                        android:id="@+id/teacher_image_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/icon_camera_close2" />
+
+                </RelativeLayout>
+
+
+                <ImageView
+                    android:id="@+id/iv_live_microphone_close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/icon_microphone_close2"
+                    android:visibility="gone" />
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_live_microphone_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:background="@color/color_ff353535"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:padding="@dimen/dp2"
+                        android:src="@drawable/icon_microphone_open" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/shape_bg_check"
+                        android:layout_alignParentLeft="true"
+                        android:text="教师"
+                        android:padding="@dimen/dp2"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/dp14" />
+
+                    <ImageView
+                        android:id="@+id/iv_live_camera_flip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/dp5"
+                        android:paddingRight="@dimen/dp5"
+                        android:paddingTop="@dimen/dp2"
+                        android:paddingBottom="@dimen/dp2"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/camera_before_after_select"
+                        android:visibility="invisible"/>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:layout_alignParentBottom="true"
+                    android:paddingLeft="@dimen/dp10"
+                    android:paddingRight="@dimen/dp2"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/local_video_teacher"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:singleLine="true"
+                        android:visibility="gone"
+                        android:padding="@dimen/dp2"
+                        android:textColor="@color/color_FF0079FF"
+                        android:text="@string/main_videoups_up"/>
+
+                    <TextView
+                        android:id="@+id/local_audio_teacher"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:singleLine="true"
+                        android:padding="@dimen/dp2"
+                        android:textColor="@color/color_FF0079FF"
+                        android:visibility="gone"
+                        android:text="@string/videoly_videodown_down"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_live_one_to_one_student"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.33"
+                android:background="@color/color_ff3b3b3b"
+                android:visibility="visible">
+
+                <com.tttlive.education.util.LiveView
+                    android:id="@+id/rl_live_head_video_student"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/color_ff3b3b3b"
+                    />
+
+            <RelativeLayout
+                android:id="@+id/rl_live_microphone_student_two"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true">
+
+                <ImageView
+                    android:id="@+id/iv_live_image_view_student"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/icon_camera_close2"/>
+
+            </RelativeLayout>
+
+
+                <ImageView
+                    android:id="@+id/iv_live_audio_close_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/icon_microphone_close2"
+                    android:visibility="gone" />
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_live_video_close_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:background="@color/color_ff353535"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:padding="@dimen/dp2"
+                        android:src="@drawable/icon_microphone_open" />
+                </RelativeLayout>
+
+                <include
+                    android:id="@+id/clude_local_one"
+                    layout="@layout/local_audio_video_uitl"
+                    android:visibility="gone"/>
+
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/rl_live_lv_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_live_video_two"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:background="@color/color_ff353535">
+
+                    <!--<RelativeLayout
+                        android:id="@+id/rl_live_video_one"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/color_ff353535" />-->
+                    <com.tttlive.education.util.LiveView
+                        android:id="@+id/rl_live_video_one"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/color_ff353535" />
+
+                    <TextView
+                        android:id="@+id/tv_live_video_one"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="@dimen/dp10"
+                        android:background="@drawable/shape_page_num"
+                        android:padding="@dimen/dp2"
+                        android:text="三体云"
+                        android:textColor="@color/color_FF333333"
+                        android:textSize="@dimen/dp11"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/iv_live_video_one"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/icon_camera_close2" />
+
+                    <ImageView
+                        android:id="@+id/iv_live_microphone_close_one"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/icon_microphone_close2"
+                        android:visibility="gone" />
+
+
+                    <RelativeLayout
+                        android:id="@+id/rl_live_microphone_open_one"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:background="@color/color_ff353535"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:padding="@dimen/dp2"
+                            android:src="@drawable/icon_microphone_open" />
+                    </RelativeLayout>
+                    <include
+                        android:id="@+id/clude_local_two"
+                        layout="@layout/local_audio_video_uitl"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:background="@color/color_ff3b3b3b">
+
+                    <!--<RelativeLayout
+                        android:id="@+id/rl_live_video_two"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/color_ff3b3b3b" />-->
+
+                    <com.tttlive.education.util.LiveView
+                        android:id="@+id/rl_live_video_two"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/color_ff3b3b3b" />
+
+
+                    <TextView
+                        android:id="@+id/tv_live_video_two"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="@dimen/dp10"
+                        android:background="@drawable/shape_page_num"
+                        android:padding="@dimen/dp2"
+                        android:text="三体云"
+                        android:textColor="@color/color_FF333333"
+                        android:textSize="@dimen/dp11"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/iv_live_video_two"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/icon_camera_close2" />
+
+                    <ImageView
+                        android:id="@+id/iv_live_microphone_close_two"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/icon_microphone_close2"
+                        android:visibility="gone" />
+
+
+                    <RelativeLayout
+                        android:id="@+id/rl_live_microphone_open_two"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:background="@color/color_ff353535"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:padding="@dimen/dp2"
+                            android:src="@drawable/icon_microphone_open" />
+                    </RelativeLayout>
+                    <include
+                        android:id="@+id/clude_local_three"
+                        layout="@layout/local_audio_video_uitl"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:background="@color/color_ff353535">
+
+                    <!--<RelativeLayout
+                        android:id="@+id/rl_live_video_one"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/color_ff353535" />-->
+                    <com.tttlive.education.util.LiveView
+                        android:id="@+id/rl_live_video_three"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/color_ff353535" />
+
+                    <TextView
+                        android:id="@+id/tv_live_video_three"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="@dimen/dp10"
+                        android:background="@drawable/shape_page_num"
+                        android:padding="@dimen/dp2"
+                        android:text="三体云"
+                        android:textColor="@color/color_FF333333"
+                        android:textSize="@dimen/dp11"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/iv_live_video_three"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/icon_camera_close2" />
+
+                    <ImageView
+                        android:id="@+id/iv_live_microphone_close_three"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/icon_microphone_close2"
+                        android:visibility="gone" />
+
+
+                    <RelativeLayout
+                        android:id="@+id/rl_live_microphone_open_three"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:background="@color/color_ff353535"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:padding="@dimen/dp2"
+                            android:src="@drawable/icon_microphone_open" />
+                    </RelativeLayout>
+                    <include
+                        android:id="@+id/clude_local_four"
+                        layout="@layout/local_audio_video_uitl"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:background="@color/color_ff3b3b3b"
+                    android:visibility="gone">
+
+                    <!--<RelativeLayout
+                        android:id="@+id/rl_live_video_three"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/color_ff3b3b3b" />-->
+
+                    <com.tttlive.education.util.LiveView
+                        android:id="@+id/rl_live_video_four"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/color_ff3b3b3b" />
+
+                    <TextView
+                        android:id="@+id/tv_live_video_four"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="@dimen/dp10"
+                        android:background="@drawable/shape_page_num"
+                        android:padding="@dimen/dp2"
+                        android:text="三体云"
+                        android:textColor="@color/color_FF333333"
+                        android:textSize="@dimen/dp11"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/iv_live_video_four"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/icon_camera_close2" />
+
+                    <ImageView
+                        android:id="@+id/iv_live_microphone_close_four"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/icon_microphone_close2"
+                        android:visibility="gone" />
+
+
+                    <RelativeLayout
+                        android:id="@+id/rl_live_microphone_open_four"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:background="@color/color_ff353535"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:padding="@dimen/dp2"
+                            android:src="@drawable/icon_microphone_open" />
+
+
+                    </RelativeLayout>
+                    <include
+                        android:id="@+id/clude_local_five"
+                        layout="@layout/local_audio_video_uitl"/>
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_live_video_three"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:background="@color/color_ff3b3b3b">
+
+                    <!--<RelativeLayout
+                        android:id="@+id/rl_live_video_four"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/color_ff353535" />-->
+
+                    <com.tttlive.education.util.LiveView
+                        android:id="@+id/rl_live_video_five"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/color_ff3b3b3b" />
+
+                    <TextView
+                        android:id="@+id/tv_live_video_five"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="@dimen/dp10"
+                        android:background="@drawable/shape_page_num"
+                        android:padding="@dimen/dp2"
+                        android:text="三体云"
+                        android:textColor="@color/color_FF333333"
+                        android:textSize="@dimen/dp11"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/iv_live_video_five"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/icon_camera_close2" />
+
+                    <ImageView
+                        android:id="@+id/iv_live_microphone_close_five"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/icon_microphone_close2"
+                        android:visibility="gone" />
+
+
+                    <RelativeLayout
+                        android:id="@+id/rl_live_microphone_open_five"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:background="@color/color_ff353535"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:padding="@dimen/dp2"
+                            android:src="@drawable/icon_microphone_open" />
+
+                    </RelativeLayout>
+                    <include
+                        android:id="@+id/clude_local_six"
+                        layout="@layout/local_audio_video_uitl"/>
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:background="@color/color_ff353535">
+
+                    <!--<RelativeLayout
+                        android:id="@+id/rl_live_video_three"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/color_ff3b3b3b" />-->
+
+                    <com.tttlive.education.util.LiveView
+                        android:id="@+id/rl_live_video_six"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/color_ff353535" />
+
+                    <TextView
+                        android:id="@+id/tv_live_video_six"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="@dimen/dp10"
+                        android:background="@drawable/shape_page_num"
+                        android:padding="@dimen/dp2"
+                        android:text="三体云"
+                        android:textColor="@color/color_FF333333"
+                        android:textSize="@dimen/dp11"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/iv_live_video_six"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/icon_camera_close2" />
+
+                    <ImageView
+                        android:id="@+id/iv_live_microphone_close_six"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/icon_microphone_close2"
+                        android:visibility="gone" />
+
+
+                    <RelativeLayout
+                        android:id="@+id/rl_live_microphone_open_six"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:background="@color/color_ff353535"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:padding="@dimen/dp2"
+                            android:src="@drawable/icon_microphone_open" />
+                    </RelativeLayout>
+                    <include
+                        android:id="@+id/clude_local_seven"
+                        layout="@layout/local_audio_video_uitl"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:background="@color/color_ff3b3b3b">
+
+                    <!--<RelativeLayout
+                        android:id="@+id/rl_live_video_one"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/color_ff353535" />-->
+                    <com.tttlive.education.util.LiveView
+                        android:id="@+id/rl_live_video_seven"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/color_ff3b3b3b" />
+
+                    <TextView
+                        android:id="@+id/tv_live_video_seven"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="@dimen/dp10"
+                        android:background="@drawable/shape_page_num"
+                        android:padding="@dimen/dp2"
+                        android:text="三体云"
+                        android:textColor="@color/color_FF333333"
+                        android:textSize="@dimen/dp11"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/iv_live_video_seven"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/icon_camera_close2"
+                        android:visibility="gone"/>
+
+                    <ImageView
+                        android:id="@+id/iv_live_microphone_close_seven"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/icon_microphone_close2"
+                        android:visibility="gone" />
+
+
+                    <RelativeLayout
+                        android:id="@+id/rl_live_microphone_open_seven"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:background="@color/color_ff353535"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:padding="@dimen/dp2"
+                            android:src="@drawable/icon_microphone_open" />
+                    </RelativeLayout>
+                    <include
+                        android:id="@+id/clude_local_eight"
+                        layout="@layout/local_audio_video_uitl"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:background="@color/color_ff3b3b3b"
+                    android:visibility="gone">
+
+                    <!--<RelativeLayout
+                        android:id="@+id/rl_live_video_two"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/color_ff3b3b3b" />-->
+
+                    <com.tttlive.education.util.LiveView
+                        android:id="@+id/rl_live_video_eight"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/color_ff353535" />
+
+
+                    <TextView
+                        android:id="@+id/tv_live_video_eight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="@dimen/dp10"
+                        android:background="@drawable/shape_page_num"
+                        android:padding="@dimen/dp2"
+                        android:text="三体云"
+                        android:textColor="@color/color_ff353535"
+                        android:textSize="@dimen/dp11"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/iv_live_video_eight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/icon_camera_close2" />
+
+                    <ImageView
+                        android:id="@+id/iv_live_microphone_close_eight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/icon_microphone_close2"
+                        android:visibility="gone" />
+
+
+                    <RelativeLayout
+                        android:id="@+id/rl_live_microphone_open_eight"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:background="@color/color_ff353535"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:padding="@dimen/dp2"
+                            android:src="@drawable/icon_microphone_open" />
+
+                    </RelativeLayout>
+                    <include
+                        android:id="@+id/clude_local_nine"
+                        layout="@layout/local_audio_video_uitl"/>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

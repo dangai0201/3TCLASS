@@ -1,0 +1,54 @@
+<resources>
+    <string-array name="webview_tool_names">
+        <item>钢笔</item>
+        <item>激光笔</item>
+        <item>文字</item>
+        <item>箭头</item>
+        <item>矩形框</item>
+        <item>圆形</item>
+        <item>直线</item>
+        <item>虚线</item>
+        <item>橡皮擦</item>
+        <item>清除</item>
+    </string-array>
+
+    <string-array name="webview_tool_values">
+        <item>Pen</item>
+        <item>Pointer</item>
+        <item>IText</item>
+        <item>Arrow</item>
+        <item>Rect</item>
+        <item>Circle</item>
+        <item>Line</item>
+        <item>Dashed</item>
+        <item>SingleEraser</item>
+        <item>clearAll</item>
+    </string-array>
+
+    <string-array name="webview_tool_icon_normal">
+        <item>@drawable/tool_icon_pen_normal</item>
+        <item>@drawable/tool_icon_laser_normal</item>
+        <item>@drawable/tool_icon_text_normal</item>
+        <item>@drawable/tool_icon_arrow_normal</item>
+        <item>@drawable/tool_icon_rectangle_normal</item>
+        <item>@drawable/tool_icon_oval_normal</item>
+        <item>@drawable/tool_icon_beeline_normal</item>
+        <item>@drawable/tool_icon_dashed_normal</item>
+        <item>@drawable/tool_icon_eraser_normal</item>
+        <item>@drawable/tool_icon_delete_normal</item>
+    </string-array>
+
+    <string-array name="webview_tool_icon_hover">
+        <item>@drawable/tool_icon_pen_hover</item>
+        <item>@drawable/tool_icon_laser_hover</item>
+        <item>@drawable/tool_icon_text_hover</item>
+        <item>@drawable/tool_icon_arrow_hover</item>
+        <item>@drawable/tool_icon_rectangle_hover</item>
+        <item>@drawable/tool_icon_oval_hover</item>
+        <item>@drawable/tool_icon_beeline_hover</item>
+        <item>@drawable/tool_icon_dashed_hover</item>
+        <item>@drawable/tool_icon_eraser_hover</item>
+        <item>@drawable/tool_icon_delete_hover</item>
+    </string-array>
+</resources>
+

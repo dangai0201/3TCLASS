@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/on"
+        android:state_activated="false">
+        <bitmap android:src="@drawable/cup_01"/>
+    </item>
+
+    <item
+        android:id="@+id/off"
+        android:state_activated="true">
+        <bitmap android:src="@drawable/cup_20"/>
+    </item>
+
+    <transition
+        android:fromId="@id/on"
+        android:toId="@id/off"
+        android:drawable="@drawable/animation_list_filling"/>
+
+</animated-selector>

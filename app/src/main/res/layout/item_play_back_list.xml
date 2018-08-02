@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:paddingLeft="@dimen/dp12"
+              android:paddingRight="@dimen/dp30"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/dp54">
+    <TextView
+        android:id="@+id/course_item_name"
+        android:gravity="center"
+        android:textColor="#FF333333"
+        android:textSize="16sp"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="@dimen/dp54"/>
+    <TextView
+        android:id="@+id/course_item_duration"
+        android:gravity="center"
+        android:textColor="#FF333333"
+        android:textSize="16sp"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="@dimen/dp54"/>
+    <LinearLayout
+        android:id="@+id/course_item_del"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="@dimen/dp54">
+        <ImageView
+            android:background="@drawable/icon_delete1"
+            android:layout_width="@dimen/dp24"
+            android:layout_height="@dimen/dp24"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/course_item_play"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="@dimen/dp54">
+        <ImageView
+            android:background="@drawable/icon_play1"
+            android:layout_width="@dimen/dp24"
+            android:layout_height="@dimen/dp24"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp150"
+        android:background="@drawable/shape_item_course"
+        android:layout_marginBottom="@dimen/dp20"
+        android:layout_marginLeft="@dimen/dp20"
+        android:layout_marginRight="@dimen/dp20">
+
+        <TextView
+            android:id="@+id/tv_course_title"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp27"
+            android:textSize="@dimen/sp19"
+            android:textColor="@color/color_FF333333"
+            android:gravity="center_vertical"
+            android:text="课程内容01"
+            android:layout_margin="@dimen/dp16"/>
+
+        <ImageView
+            android:id="@+id/iv_islive"
+            android:layout_width="@dimen/dp74"
+            android:layout_height="@dimen/dp28"
+            android:layout_marginTop="@dimen/dp18"
+            android:layout_toRightOf="@id/tv_course_title"
+            android:src="@drawable/icon_living"/>
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/iv_course_more"
+            android:layout_width="@dimen/dp24"
+            android:layout_height="@dimen/dp24"
+            android:layout_marginTop="@dimen/dp16"
+            android:layout_marginRight="@dimen/dp16"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/icon_more1"/>
+        <TextView
+            android:padding="@dimen/dp10"
+            android:id="@+id/tv_delete_course"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp16"
+            android:layout_marginRight="@dimen/dp16"
+            android:layout_alignParentRight="true"
+            android:text="删除"
+            android:textColor="@color/color_FF666666"/>
+        <TextView
+            android:id="@+id/tv_course_time"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp25"
+            android:layout_below="@id/tv_course_title"
+            android:layout_marginLeft="@dimen/dp16"
+            android:textSize="@dimen/sp18"
+            android:text="长期课程"
+            android:textColor="@color/color_FF666666"/>
+
+        <TextView
+            android:id="@+id/tv_course_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_FF999999"
+            android:text="一对一"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/dp16"
+            android:layout_marginBottom="@dimen/dp18"
+            android:textSize="@dimen/sp12"
+            android:paddingLeft="@dimen/dp10"
+            android:paddingRight="@dimen/dp10"
+            android:paddingTop="@dimen/dp5"
+            android:paddingBottom="@dimen/dp5"
+            android:background="@drawable/shape_course_type"/>
+
+        <TextView
+            android:id="@+id/tv__course_pd_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tv_course_type"
+            android:textColor="@color/color_FF999999"
+            android:text="邀请码进入"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/dp16"
+            android:layout_marginBottom="@dimen/dp18"
+            android:textSize="@dimen/sp12"
+            android:paddingLeft="@dimen/dp10"
+            android:paddingRight="@dimen/dp10"
+            android:paddingTop="@dimen/dp5"
+            android:paddingBottom="@dimen/dp5"
+            android:background="@drawable/shape_course_type"/>
+
+        <ImageView
+            android:id="@+id/iv_course_share"
+            android:layout_width="@dimen/dp24"
+            android:layout_height="@dimen/dp24"
+            android:layout_marginBottom="@dimen/dp18"
+            android:layout_marginRight="@dimen/dp16"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/icon_share1"/>
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

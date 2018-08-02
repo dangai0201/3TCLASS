@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/color_transparent_40"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+        <LinearLayout
+
+            android:layout_width="400dp"
+            android:layout_height="220dp"
+            android:background="@drawable/result_bg"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingRight="@dimen/dp10"
+                android:paddingBottom="@dimen/dp5"
+                android:paddingLeft="@dimen/dp10"
+                >
+
+                <TextView
+                    android:layout_marginTop="@dimen/dp20"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:id="@+id/tv_answer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp14"
+                    android:textColor="@color/color_live_chat_name"
+                    android:text="@string/live_trophy_count"/>
+
+
+                <LinearLayout
+                    android:visibility="visible"
+                    android:id="@+id/ll_result_time"
+                    android:layout_marginLeft="@dimen/dp5"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/answer_time_bg"
+                    android:layout_toRightOf="@+id/tv_answer">
+
+                    <TextView
+                        android:id="@+id/tv_result_time"
+                        android:layout_marginRight="@dimen/dp10"
+                        android:layout_marginLeft="@dimen/dp10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="00:00:00"
+                        android:textSize="14sp"
+                        android:textColor="@color/color_FF934F"
+                        />
+                </LinearLayout>
+            </RelativeLayout>
+
+<!---->
+            <View
+                android:layout_marginTop="@dimen/dp10"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_E6E6E6"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="@dimen/dp20"
+                />
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/dp40"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="正确答案:  "
+                    android:textColor="@color/color_9B9B9B"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/tv_correct_answer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="B"
+                    android:textColor="@color/color_02AFFC"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/dp20"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="我的答案:  "
+                    android:textColor="@color/color_9B9B9B"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/tv_me_answer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="B"
+                    android:textColor="@color/color_02AFFC"
+                    android:textSize="20sp"/>
+
+
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/main"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <include layout="@layout/title_view"/>
+
+    <RadioGroup
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:paddingTop="9dp"
+        android:paddingLeft="@dimen/dp10"
+        android:paddingRight="@dimen/dp10"
+        android:paddingBottom="@dimen/dp15"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp80">
+
+        <RadioButton
+            android:textSize="@dimen/sp16"
+            android:id="@+id/student"
+            android:button="@null"
+            android:text="学生"
+            android:textColor="@color/color_creat_course_title"
+            android:background="@drawable/selector_creat_course_title_left"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+        </RadioButton>
+
+        <RadioButton
+            android:textSize="@dimen/sp16"
+            android:id="@+id/teacher"
+            android:gravity="center"
+            android:text="老师"
+            android:textColor="@color/color_creat_course_title"
+            android:background="@drawable/selector_creat_course_title_middle"
+            android:checked="false"
+            android:button="@null"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+
+        <RadioButton
+            android:visibility="gone"
+            android:textSize="@dimen/sp16"
+            android:id="@+id/assistant"
+            android:gravity="center"
+            android:text="助教"
+            android:textColor="@color/color_creat_course_title"
+            android:background="@drawable/selector_creat_course_title_right"
+            android:checked="false"
+            android:button="@null"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+
+    </RadioGroup>
+
+    <FrameLayout
+        android:id="@+id/fragmentContent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+
+</LinearLayout>

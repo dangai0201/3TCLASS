@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+        <RadioGroup
+            android:id="@+id/rg_course_group"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp40"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rg_course_im_radio_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/selector_live_bg_title"
+                android:button="@null"
+                android:gravity="center"
+                android:text="互动聊天"
+                android:textColor="@drawable/selector_live_text_bg" />
+
+            <RadioButton
+                android:id="@+id/rg_course_personnel_radio_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/selector_live_bg_title"
+                android:button="@null"
+                android:gravity="center"
+                android:text="人员名单(0)"
+                android:textColor="@drawable/selector_live_text_bg" />
+
+        </RadioGroup>
+
+        <com.tttlive.education.util.MaterialBadgeTextView
+            android:id="@+id/materialBadge_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="30dp"
+            android:background="@color/color_FFFF3B30"
+            android:text="0"
+            android:textColor="@android:color/white"
+            android:visibility="visible"
+            android:textSize="10sp"/>
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white">
+
+    </android.support.v4.view.ViewPager>
+
+
+</LinearLayout>
