@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="ijkplayer-java-debug:@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/ijkplayer-java-debug.aar/e2d69f9e5b6a902948440c4570390e0a/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/ijkplayer-java-debug.aar/e2d69f9e5b6a902948440c4570390e0a/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
