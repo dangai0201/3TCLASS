@@ -41,6 +41,11 @@
 
         </RelativeLayout>
 
+        <AbsoluteLayout
+            android:id="@+id/rl_student_video_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,10 +58,7 @@
             <include layout="@layout/teacher_tool_utils" />
         </LinearLayout>
 
-        <RelativeLayout
-            android:id="@+id/rl_student_video_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+
 
         <LinearLayout
             android:id="@+id/ll_video_tool_zoom"

@@ -94,7 +94,6 @@ public class RegisteredActivity extends BaseActivity implements View.OnClickList
         tv_version_code = findViewById(R.id.tv_version_code);
 
 
-
     }
 
     @Override
@@ -136,8 +135,8 @@ public class RegisteredActivity extends BaseActivity implements View.OnClickList
      */
     private void changeLoginBtnStatus() {
         if (TextCheckUtils.checkTextLength(mobile_num.getText().toString(), 11, 11)
-                && TextCheckUtils.checkTextLength(password_num.getText().toString(),6,20)
-                && TextCheckUtils.checkTextLength(verification_code.getText().toString(),6,6)
+                && TextCheckUtils.checkTextLength(password_num.getText().toString(), 6, 20)
+                && TextCheckUtils.checkTextLength(verification_code.getText().toString(), 6, 6)
                 && cb_agree.isChecked()) {
             //登录按钮设为蓝色
             ll_registered_correct.setBackgroundResource(R.drawable.input_submit_hover);
@@ -218,14 +217,11 @@ public class RegisteredActivity extends BaseActivity implements View.OnClickList
     public void verifyAccount(BaseResponse<Object> baceBean) {
         Log.i(TAG_CLASS, " 校验账号   : " + baceBean);
         if (baceBean.getCode() == Constant.HTTP_REQUEST_ACCOUNT_SUCCESSFUL) {
-
             showPopupWindow(getString(R.string.registered_account_confirm));
         } else if (baceBean.getCode() == Constant.HTTP_REQUEST_ACCOUNT_ERROR) {
             showPopupWindow(getString(R.string.account_parameter_error));
         } else if (baceBean.getCode() == Constant.HTTP_REQUEST_ACCOUNT_NOT_EXIST) {
             //账号不存在
-            isTimerRun = true;
-            cDownTimer.start();
             mPresenter.sendSMSCode(mobile_num_iphone);
         } else if (baceBean.getCode() == Constant.HTTP_REQUEST_ACCOUNT_ACCOUNT_SUSPENDED) {
             showPopupWindow(baceBean.getMessage());
@@ -239,15 +235,9 @@ public class RegisteredActivity extends BaseActivity implements View.OnClickList
     public void getSMSVerificationCode(BaseResponse<Object> verificationCode) {
         if (verificationCode.getCode() == Constant.HTTP_REQUEST_ACCOUNT_SUCCESSFUL) {
             //发送验证码成功
-//            showPopupWindow(getString(R.string.verification_code_send_successful));
-        } else if (verificationCode.getCode() == Constant.HTTP_REQUEST_ACCOUNT_ERROR) {
-            //参数错误
-            showPopupWindow(getResources().getString(R.string.account_parameter_error));
-        } else if (verificationCode.getCode() == Constant.HTTP_REQUEST_ACCOUNT_NOT_EXIST) {
-            //发送失败
-            showPopupWindow(verificationCode.getMessage());
-        } else if (verificationCode.getCode() == Constant.HTTP_REQUEST_SERVER_EXCEPTION) {
-            //服务器异常
+            isTimerRun = true;
+            cDownTimer.start();
+        }else {
             showPopupWindow(verificationCode.getMessage());
         }
 
@@ -285,7 +275,7 @@ public class RegisteredActivity extends BaseActivity implements View.OnClickList
             mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
                 @Override
                 public void onDismiss() {
-                    AccountBean accountBean = new AccountBean(mobile_num.getText().toString(),"");
+                    AccountBean accountBean = new AccountBean(mobile_num.getText().toString(), "");
                     //发送帐号到帐号登录页
                     EventBus.getDefault().post(accountBean);
                     finish();
@@ -379,7 +369,7 @@ public class RegisteredActivity extends BaseActivity implements View.OnClickList
             //安卓-忘记密码页面，手机号，密码都按规则输入以后，登录按钮才可以为点击状态
             changeLoginBtnStatus();
 
-            if(isTimerRun) {
+            if (isTimerRun) {
                 return;
             }
 

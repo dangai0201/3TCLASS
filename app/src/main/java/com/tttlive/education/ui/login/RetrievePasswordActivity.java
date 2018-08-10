@@ -252,10 +252,7 @@ public class RetrievePasswordActivity extends BaseActivity implements View.OnCli
     public void verifyAccount(BaseResponse<Object> baceBean) {
         Log.i(TAG_CLASS, " 校验帐号   : " + baceBean);
         if (baceBean.getCode() == Constant.HTTP_REQUEST_ACCOUNT_SUCCESSFUL) {
-//            showPopupWindow("帐号正确");
             mPresenter.sendSMSCode(mobile_number);
-            isTimerRun = true;
-            cdTimer.start();
         } else if (baceBean.getCode() == Constant.HTTP_REQUEST_ACCOUNT_ERROR) {
             showPopupWindow(getResources().getString(R.string.account_parameter_error));
         } else if (baceBean.getCode() == Constant.HTTP_REQUEST_ACCOUNT_NOT_EXIST) {
@@ -270,17 +267,12 @@ public class RetrievePasswordActivity extends BaseActivity implements View.OnCli
 
     @Override
     public void getSMSVerificationCode(BaseResponse<Object> verificationCode) {
+        Log.e("TAG", verificationCode.toString());
         if (verificationCode.getCode() == Constant.HTTP_REQUEST_ACCOUNT_SUCCESSFUL) {
-            //发送验证码正确
-//            showPopupWindow(getString(R.string.verification_code_send_successful));
-        } else if (verificationCode.getCode() == Constant.HTTP_REQUEST_ACCOUNT_ERROR) {
-            //参数错误
-            showPopupWindow(getResources().getString(R.string.account_parameter_error));
-        } else if (verificationCode.getCode() == Constant.HTTP_REQUEST_ACCOUNT_NOT_EXIST) {
-            //发送失败
-            showPopupWindow(verificationCode.getMessage());
-        } else if (verificationCode.getCode() == Constant.HTTP_REQUEST_SERVER_EXCEPTION) {
-            //服务器异常
+            //发送验证码成功
+            isTimerRun = true;
+            cdTimer.start();
+        } else {
             showPopupWindow(verificationCode.getMessage());
         }
 
