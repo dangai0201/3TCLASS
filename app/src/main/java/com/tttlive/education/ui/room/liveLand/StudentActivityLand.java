@@ -63,6 +63,7 @@ import com.tttlive.education.ui.room.bean.GegBannedBean;
 import com.tttlive.education.ui.room.bean.LeaveMassageBean;
 import com.tttlive.education.ui.room.bean.LmAgreeResBean;
 import com.tttlive.education.ui.room.bean.LmDisconnectBean;
+import com.tttlive.education.ui.room.bean.ModeVieoChangeBean;
 import com.tttlive.education.ui.room.bean.SendTextMessageBean;
 import com.tttlive.education.ui.room.bean.ShareBean;
 import com.tttlive.education.ui.room.bean.StartNotLiveBean;
@@ -1260,6 +1261,22 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
             mAudeoClose = false;
             AudioOpen(mUerId);
         }
+    }
+
+    @Override
+    public void modeChangeReq(String data) {
+        Log.i(TAG_CLASS , "切换视频模式 : " + data);
+
+        ModeVieoChangeBean mvcBean = stGson.fromJson(data  , ModeVieoChangeBean.class);
+        if ("video".equals(mvcBean.getData().getMode())){
+            //视频模式
+            Log.i(TAG_CLASS , "视频模式 ");
+        }else if ("normal".equals(mvcBean.getData().getMode())){
+            //白板模式
+
+        }
+
+
     }
 
     @Override

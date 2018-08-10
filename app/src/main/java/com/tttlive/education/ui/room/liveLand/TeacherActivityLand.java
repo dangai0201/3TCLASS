@@ -1392,6 +1392,11 @@ public class TeacherActivityLand extends BaseLiveActivity implements View.OnClic
     }
 
     @Override
+    public void modeChangeReq(String data) {
+        //视频模式
+    }
+
+    @Override
     public void showNetworkException() {
         super.showNetworkException();
         Log.e(TAG_NAME , " showNetworkException  ");

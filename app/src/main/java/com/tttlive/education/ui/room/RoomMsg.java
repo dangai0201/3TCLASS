@@ -100,5 +100,10 @@ public interface RoomMsg {
     */
    void liveAudioClose(String data);
 
+   /**
+    * 接收视频模式
+    */
+   void modeChangeReq(String data);
+
 
 }

@@ -39,7 +39,7 @@ public class Constant {
     public static String LIVE_TYPE_ID;
     //房间ID
     public static String LIVE_ROOM_ID;
-    //bugly的key
+    //bugly的keyte
     public static final String BuglyKey = "f27a557d57";
     //API接口地址
     //测试环境
@@ -151,6 +151,8 @@ public class Constant {
     public static final String VIDEO_CLOSE_OPEN = "camera_closed_req";
     //开关麦克风
     public static final String AUDIO_CLOSE_OPEN = "mic_closed_req";
+    //视频模式切换
+    public static final String MODE_CHANGE_REQ = "mode_change_req";
 
 
     /**********发送消息广播类型*********/

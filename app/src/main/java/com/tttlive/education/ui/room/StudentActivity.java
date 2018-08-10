@@ -917,6 +917,11 @@ public class StudentActivity extends BaseLiveActivity implements PlayerManager.P
 
     }
 
+    @Override
+    public void modeChangeReq(String data) {
+
+    }
+
     /**
      * 判断是否上课
      */

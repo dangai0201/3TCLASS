@@ -1459,6 +1459,11 @@ public class TeacherActivity extends BaseLiveActivity implements View.OnClickLis
 
     }
 
+    @Override
+    public void modeChangeReq(String data) {
+
+    }
+
     /**
      * 发送聊天消息
      *

@@ -36,7 +36,6 @@ public class RoomMessageType {
                     break;
                 case Constant.LMREQ:
                     mRoomInstance.dealApplyMicMessage(data);
-
                     break;
                 case Constant.ROOM_JOIN_QUN_RES:
                     mRoomInstance.roomPersonnelList(data);
@@ -50,7 +49,6 @@ public class RoomMessageType {
                 case Constant.LM_CLOSE_CALL:
                     mRoomInstance.closeLmCall(data);
                     break;
-
                 case Constant.OUT_ROOM:
                     mRoomInstance.outRoomClose(data);
                     break;
@@ -94,6 +92,9 @@ public class RoomMessageType {
                     break;
                 case Constant.AUDIO_CLOSE_OPEN:
                     mRoomInstance.liveAudioClose(data);
+                    break;
+                case Constant.MODE_CHANGE_REQ:
+                    mRoomInstance.modeChangeReq(data);
                     break;
             }
         } catch (JSONException e) {

@@ -1323,6 +1323,11 @@ public class TeacherActivityLand1 extends BaseLiveActivity implements View.OnCli
     }
 
     @Override
+    public void modeChangeReq(String data) {
+
+    }
+
+    @Override
     public void showNetworkException() {
         super.showNetworkException();
 
