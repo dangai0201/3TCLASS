@@ -230,13 +230,13 @@ public class TTTVideoModule {
         switch (profile) {
             case Constants.VIDEO_PROFILE_120P:
                 width = 160;
-                height = 120;
+                height = 128;
                 config.videoFrameRate = 15;
                 config.videoBitRate = 65 * 1000;
                 break;
             case Constants.VIDEO_PROFILE_180P:
                 width = 320;
-                height = 180;
+                height = 192;
                 config.videoFrameRate = 15;
                 config.videoBitRate = 140 * 1000;
                 break;
@@ -248,7 +248,7 @@ public class TTTVideoModule {
                 break;
             case Constants.VIDEO_PROFILE_360P:
                 width = 640;
-                height = 360;
+                height = 368;
                 config.videoFrameRate = 15;
                 config.videoBitRate = 400 * 1000;
                 break;
@@ -266,7 +266,7 @@ public class TTTVideoModule {
                 break;
             case Constants.VIDEO_PROFILE_1080P:
                 width = 1920;
-                height = 1080;
+                height = 1088;
                 config.videoFrameRate = 15;
                 config.videoBitRate = 2080 * 1000;
                 break;
