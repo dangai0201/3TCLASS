@@ -1,6 +1,5 @@
 package com.tttlive.education.ui.room;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -11,10 +10,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.RadioButton;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.tttlive.basic.education.R;
 import com.tttlive.education.base.BaseActivity;
 import com.tttlive.education.constant.Constant;
 import com.tttlive.education.ui.room.bean.BindWebsocket;
@@ -71,10 +68,10 @@ public abstract class BaseLiveActivity extends BaseActivity implements RoomLiveI
         mContext = this;
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        boolean opppIphone = mContext.getPackageManager().hasSystemFeature("com.oppo.feature.screen.heteromorphism");
-        if (opppIphone){
-            Toast.makeText(mContext , getResources().getString(R.string.concave_area), Toast.LENGTH_LONG).show();
-        }
+//        boolean opppIphone = mContext.getPackageManager().hasSystemFeature("com.oppo.feature.screen.heteromorphism");
+//        if (opppIphone){
+//            Toast.makeText(mContext , getResources().getString(R.string.concave_area), Toast.LENGTH_LONG).show();
+//        }
 
     }
 

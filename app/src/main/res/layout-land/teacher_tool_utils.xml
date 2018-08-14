@@ -15,43 +15,15 @@
         android:orientation="horizontal">
 
         <LinearLayout
+
             android:id="@+id/land_ll_tool_chat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:paddingBottom="@dimen/dp2"
             android:paddingTop="@dimen/dp2">
-
-            <FrameLayout
-                android:id="@+id/land_fl_personnel_chat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dp10">
-
-                <ImageView
-                    android:id="@+id/land_img_chat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/dp5"
-                    android:layout_marginRight="@dimen/dp5"
-                    android:background="@drawable/icon_chat_normal" />
-
-                <com.tttlive.education.util.MaterialBadgeTextView
-                    android:id="@+id/land_mbt_personnel_chat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="27dp"
-                    android:layout_marginRight="@dimen/dp5"
-                    android:background="@color/color_FFFF3B30"
-                    android:text="0"
-                    android:textColor="@color/color_FFFF3B30"
-                    android:textSize="5sp"
-                    android:visibility="gone" />
-            </FrameLayout>
 
             <FrameLayout
                 android:id="@+id/land_fl_personnel_live"
@@ -79,6 +51,35 @@
                     android:text="0"
                     android:textColor="@color/white"
                     android:textSize="7sp"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/land_fl_personnel_chat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp10">
+
+                <ImageView
+                    android:id="@+id/land_img_chat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dp5"
+                    android:layout_marginRight="@dimen/dp5"
+                    android:background="@drawable/icon_chat_normal" />
+
+                <com.tttlive.education.util.MaterialBadgeTextView
+                    android:id="@+id/land_mbt_personnel_chat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="27dp"
+                    android:layout_marginRight="@dimen/dp5"
+                    android:background="@color/color_FFFF3B30"
+                    android:text="0"
+                    android:textColor="@color/color_FFFF3B30"
+                    android:textSize="5sp"
                     android:visibility="gone" />
             </FrameLayout>
 
@@ -244,8 +245,8 @@
                     android:id="@+id/land_iv_radio_courseware"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/icon_course_normal"
                     android:layout_marginTop="@dimen/dp5"
+                    android:background="@drawable/icon_course_normal"
                     android:paddingLeft="@dimen/dp5"
                     android:paddingRight="@dimen/dp5"
                     android:visibility="gone" />

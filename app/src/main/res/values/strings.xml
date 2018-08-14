@@ -176,6 +176,10 @@
     <string name="user_agree">用户协议</string>
     <string name="millisecond">ms</string>
 
+    <string name="model_video">老师切换为视频模式</string>
+    <string name="model_normal">老师切换为课件模式</string>
+
+
 
 
 </resources>

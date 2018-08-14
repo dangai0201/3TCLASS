@@ -48,27 +48,27 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:gravity="center_vertical"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:paddingBottom="@dimen/dp2"
                 android:paddingLeft="@dimen/dp5"
                 android:paddingRight="@dimen/dp5"
                 android:paddingTop="@dimen/dp2">
 
                 <ImageView
-                    android:id="@+id/land_image_view_share"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/dp5"
-                    android:padding="@dimen/dp5"
-                    android:src="@drawable/icon_share_normal" />
-
-                <ImageView
                     android:id="@+id/land_image_view_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp5"
                     android:padding="@dimen/dp5"
                     android:src="@drawable/icon_close_normal" />
+
+                <ImageView
+                    android:id="@+id/land_image_view_share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp5"
+                    android:src="@drawable/icon_share_normal" />
+
+
             </LinearLayout>
 
 

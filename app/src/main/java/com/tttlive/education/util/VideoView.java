@@ -6,14 +6,20 @@ import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
 import android.view.animation.LinearInterpolator;
+import android.widget.AbsoluteLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.tttlive.basic.education.R;
+import com.wushuangtech.library.Constants;
+import com.wushuangtech.wstechapi.TTTRtcEngine;
+import com.wushuangtech.wstechapi.model.VideoCanvas;
 
 import java.lang.ref.WeakReference;
 
@@ -21,7 +27,7 @@ import java.lang.ref.WeakReference;
  * Created by Administrator on 2018/5/30/0030.
  */
 
-public class VideoView extends RelativeLayout {
+public class VideoView extends DragScaleView {
     private String mId;
     private setOnClickListener mOnClickLien;
     private View video_utile_land;
@@ -31,6 +37,7 @@ public class VideoView extends RelativeLayout {
     private ImageView live_stauts_phone;
     private ImageView live_stauts_camera;
     private RelativeLayout land_rl_live_microphone_one;
+    private RelativeLayout student_head_video_land;
 
     private static final String W = "width";
     private static final String H = "height";
@@ -40,7 +47,7 @@ public class VideoView extends RelativeLayout {
     private static final String TRANSLATION_Y = "translationY";
     private static final String SCALE_X = "scaleX";
     private static final String SCALE_Y = "scaleY";
-    private static final long DURATION = 2000L;
+    private static final long DURATION = 1000L;
 
     public RelativeLayout getRl_video_land() {
         return rl_video_land;
@@ -63,6 +70,8 @@ public class VideoView extends RelativeLayout {
         this.mId = id;
         this.mOnClickLien = onClickLien;
         initView(context);
+        this.setPivotX(0);
+        this.setPivotY(0);
     }
 
     public VideoView(Context context, AttributeSet attrs) {
@@ -79,6 +88,7 @@ public class VideoView extends RelativeLayout {
         live_stauts_phone = video_utile_land.findViewById(R.id.live_video_stauts_phone);
         live_stauts_camera = video_utile_land.findViewById(R.id.live_video_stauts_camera);
         land_rl_live_microphone_one = video_utile_land.findViewById(R.id.land_rl_live_microphone_one);
+        student_head_video_land = video_utile_land.findViewById(R.id.teacher_head_video_land);
         live_stauts_authorization.setVisibility(GONE);
         live_stauts_camera.setVisibility(GONE);
         live_stauts_phone.setVisibility(GONE);
@@ -86,37 +96,65 @@ public class VideoView extends RelativeLayout {
         this.rl_video_land = (RelativeLayout) video_utile_land;
     }
 
-//    @Override
-//    protected void childOnLayout() {
-//
-//    }
-//
-//    @Override
-//    protected void onLayoutMove() {
-//
-//    }
-//
-//    @Override
-//    protected void onLayoutClick() {
-//        //单击点击事件
-//        Log.e(" ----  ", "单击点击事件");
-//        mOnClickLien.OnClickListener(mId);
-//    }
-//
-//    @Override
-//    protected void onLayoutZoom() {
-//
-//    }
-//
-//    @Override
-//    protected void onLayoutDoubleTap() {
-//
-//    }
-//
-//    @Override
-//    protected void resetVideo() {
-//
-//    }
+    public void setVideo(long userId, int width, int height) {
+        setSize(width, height);
+        SurfaceView surfaceView = TTTRtcEngine.getInstance().CreateRendererView(getContext());
+        TTTRtcEngine.getInstance().setupRemoteVideo(new VideoCanvas(userId, Constants.
+                RENDER_MODE_HIDDEN, surfaceView));
+        student_head_video_land.addView(surfaceView);
+    }
+
+    //设置窗体宽高
+    private void setSize(int width, int height) {
+        this.setLayoutParams(new AbsoluteLayout.LayoutParams(width, height, 0, 0));
+    }
+
+    public void moveWithAnimation(float translationX, float translationY, float scaleX, float scaleY) {
+        this
+                .animate()
+                .scaleX(scaleX)
+                .scaleY(scaleY)
+                .translationX(translationX)
+                .translationY(translationY)
+                .setDuration(10)
+                .start();
+    }
+
+    @Override
+    protected void childOnLayout() {
+
+    }
+
+    @Override
+    protected void onLayoutMove() {
+
+    }
+
+    @Override
+    protected void onLayoutClick() {
+        //单击点击事件
+        Log.e(" ----  ", "单击点击事件");
+        if (mOnClickLien != null) {
+            mOnClickLien.OnClickListener(mId);
+        }
+
+    }
+
+    @Override
+    protected void onLayoutZoom() {
+
+    }
+
+    @Override
+    protected void onLayoutDoubleTap() {
+
+    }
+
+    @Override
+    protected void resetVideo() {
+
+    }
+
 
     public interface setOnClickListener {
         void OnClickListener(String id);
@@ -169,7 +207,6 @@ public class VideoView extends RelativeLayout {
     }
 
 
-
     public AnimatorSet getLayoutChangeAnimator(int width, int height, float x, float y) {
         WeakReference<VideoView> videoViewWeakReference = new WeakReference<>(this);
         VideoView videoView = videoViewWeakReference.get();
@@ -187,7 +224,7 @@ public class VideoView extends RelativeLayout {
 
     }
 
-//    public AnimatorSet getLayoutChangeAnimatorSet(int width, int height, int translationX, int translationY) {
+    //    public AnimatorSet getLayoutChangeAnimatorSet(int width, int height, int translationX, int translationY) {
 //        WeakReference<VideoView> videoViewWeakReference = new WeakReference<>(this);
 //        VideoView videoView = videoViewWeakReference.get();
 //        ObjectAnimator widthAnimator = ObjectAnimator.ofInt(videoView, W, width);
@@ -202,16 +239,16 @@ public class VideoView extends RelativeLayout {
 //    }
     public ValueAnimator getLayoutChangeAnimatorSet(int width, int height, float translationX, float translationY) {
         WeakReference<VideoView> videoViewWeakReference = new WeakReference<>(this);
-        VideoView videoView = videoViewWeakReference.get();
+        VideoView surfaceView = videoViewWeakReference.get();
         PropertyValuesHolder holder1 = PropertyValuesHolder.ofInt(W, width);
         PropertyValuesHolder holder2 = PropertyValuesHolder.ofInt(H, height);
         PropertyValuesHolder holder3 = PropertyValuesHolder.ofFloat(TRANSLATION_X, translationX);
         PropertyValuesHolder holder4 = PropertyValuesHolder.ofFloat(TRANSLATION_Y, translationY);
-        return ObjectAnimator.ofPropertyValuesHolder(videoView, holder1, holder2, holder3, holder4);
+        return ObjectAnimator.ofPropertyValuesHolder(surfaceView, holder1, holder2, holder3, holder4).setDuration(DURATION);
 
     }
 
-    private ViewPropertyAnimator getPropertyAnimator(float scaleX, float scaleY, float translationX, float translationY) {
+    public ViewPropertyAnimator getPropertyAnimator(float scaleX, float scaleY, float translationX, float translationY) {
 
         this.setPivotX(0);
         this.setPivotY(0);
@@ -221,7 +258,7 @@ public class VideoView extends RelativeLayout {
                 .scaleY(scaleY)
                 .translationX(translationX)
                 .translationY(translationY)
-                .setDuration(DURATION)
+//                .setDuration(DURATION)
                 .setInterpolator(new LinearInterpolator());
 
     }
