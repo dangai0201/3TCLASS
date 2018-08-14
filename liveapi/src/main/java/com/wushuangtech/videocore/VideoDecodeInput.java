@@ -136,7 +136,7 @@ class VideoDecodeInput extends GLTextureOutputRenderer implements SurfaceTexture
                     newVideoDecoder = VideoDecoderManager.getInstance().getVideoDecoderByID(mDevID);
                 }
                 // 将SurfaceTexture设置给解码器，用于绘制图形
-                if (dispTex != null) {
+                if (dispTex != null && newVideoDecoder != null) {
                     newVideoDecoder.setSurfaceTexture(dispTex);
                 }
             }
