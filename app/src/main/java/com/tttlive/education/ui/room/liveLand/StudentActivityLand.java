@@ -2310,7 +2310,6 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
             tv_user_one = mVideoView.findViewById(R.id.tv_user_name_one);
         }
         mVideoView.setFlagUserId(userId);
-
 //        if (curModel == MODEL_NORMAL) {
 //            addView(mVideoView, rl_student_video_view.getChildCount());
 //        }
