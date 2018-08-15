@@ -2423,7 +2423,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                 return;
             }
 
-            //添加之后的位置
+            //添加之后的位置集合
             ArrayList<ViewInfo> viewInfoList = getViewInfoList(childCount);
             if (!isStudentSelfIn) {
                 num = 0;
