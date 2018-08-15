@@ -51,6 +51,16 @@ public class VideoView extends DragScaleView {
     private static final String SCALE_Y = "scaleY";
     private static final long DURATION = 500L;
 
+    public ImageView getVideo_image_view() {
+        return video_image_view;
+    }
+
+    public void setVideo_image_view(ImageView video_image_view) {
+        this.video_image_view = video_image_view;
+    }
+
+    private ImageView video_image_view;
+
 
     public RelativeLayout getRl_video_land() {
         return rl_video_land;
@@ -93,6 +103,7 @@ public class VideoView extends DragScaleView {
         land_rl_live_microphone_one = video_utile_land.findViewById(R.id.land_rl_live_microphone_one);
         student_head_video_land = video_utile_land.findViewById(R.id.teacher_head_video_land);
         ll_video_tool = video_utile_land.findViewById(R.id.ll_video_tool);
+        video_image_view = video_utile_land.findViewById(R.id.land_teacher_image_view);
         live_stauts_authorization.setVisibility(GONE);
         live_stauts_camera.setVisibility(GONE);
         live_stauts_phone.setVisibility(GONE);

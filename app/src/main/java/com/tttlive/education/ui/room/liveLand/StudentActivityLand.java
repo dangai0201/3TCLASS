@@ -775,6 +775,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                             if (!upCustom.isMicClosed()) {
                                 for (int i1 = 0; i1 < mVideoViewList.size(); i1++) {
                                     if (mVideoViewList.get(i1).getFlagUserId().equals(String.valueOf(upCustom.getUserId()))) {
+                                        CurModelTools(i1);
                                         mVideoViewList.get(i1).getLive_stauts_phone().setVisibility(View.GONE);
                                         customBeanList.get(i).setMicClosed(false);
                                     }
@@ -784,6 +785,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                             if (upCustom.isMicClosed()) {
                                 for (int i1 = 0; i1 < mVideoViewList.size(); i1++) {
                                     if (mVideoViewList.get(i1).getFlagUserId().equals(String.valueOf(upCustom.getUserId()))) {
+                                        CurModelTools(i1);
                                         mVideoViewList.get(i1).getLive_stauts_phone().setVisibility(View.VISIBLE);
                                         customBeanList.get(i).setMicClosed(true);
                                     }
@@ -796,6 +798,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                             if (!upCustom.isCameraClosed()) {
                                 for (int i1 = 0; i1 < mVideoViewList.size(); i1++) {
                                     if (mVideoViewList.get(i1).getFlagUserId().equals(String.valueOf(upCustom.getUserId()))) {
+                                        CurModelTools(i1);
                                         mVideoViewList.get(i1).getLive_stauts_camera().setVisibility(View.GONE);
                                         mVideoViewList.get(i1).getLand_rl_live_microphone_one().setVisibility(View.GONE);
                                         customBeanList.get(i).setCameraClosed(false);
@@ -807,6 +810,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                             if (upCustom.isCameraClosed()) {
                                 for (int i1 = 0; i1 < mVideoViewList.size(); i1++) {
                                     if (mVideoViewList.get(i1).getFlagUserId().equals(String.valueOf(upCustom.getUserId()))) {
+                                        CurModelTools(i1);
                                         mVideoViewList.get(i1).getLive_stauts_camera().setVisibility(View.VISIBLE);
                                         mVideoViewList.get(i1).getLand_rl_live_microphone_one().setVisibility(View.VISIBLE);
                                         customBeanList.get(i).setCameraClosed(true);
@@ -823,6 +827,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                     if (!upCustom.isWhiteBoardAccess()) {
                         for (int i1 = 0; i1 < mVideoViewList.size(); i1++) {
                             if (mVideoViewList.get(i1).getFlagUserId().equals(String.valueOf(upCustom.getUserId()))) {
+                                CurModelTools(i1);
                                 mVideoViewList.get(i1).getLive_stauts_authorization().setVisibility(View.GONE);
                                 customBeanList.get(i).setWhiteBoardAccess(false);
                             }
@@ -833,6 +838,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
 
                         for (int i1 = 0; i1 < mVideoViewList.size(); i1++) {
                             if (mVideoViewList.get(i1).getFlagUserId().equals(String.valueOf(upCustom.getUserId()))) {
+                                CurModelTools(i1);
                                 mVideoViewList.get(i1).getLive_stauts_authorization().setVisibility(View.VISIBLE);
                                 customBeanList.get(i).setWhiteBoardAccess(true);
                             }
@@ -841,10 +847,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                     }
 
                 }
-
                 whiteboardStype(String.valueOf(upCustom.getUserId()), upCustom.isWhiteBoardAccess());
-
-
             }
 
         }
@@ -1344,6 +1347,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
             for (int i = 0; i < childCount; i++) {
                 VideoView videoView = (VideoView) rl_student_video_view.getChildAt(i);
                 videoView.getValueAnimator(eachWidth,eachHeight,i*eachWidth,0).start();
+
 //                videoView
 //                        .animate()
 //                        .translationX(eachWidth * i - videoView.getX())
@@ -1354,9 +1358,18 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
 //                        })
 //                        .start();
             }
+
         }
+        for (int i = 0; i < customBeanList.size(); i++) {
+            if (customBeanList.get(i).getLm() == 1) {
+                for (int i1 = 0; i1 < mVideoViewList.size(); i1++) {
+                    if (String.valueOf(customBeanList.get(i).getUserId()).equals(mVideoViewList.get(i1).getFlagUserId())) {
+                        CurModelTools(i1);
+                    }
+                }
 
-
+            }
+        }
     }
 
     @Override
@@ -2847,6 +2860,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
     private void localVideoStype(String mUerId, int visible, boolean isVideo) {
         for (int i = 0; i < mVideoViewList.size(); i++) {
             if (mVideoViewList.get(i).getFlagUserId().equals(mUerId)) {
+                CurModelTools(i);
                 mVideoViewList.get(i).getLive_stauts_camera().setVisibility(visible);
                 mVideoViewList.get(i).getLand_rl_live_microphone_one().setVisibility(visible);
 
@@ -2862,6 +2876,28 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                 nackname, userimage, mUserRole,
                 mLiveLm, mSpeakStop, mTrophyCount, mWhiteBoard, mVideoClose, mAudeoClose);
         mRoomLiveHelp.updateUserInfo(upate);
+    }
+
+    //不同模式布局状态图标显示方位
+    private void CurModelTools(int i) {
+        if (curModel == MODEL_NORMAL){
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT , RelativeLayout.LayoutParams.WRAP_CONTENT);
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            mVideoViewList.get(i).getLl_video_tool().setLayoutParams(layoutParams);
+
+            if (mVideoViewList.get(i).getLand_rl_live_microphone_one().getVisibility() == View.VISIBLE){
+                mVideoViewList.get(i).getVideo_image_view().setBackground(getResources().getDrawable(R.drawable.icon_camera_close2));
+            }
+
+        }else if (curModel == MODEL_VIDEO){
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT , RelativeLayout.LayoutParams.WRAP_CONTENT);
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            mVideoViewList.get(i).getLl_video_tool().setLayoutParams(layoutParams);
+
+            if (mVideoViewList.get(i).getLand_rl_live_microphone_one().getVisibility() == View.VISIBLE){
+                mVideoViewList.get(i).getVideo_image_view().setBackground(getResources().getDrawable(R.drawable.icon_video_close_big));
+            }
+        }
     }
 
     /**
@@ -2983,6 +3019,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                 if (customBean.getLm() == 1) {
                     for (int i = 0; i < mVideoViewList.size(); i++) {
                         if (mVideoViewList.get(i).getFlagUserId().equals(String.valueOf(customBean.getUserId()))) {
+                            CurModelTools(i);
                             mVideoViewList.get(i).getLive_stauts_camera().setVisibility(View.VISIBLE);
                             mVideoViewList.get(i).getLand_rl_live_microphone_one().setVisibility(View.VISIBLE);
                         }
@@ -2995,6 +3032,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                 if (customBean.getLm() == 1) {
                     for (int i = 0; i < mVideoViewList.size(); i++) {
                         if (mVideoViewList.get(i).getFlagUserId().equals(String.valueOf(customBean.getUserId()))) {
+                            CurModelTools(i);
                             mVideoViewList.get(i).getLive_stauts_phone().setVisibility(View.VISIBLE);
                         }
                     }
@@ -3006,6 +3044,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         if (customBean.isWhiteBoardAccess()) {
             for (int i = 0; i < mVideoViewList.size(); i++) {
                 if (mVideoViewList.get(i).getFlagUserId().equals(String.valueOf(customBean.getUserId()))) {
+                    CurModelTools(i);
                     mVideoViewList.get(i).getLive_stauts_authorization().setVisibility(View.VISIBLE);
                 }
             }
