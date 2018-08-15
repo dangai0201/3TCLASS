@@ -1787,22 +1787,22 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         webSettings.setLoadsImagesAutomatically(true);
         webSettings.setUseWideViewPort(true);
         webSettings.setLoadWithOverviewMode(true);
-        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
 
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) student_view_web.getLayoutParams();
-//        layoutParams.width = mapHeight * 16/9;
-//        layoutParams.height = mapHeight;
-
         layoutParams.width = mapWidth;
         if (mapWidth * 9 / 16 > mapHeight) {
             layoutParams.height = mapHeight;
         } else {
             layoutParams.height = mapWidth * 9 / 16;
         }
-        layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+//        layoutParams.topMargin = rl_network_bar.getHeight();
+        Log.e(TAG_CLASS , "屏幕高度 11: " + rl_network_bar.getHeight());
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         student_view_web.setLayoutParams(layoutParams);
 
         final int height = BaseTools.getWindowsHeight(this);
+        Log.e(TAG_CLASS , "屏幕高度 : " + mapHeight);
         if (height > 540) {
             student_view_web.setInitialScale((int) (540f / height * 100));
         } else {
@@ -2308,7 +2308,6 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
     private void addViewWithMode(VideoView videoView, int mode) {
 
         if (mode == MODEL_NORMAL) {
-
             if (!isStudentSelfIn) {
                 int childCount = rl_student_video_view.getChildCount();
                 int eachWidth = parentWidth / 7;
