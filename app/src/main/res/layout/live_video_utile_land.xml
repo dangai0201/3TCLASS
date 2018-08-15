@@ -63,10 +63,10 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:layout_alignParentTop="true"
             android:id="@+id/rl_teacher_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:visibility="gone">
 
             <TextView
@@ -123,6 +123,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true">
 
             <LinearLayout

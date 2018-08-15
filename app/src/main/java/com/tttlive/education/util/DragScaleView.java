@@ -13,10 +13,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AbsoluteLayout;
 import android.widget.RelativeLayout;
-import android.widget.VideoView;
-
-import java.util.List;
 
 /**
  * Created by Administrator on 2018/5/30/0030.
@@ -288,9 +286,9 @@ public abstract class DragScaleView extends RelativeLayout implements View.OnTou
                     if (x <= MAX_DISTANCE_FOR_CLICK && y <= MAX_DISTANCE_FOR_CLICK) {
                         Log.e(TAG, "移动过小 不触发" + " x=" + x + "; y=" + y);
                     } else {
-                        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) getLayoutParams();
-                        layoutParams.leftMargin = getLeft();
-                        layoutParams.topMargin = getTop();
+                        AbsoluteLayout.LayoutParams layoutParams = (AbsoluteLayout.LayoutParams) getLayoutParams();
+                        layoutParams.x = getLeft();
+                        layoutParams.y = getTop();
                         setLayoutParams(layoutParams);
 
                         onLayoutMove();

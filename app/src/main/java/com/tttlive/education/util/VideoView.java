@@ -47,7 +47,7 @@ public class VideoView extends DragScaleView {
     private static final String TRANSLATION_Y = "translationY";
     private static final String SCALE_X = "scaleX";
     private static final String SCALE_Y = "scaleY";
-    private static final long DURATION = 1000L;
+    private static final long DURATION = 500L;
 
     public RelativeLayout getRl_video_land() {
         return rl_video_land;
@@ -224,7 +224,7 @@ public class VideoView extends DragScaleView {
 
     }
 
-    //    public AnimatorSet getLayoutChangeAnimatorSet(int width, int height, int translationX, int translationY) {
+    //    public AnimatorSet getValueAnimator(int width, int height, int translationX, int translationY) {
 //        WeakReference<VideoView> videoViewWeakReference = new WeakReference<>(this);
 //        VideoView videoView = videoViewWeakReference.get();
 //        ObjectAnimator widthAnimator = ObjectAnimator.ofInt(videoView, W, width);
@@ -237,14 +237,14 @@ public class VideoView extends DragScaleView {
 //        return set;
 //
 //    }
-    public ValueAnimator getLayoutChangeAnimatorSet(int width, int height, float translationX, float translationY) {
+    public ValueAnimator getValueAnimator(int width, int height, float x, float y) {
         WeakReference<VideoView> videoViewWeakReference = new WeakReference<>(this);
-        VideoView surfaceView = videoViewWeakReference.get();
+        VideoView videoView = videoViewWeakReference.get();
         PropertyValuesHolder holder1 = PropertyValuesHolder.ofInt(W, width);
         PropertyValuesHolder holder2 = PropertyValuesHolder.ofInt(H, height);
-        PropertyValuesHolder holder3 = PropertyValuesHolder.ofFloat(TRANSLATION_X, translationX);
-        PropertyValuesHolder holder4 = PropertyValuesHolder.ofFloat(TRANSLATION_Y, translationY);
-        return ObjectAnimator.ofPropertyValuesHolder(surfaceView, holder1, holder2, holder3, holder4).setDuration(DURATION);
+        PropertyValuesHolder holder3 = PropertyValuesHolder.ofFloat(X, x);
+        PropertyValuesHolder holder4 = PropertyValuesHolder.ofFloat(Y, y);
+        return ObjectAnimator.ofPropertyValuesHolder(videoView, holder1, holder2, holder3, holder4).setDuration(DURATION);
 
     }
 
