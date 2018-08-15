@@ -16,6 +16,7 @@ import android.widget.AbsoluteLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.tttlive.basic.education.R;
 import com.wushuangtech.library.Constants;
@@ -40,6 +41,7 @@ public class VideoView extends DragScaleView {
     private RelativeLayout land_rl_live_microphone_one;
     private RelativeLayout student_head_video_land;
     private LinearLayout ll_video_tool;
+    private TextView tv_video_close;
 
     private static final String W = "width";
     private static final String H = "height";
@@ -50,6 +52,7 @@ public class VideoView extends DragScaleView {
     private static final String SCALE_X = "scaleX";
     private static final String SCALE_Y = "scaleY";
     private static final long DURATION = 500L;
+
 
     public ImageView getVideo_image_view() {
         return video_image_view;
@@ -68,6 +71,14 @@ public class VideoView extends DragScaleView {
 
     public void setRl_video_land(RelativeLayout rl_video_land) {
         this.rl_video_land = rl_video_land;
+    }
+
+    public TextView getTv_video_close() {
+        return tv_video_close;
+    }
+
+    public void setTv_video_close(TextView tv_video_close) {
+        this.tv_video_close = tv_video_close;
     }
 
     public String getFlagUserId() {
@@ -104,6 +115,7 @@ public class VideoView extends DragScaleView {
         student_head_video_land = video_utile_land.findViewById(R.id.teacher_head_video_land);
         ll_video_tool = video_utile_land.findViewById(R.id.ll_video_tool);
         video_image_view = video_utile_land.findViewById(R.id.land_teacher_image_view);
+        tv_video_close = video_utile_land.findViewById(R.id.tv_video_close);
         live_stauts_authorization.setVisibility(GONE);
         live_stauts_camera.setVisibility(GONE);
         live_stauts_phone.setVisibility(GONE);

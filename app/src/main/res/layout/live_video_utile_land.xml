@@ -27,12 +27,30 @@
             android:visibility="gone"
             android:layout_centerInParent="true">
 
-            <ImageView
-                android:id="@+id/land_teacher_image_view"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:background="@drawable/icon_video_close_big"/>
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:id="@+id/land_teacher_image_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/icon_video_close_big"/>
+
+                <TextView
+                    android:id="@+id/tv_video_close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp16"
+                    android:layout_marginTop="@dimen/dp5"
+                    android:textColor="@color/color_FF999999"
+                    android:text="摄像头已关闭"/>
+
+            </LinearLayout>
+
 
         </RelativeLayout>
 

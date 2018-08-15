@@ -315,7 +315,13 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
 
     private static final int MODEL_NORMAL = 0;//常规模式
     private static final int MODEL_VIDEO = 1;//视频模式
-    private int curModel = MODEL_NORMAL;//当前模式，默认为视频模式
+
+    @Override
+    public void onMultiWindowModeChanged(boolean isInMultiWindowMode) {
+        super.onMultiWindowModeChanged(isInMultiWindowMode);
+    }
+
+    private int curModel = MODEL_NORMAL;//当前模式，常规模式
 
     private int singleWidth;
     private int singleHeight;
@@ -2780,6 +2786,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
     private void localAudioStype(String mUerId, int visible, boolean isAudio) {
         for (int i = 0; i < mVideoViewList.size(); i++) {
             if (mVideoViewList.get(i).getFlagUserId().equals(mUerId)) {
+                CurModelTools(i);
                 mVideoViewList.get(i).getLive_stauts_phone().setVisibility(visible);
             }
         }
@@ -2826,6 +2833,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
 
             if (mVideoViewList.get(i).getLand_rl_live_microphone_one().getVisibility() == View.VISIBLE) {
                 mVideoViewList.get(i).getVideo_image_view().setBackground(getResources().getDrawable(R.drawable.icon_camera_close2));
+                mVideoViewList.get(i).getTv_video_close().setVisibility(View.GONE);
             }
 
         } else if (curModel == MODEL_VIDEO) {
@@ -2835,6 +2843,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
 
             if (mVideoViewList.get(i).getLand_rl_live_microphone_one().getVisibility() == View.VISIBLE) {
                 mVideoViewList.get(i).getVideo_image_view().setBackground(getResources().getDrawable(R.drawable.icon_video_close_big));
+                mVideoViewList.get(i).getTv_video_close().setVisibility(View.VISIBLE);
             }
         }
     }
@@ -2907,6 +2916,10 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         Log.e(TAG_CLASS, "有人加入房间  " + customBean);
 
         customBeanList.add(customBean);
+        if (customBeanList.size() > 7){
+            onBackPressed();
+            toastShort(R.string.msg_operation_number_max);
+        }
 
         if (String.valueOf(customBean.getUserId()).equals(teachid)) {
             customBeanList.add(0, customBean);
