@@ -258,7 +258,6 @@ public class VideoView extends DragScaleView {
                 .scaleY(scaleY)
                 .translationX(translationX)
                 .translationY(translationY)
-//                .setDuration(DURATION)
                 .setInterpolator(new LinearInterpolator());
 
     }

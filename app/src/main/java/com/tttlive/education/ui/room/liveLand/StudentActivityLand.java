@@ -1,9 +1,9 @@
 package com.tttlive.education.ui.room.liveLand;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -43,6 +43,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.tttlive.basic.education.R;
@@ -316,7 +317,10 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
 
     private static final int MODEL_NORMAL = 0;//常规模式
     private static final int MODEL_VIDEO = 1;//视频模式
-    private int curModel = MODEL_VIDEO;//当前模式，默认为视频模式
+    private int curModel = MODEL_NORMAL;//当前模式，默认为视频模式
+
+    private boolean isStudentSelfIn = false;//标记是否是学生自己进入
+
 
     /**
      * @param context
@@ -905,6 +909,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         }
     }
 
+
     //学生申请连麦的回调
     @Override
     public void dealApplyAgreeMessage(String data) {
@@ -913,6 +918,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         Gson leaveGson = new Gson();
         LmAgreeResBean lmAgreeBean = leaveGson.fromJson(data, LmAgreeResBean.class);
         if (lmAgreeBean.getData().getType().equals("1")) {//老师同意了学生的连麦请求
+
             if (lmAgreeBean.getData().getUserId().equals(mUerId)) {
                 AudioOpen(lmAgreeBean.getData().getUserId());
                 VideoOpen(lmAgreeBean.getData().getUserId());
@@ -1221,7 +1227,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         WhiteBoardBean mWhiteBoardBean = stGson.fromJson(data, WhiteBoardBean.class);
         if (mWhiteBoardBean.getData().isAccess()) {
             land_iv_tool_whiteboard.setBackground(getResources().getDrawable(R.drawable.icon_pen_normal));
-            if(curModel == MODEL_NORMAL) {
+            if (curModel == MODEL_NORMAL) {
                 land_iv_tool_whiteboard.setVisibility(View.VISIBLE);
             }
             mWhiteBoard = true;
@@ -1298,6 +1304,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
 
     @Override
     public void modeChangeReq(String data) {
+
         Log.i(TAG_CLASS, "切换视频模式 : " + data);
 
         ModeVieoChangeBean mvcBean = stGson.fromJson(data, ModeVieoChangeBean.class);
@@ -1306,28 +1313,44 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
             Log.i(TAG_CLASS, "视频模式 ");
             curModel = MODEL_VIDEO;
             showPopupWindow(getString(R.string.model_video));
-            for (int i = 0; i < rl_student_video_view.getChildCount(); i++) {
+            int childCount = rl_student_video_view.getChildCount();
+            ArrayList<ViewInfo> viewInfoList = getViewInfoList(childCount);
+            for (int i = 0; i < childCount; i++) {
                 VideoView videoView = (VideoView) rl_student_video_view.getChildAt(i);
-                ViewInfo viewInfo = getViewInfoList(rl_student_video_view.getChildCount()).get(i);
-                int width = viewInfo.getWidth();
-                int height = viewInfo.getHeight();
-                float translationX = viewInfo.getTranslationX();
-                float translationY = viewInfo.getTranslationY();
-                videoView.getPropertyAnimator(1.0F * width / parentWidth, 1.0F * height / parentHeight, translationX, translationY).start();
+                int width = viewInfoList.get(i).getWidth();
+                int height = viewInfoList.get(i).getHeight();
+                int x = viewInfoList.get(i).getX();
+                int y = viewInfoList.get(i).getY();
+                videoView
+                        .animate()
+                        .translationX(x - videoView.getX())
+                        .translationY(y - videoView.getY())
+                        .scaleX(1.0F * width / videoView.getWidth())
+                        .scaleY(1.0F * height / videoView.getHeight())
+                        .setListener(new AnimatorListenerAdapter() {
+                        })
+                        .start();
             }
 
         } else if ("normal".equals(mvcBean.getData().getMode())) {
+
             //白板模式
             curModel = MODEL_NORMAL;
             showPopupWindow(getString(R.string.model_normal));
             int childCount = rl_student_video_view.getChildCount();
             int eachWidth = parentWidth / 7;
             int eachHeight = eachWidth * 9 / 16;
-            for (int i = 0; i < rl_student_video_view.getChildCount(); i++) {
+            for (int i = 0; i < childCount; i++) {
                 VideoView videoView = (VideoView) rl_student_video_view.getChildAt(i);
-                float scaleX = 1.0F * eachWidth / parentWidth;
-                float scaleY = 1.0F * eachHeight / parentHeight;
-                videoView.getPropertyAnimator(scaleX, scaleY, eachWidth * i, 0).start();
+                videoView
+                        .animate()
+                        .translationX(eachWidth * i - videoView.getX())
+                        .translationY(-videoView.getY())
+                        .scaleX(1.0F * eachWidth / videoView.getWidth())
+                        .scaleY(1.0F * eachHeight / videoView.getHeight())
+                        .setListener(new AnimatorListenerAdapter() {
+                        })
+                        .start();
             }
         }
 
@@ -2081,23 +2104,25 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         lmUserIdList.add(userId);
         if (LIVE_LARGE_CLASS.equals(mroomType)) {
             if (userId.equals(teachid)) {
+                Log.e(TAG_CLASS, "老师进入拉。。。。。。。。。。 " + userId);
                 videoViewLocationSize(userId, userInfo);
             }
         } else if (LIVE_SMALL_CLASS.equals(mroomType)) {
             videoViewLocationSize(userId, userInfo);
         }
+
 //
 //
 //        //执行人员增加动画
-        if(curModel == MODEL_VIDEO) {
-            playVideoModeAddAnimation();
-            Log.e("TAG", "当前模式为视频模式");
-        }
-
-        if(curModel == MODEL_NORMAL) {
-            playNormalModeAddAnimation();
-            Log.e("TAG", "当前模式为普通模式");
-        }
+//        if (curModel == MODEL_VIDEO) {
+//            playVideoModeAddAnimation();
+//            Log.e("TAG", "当前模式为视频模式");
+//        }
+//
+//        if (curModel == MODEL_NORMAL) {
+//            playNormalModeAddAnimation();
+//            Log.e("TAG", "当前模式为普通模式");
+//        }
 
 
     }
@@ -2105,10 +2130,19 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
     /**
      * 设置视频窗口的位置和大小
      */
-    private void videoViewLocationSize(String userId, final EnterUserInfo userInfo) {
+    private void videoViewLocationSize(final String userId, final EnterUserInfo userInfo) {
+
+        //判断是否是学生本人
+        isStudentSelfIn = mUerId.equals(userId);
+
+        final VideoView videoView = videoViewLayout(userId, mapWidth);
         if (userId.equals(teachid)) {
+
+            Log.e("TAG", "老师ID == " + teachid);
+
             //打开主播视频
-            videoViewLayout(userId, mapWidth);
+            addViewWithMode(videoView, curModel);
+
             rl_teacher_top.setVisibility(View.VISIBLE);
             setTextPlaceByMode(rl_teacher_top);
             if (LIVE_LARGE_CLASS.equals(mroomType)) {
@@ -2122,13 +2156,36 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                 playerManager.start();
             } else {
                 Log.e(TAG_CLASS, "打开主播视频 " + userId);
-
                 mRoomLiveHelp.openRemoteVideo(student_head_video_land, userInfo, true);
+
+
             }
 
         } else {
             Log.e(TAG_CLASS, "其它端视频 " + userId);
-            videoViewLayout(userId, mapWidth);
+//            addViewWithMode(videoViewLayout(userId, mapWidth), curModel);
+            //先动画再添加
+            if (curModel == MODEL_VIDEO) {
+                startAddAnimation(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        num++;
+                        if (num == rl_student_video_view.getChildCount()) {
+                            Toast.makeText(StudentActivityLand.this, "动画结束", Toast.LENGTH_SHORT).show();
+
+                            //打开主播视频
+                            addViewWithMode(videoView, curModel);
+
+                        }
+                    }
+                });
+            }
+
+            if (curModel == MODEL_NORMAL) {
+                addViewWithMode(videoView, curModel);
+            }
+
             if (userId.equals(mUerId)) {
                 //打开本地视频
                 if (!showSelfVideo) {
@@ -2176,12 +2233,9 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                 int height = viewInfoList.get(i).getHeight();
                 float translationX = viewInfoList.get(i).getTranslationX();
                 float translationY = viewInfoList.get(i).getTranslationY();
-                videoWindow.getPropertyAnimator(1.0F *eachWidth/ parentWidth, 1.0F * eachHeight / parentHeight, i*parentWidth/7, 0)
+                videoWindow.getPropertyAnimator(1.0F * eachWidth / parentWidth, 1.0F * eachHeight / parentHeight, i * parentWidth / 7, 0)
                         .setDuration(1000)
                         .start();
-//                ValueAnimator animator = videoWindow.getLayoutChangeAnimatorSet(width, height, translationX, translationY);
-                Log.e("TAG", "scaleX == " + 1.0F * width / parentWidth);
-                Log.e("TAG", "scaleY == " + 1.0F * height / parentHeight);
             }
             rl_student_video_view.postDelayed(new Runnable() {
                 @Override
@@ -2199,6 +2253,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         }
 
     }
+
     //执行添加人员动画
     private void playVideoModeAddAnimation() {
         ArrayList<ViewInfo> viewInfoList = getViewInfoList(rl_student_video_view.getChildCount());
@@ -2212,9 +2267,6 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                 videoWindow.getPropertyAnimator(1.0F * width / parentWidth, 1.0F * height / parentHeight, translationX, translationY)
                         .setDuration(1000)
                         .start();
-//                ValueAnimator animator = videoWindow.getLayoutChangeAnimatorSet(width, height, translationX, translationY);
-                Log.e("TAG", "scaleX == " + 1.0F * width / parentWidth);
-                Log.e("TAG", "scaleY == " + 1.0F * height / parentHeight);
             }
             rl_student_video_view.postDelayed(new Runnable() {
                 @Override
@@ -2236,7 +2288,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
     /**
      * 添加窗口视频窗口
      */
-    private void videoViewLayout(String userId, int mapWidth) {
+    private VideoView videoViewLayout(String userId, int mapWidth) {
         videoListener();
         VideoView mVideoView = new VideoView(this, userId, videoOnClickListener);
         student_head_video_land = mVideoView.findViewById(R.id.teacher_head_video_land);
@@ -2258,49 +2310,151 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
             tv_user_one = mVideoView.findViewById(R.id.tv_user_name_one);
         }
         mVideoView.setFlagUserId(userId);
-//        mVideoViewList.add(mVideoView);
 
-        if (curModel == MODEL_NORMAL) {
-//            int networkHeight = rl_network_bar.getHeight();
-//            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(mapWidth / 6, mapWidth / 6 * 11 / 16);
-//            if (mVideoViewList.size() < 5) {
-//                layoutParams.topMargin = networkHeight;
-//                layoutParams.leftMargin = mapWidth / 6 * (mVideoViewList.size() - 1);
-//            } else {
-//                layoutParams.topMargin = mapWidth / 6 * 11 / 16 + networkHeight;
-//                layoutParams.leftMargin = mapWidth / 6 * (mVideoViewList.size() - 5);
+//        if (curModel == MODEL_NORMAL) {
+//            addView(mVideoView, rl_student_video_view.getChildCount());
+//        }
+//        if (curModel == MODEL_VIDEO) {
 //
+//            int childCount = rl_student_video_view.getChildCount();
+//            int insertIndex = userId.equals(mUerId) ? 1 : childCount;
+//            if (userId.equals(mUerId) && mVideoViewList.size() > 2) {
+//                mVideoViewList.add(1, mVideoView);
+//            } else {
+//                mVideoViewList.add(mVideoView);
 //            }
-//            mVideoView.setLayoutParams(layoutParams);
-//            mVideoView.setClickable(true);
-//            rl_student_video_view.addView(mVideoView);
+//            //添加视频窗口
+//            addView(mVideoView, insertIndex);
+//
+//        }
 
+        return mVideoView;
+    }
 
-            addView(mVideoView,rl_student_video_view.getChildCount());
-//            int eachWidth = parentWidth / 7;
-//            int eachHeight = eachWidth * 9 / 16;
-//            for (int i = 0; i < rl_student_video_view.getChildCount(); i++) {
-//                VideoView videoView = (VideoView) rl_student_video_view.getChildAt(i);
-//                float scaleX = 1.0F * eachWidth / parentWidth;
-//                float scaleY = 1.0F * eachHeight / parentHeight;
-//                videoView.getPropertyAnimator(scaleX, scaleY, eachWidth * i, 0).start();
-//            }
+    private void addViewWithMode(VideoView videoView, int mode) {
 
-        }
-        if (curModel == MODEL_VIDEO) {
+        if (mode == MODEL_NORMAL) {
 
-            int childCount = rl_student_video_view.getChildCount();
-            int insertIndex = userId.equals(mUerId) ? 1 : childCount;
-            if (userId.equals(mUerId) && mVideoViewList.size() > 2) {
-                mVideoViewList.add(1, mVideoView);
+            if (!isStudentSelfIn) {
+                int childCount = rl_student_video_view.getChildCount();
+                int eachWidth = parentWidth / 7;
+                int eachHeight = eachWidth * 9 / 16;
+                AbsoluteLayout.LayoutParams layoutParams = new AbsoluteLayout.LayoutParams(eachWidth, eachHeight, childCount * eachWidth, 0);
+                videoView.setLayoutParams(layoutParams);
+                rl_student_video_view.addView(videoView);
             } else {
-                mVideoViewList.add(mVideoView);
+                int childCount = rl_student_video_view.getChildCount();
+                int eachWidth = parentWidth / 7;
+                int eachHeight = eachWidth * 9 / 16;
+                for (int i = 0; i < childCount; i++) {
+                    if (i > 0) {//从第二个开始向右移动
+                        VideoView childView = (VideoView) rl_student_video_view.getChildAt(i);
+                        childView.animate().translationX(1.0F * eachWidth).setDuration(DURATION).start();
+                    }
+                }
+                AbsoluteLayout.LayoutParams layoutParams = new AbsoluteLayout.LayoutParams(eachWidth, eachHeight, eachWidth, 0);
+                videoView.setLayoutParams(layoutParams);
+                rl_student_video_view.addView(videoView);
+
             }
-            //添加视频窗口
-            addView(mVideoView, insertIndex);
+        }
+        if (mode == MODEL_VIDEO) {
+            if (!isStudentSelfIn) {
+                int childCount = rl_student_video_view.getChildCount();
+                ViewInfo viewInfo = getViewInfo(childCount);
+                int width = viewInfo.getWidth();
+                int height = viewInfo.getHeight();
+                int x = viewInfo.getX();
+                int y = viewInfo.getY();
+                AbsoluteLayout.LayoutParams layoutParams = new AbsoluteLayout.LayoutParams(width, height, x, y);
+                videoView.setLayoutParams(layoutParams);
+                rl_student_video_view.addView(videoView);
+            } else {
+                int childCount = rl_student_video_view.getChildCount();
+                ArrayList<ViewInfo> viewInfoList = getViewInfoList(childCount + 1);
+                ViewInfo viewInfo = viewInfoList.get(1);
+                int width = viewInfo.getWidth();
+                int height = viewInfo.getHeight();
+                int x = viewInfo.getX();
+                int y = viewInfo.getY();
+                AbsoluteLayout.LayoutParams layoutParams = new AbsoluteLayout.LayoutParams(width, height, x, y);
+                videoView.setLayoutParams(layoutParams);
+                rl_student_video_view.addView(videoView);
+            }
 
         }
+    }
 
+    private long DURATION = 1000L;
+    private int num;
+
+    //执行视频模式添加动画
+    private void startAddAnimation(AnimatorListenerAdapter listenerAdapter) {
+
+        if (curModel == MODEL_VIDEO) {
+            final int childCount = rl_student_video_view.getChildCount();
+            if (childCount == 0) {
+                return;
+            }
+
+            //添加之后的位置
+            ArrayList<ViewInfo> viewInfoList = getViewInfoList(childCount + 1);
+            if (!isStudentSelfIn) {
+                num = 0;
+                for (int i = 0; i < childCount; i++) {
+                    VideoView videoView = (VideoView) rl_student_video_view.getChildAt(i);
+                    int width = viewInfoList.get(i).getWidth();
+                    int height = viewInfoList.get(i).getHeight();
+                    int x = viewInfoList.get(i).getX();
+                    int y = viewInfoList.get(i).getY();
+                    float translationX = x - videoView.getX();
+                    float translationY = y - videoView.getY();
+                    float scaleX = 1.0F * width / videoView.getWidth();
+                    float scaleY = 1.0F * height / videoView.getHeight();
+                    videoView
+                            .animate()
+                            .setDuration(DURATION)
+                            .translationX(translationX)
+                            .translationY(translationY)
+                            .scaleX(scaleX)
+                            .scaleY(scaleY)
+                            .setListener(listenerAdapter)
+                            .start();
+                }
+            }
+
+            if (isStudentSelfIn) {
+                num = 0;
+                for (int i = 0; i < childCount; i++) {
+                    VideoView videoView = (VideoView) rl_student_video_view.getChildAt(i);
+                    int width = viewInfoList.get(i).getWidth();
+                    int height = viewInfoList.get(i).getHeight();
+                    int x = viewInfoList.get(i).getX();
+                    int y = viewInfoList.get(i).getY();
+                    if (i >= 1) {
+                        width = viewInfoList.get(i + 1).getWidth();
+                        height = viewInfoList.get(i + 1).getHeight();
+                        x = viewInfoList.get(i + 1).getX();
+                        y = viewInfoList.get(i + 1).getY();
+                    }
+                    float translationX = x - videoView.getX();
+                    float translationY = y - videoView.getY();
+                    float scaleX = 1.0F * width / videoView.getWidth();
+                    float scaleY = 1.0F * height / videoView.getHeight();
+                    videoView
+                            .animate()
+                            .setDuration(DURATION)
+                            .translationX(translationX)
+                            .translationY(translationY)
+                            .scaleX(scaleX)
+                            .scaleY(scaleY)
+                            .setListener(listenerAdapter)
+                            .start();
+                }
+            }
+
+
+        }
     }
 
     //添加视频窗口
@@ -2447,22 +2601,24 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
     }
 
     private void onUserSub(int removeIndex) {
+
         rl_student_video_view.removeViewAt(removeIndex);
+        if (curModel == MODEL_NORMAL) {
+            int childCount = rl_student_video_view.getChildCount();
+            int eachWidth = parentWidth / 7;
+            for (int i = 0; i < childCount; i++) {
+                if (i >= removeIndex) {
+                    VideoView childView = (VideoView) rl_student_video_view.getChildAt(i);
+                    childView.animate().translationX(-1.0F * eachWidth).setListener(null).setDuration(DURATION).start();
+                }
+            }
 
-        int childCount = rl_student_video_view.getChildCount();
-        ArrayList<ViewInfo> viewInfoList = getViewInfoList(childCount);
-
-        for (int i = 0; i < childCount; i++) {
-            VideoView videoWindow = (VideoView) rl_student_video_view.getChildAt(i);
-            int width = viewInfoList.get(i).getWidth();
-            int height = viewInfoList.get(i).getHeight();
-            float translationX = viewInfoList.get(i).getTranslationX();
-            float translationY = viewInfoList.get(i).getTranslationY();
-//            videoWindow.getLayoutChangeAnimatorSet(width, height, translationX, translationY).setDuration(1000).start();
-            ValueAnimator valueAnimator = videoWindow.getLayoutChangeAnimatorSet(width, height, translationX, translationY).setDuration(1000);
-            valueAnimator.setStartDelay(1000);
-            valueAnimator.start();
         }
+
+        if(curModel == MODEL_VIDEO) {
+
+        }
+
 
     }
 
@@ -2787,7 +2943,9 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
             //连麦处理
             if (customBean.getLm() != 0) {
                 if (customBean.getLm() == 1) {
-                    showRemoteView(String.valueOf(customBean.getUserId()), mUserInfo);
+                    if (customBean.getUserId() != Integer.parseInt(teachid)) {
+                        showRemoteView(String.valueOf(customBean.getUserId()), mUserInfo);
+                    }
                 }
             }
 

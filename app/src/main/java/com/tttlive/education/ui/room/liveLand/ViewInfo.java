@@ -10,8 +10,11 @@ public class ViewInfo {
 
     private int width;
     private int height;
+    private int x;
+    private int y;
     private float translationX;
     private float translationY;
+
 
     public ViewInfo() {
     }
@@ -21,6 +24,29 @@ public class ViewInfo {
         this.height = height;
         this.translationX = translationX;
         this.translationY = translationY;
+    }
+
+    public ViewInfo(int width, int height, int x, int y) {
+        this.width = width;
+        this.height = height;
+        this.x = x;
+        this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     public int getWidth() {
@@ -60,6 +86,8 @@ public class ViewInfo {
         return "ViewInfo{" +
                 "width=" + width +
                 ", height=" + height +
+                ", x=" + x +
+                ", y=" + y +
                 ", translationX=" + translationX +
                 ", translationY=" + translationY +
                 '}';
