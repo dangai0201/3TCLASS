@@ -14,6 +14,7 @@ import android.view.ViewPropertyAnimator;
 import android.view.animation.LinearInterpolator;
 import android.widget.AbsoluteLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.tttlive.basic.education.R;
@@ -38,6 +39,7 @@ public class VideoView extends DragScaleView {
     private ImageView live_stauts_camera;
     private RelativeLayout land_rl_live_microphone_one;
     private RelativeLayout student_head_video_land;
+    private LinearLayout ll_video_tool;
 
     private static final String W = "width";
     private static final String H = "height";
@@ -48,6 +50,7 @@ public class VideoView extends DragScaleView {
     private static final String SCALE_X = "scaleX";
     private static final String SCALE_Y = "scaleY";
     private static final long DURATION = 500L;
+
 
     public RelativeLayout getRl_video_land() {
         return rl_video_land;
@@ -89,6 +92,7 @@ public class VideoView extends DragScaleView {
         live_stauts_camera = video_utile_land.findViewById(R.id.live_video_stauts_camera);
         land_rl_live_microphone_one = video_utile_land.findViewById(R.id.land_rl_live_microphone_one);
         student_head_video_land = video_utile_land.findViewById(R.id.teacher_head_video_land);
+        ll_video_tool = video_utile_land.findViewById(R.id.ll_video_tool);
         live_stauts_authorization.setVisibility(GONE);
         live_stauts_camera.setVisibility(GONE);
         live_stauts_phone.setVisibility(GONE);
@@ -191,6 +195,15 @@ public class VideoView extends DragScaleView {
     public void setLand_rl_live_microphone_one(RelativeLayout land_rl_live_microphone_one) {
         this.land_rl_live_microphone_one = land_rl_live_microphone_one;
     }
+
+    public LinearLayout getLl_video_tool() {
+        return ll_video_tool;
+    }
+
+    public void setLl_video_tool(LinearLayout ll_video_tool) {
+        this.ll_video_tool = ll_video_tool;
+    }
+
 
     private void setWidth(int width) {
         ViewGroup.LayoutParams layoutParams = getLayoutParams();

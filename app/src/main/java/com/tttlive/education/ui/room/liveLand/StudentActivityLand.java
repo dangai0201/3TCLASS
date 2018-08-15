@@ -1086,8 +1086,9 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         calendar.add(Calendar.HOUR_OF_DAY, -8);
         Date time = calendar.getTime();
         liveTime = time.getTime();
-//        CharSequence sysTimeStr = DateFormat.format("HH:mm:ss", liveTime);
-//        network_stauts_time.setText(sysTimeStr);
+        CharSequence sysTimeStr = DateFormat.format("HH:mm:ss", liveTime);
+        network_stauts_time.setText(sysTimeStr);
+        network_stauts_time.setVisibility(View.GONE);
         teacherEnd(snb.getData().getUserId());
 
     }
@@ -2301,6 +2302,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
             tv_user_one = mVideoView.findViewById(R.id.tv_user_name_one);
         }
         mVideoView.setFlagUserId(userId);
+        mVideoViewList.add(mVideoView);
 
         return mVideoView;
     }
@@ -3162,6 +3164,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
             } else if (timeType.equals("ended")) {
                 tv_result_time.setText(sysTimeStr);
             } else if (timeType.equals("network")) {
+                network_stauts_time.setVisibility(View.VISIBLE);
                 network_stauts_time.setText(sysTimeStr);
 
             }

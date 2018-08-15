@@ -148,7 +148,7 @@
     <string name="network_stauts_delay">延迟:</string>
     <string name="network_stauts_packet_loss_rate">丢包率:</string>
     <string name="network_stauts_state">状态:</string>
-    <string name="network_stauts_not_classes">未开课:</string>
+    <string name="network_stauts_not_classes">未开课</string>
     <string name="network_stauts_has_classes">已开课:</string>
     <string name="network_stauts_optimal">优</string>
     <string name="network_stauts_good">良</string>
