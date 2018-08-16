@@ -69,6 +69,8 @@ public abstract class DragScaleView extends RelativeLayout implements View.OnTou
 
     protected int mVideoLayoutType;
 
+    protected boolean touchable = true;
+
     public DragScaleView(Context context) {
         super(context);
         this.mContext = context;
@@ -141,6 +143,9 @@ public abstract class DragScaleView extends RelativeLayout implements View.OnTou
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+        if(!touchable) {
+            return false;
+        }
         int action = event.getAction();
         if (action == MotionEvent.ACTION_DOWN) {
             mDownX = (int) event.getRawX();
@@ -472,4 +477,7 @@ public abstract class DragScaleView extends RelativeLayout implements View.OnTou
     protected abstract void resetVideo();
 
 
+    public void setTouchable(boolean touchable) {
+        this.touchable = touchable;
+    }
 }

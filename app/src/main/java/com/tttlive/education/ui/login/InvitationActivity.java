@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -32,7 +31,6 @@ import com.tttlive.education.ui.room.socket.WebSocketService;
 import com.tttlive.education.util.CustomPopWindow;
 import com.tttlive.education.util.DateUtils;
 import com.tttlive.education.util.SPTools;
-import com.tttlive.education.util.StatusBarUtil;
 import com.tttlive.education.util.Tools;
 import com.wushuangtech.library.Constants;
 import com.wushuangtech.room.core.TTTSDK;
@@ -432,7 +430,7 @@ public class InvitationActivity extends BaseActivity implements View.OnClickList
 
     //邀请码登录成功后请求集群地址
     private void websCluster() {
-        if (Constant.wsService != null){
+        if (Constant.wsService != null && Constant.wsService.webSocket != null){
             if (Constant.wsService.webSocket.isOpen()){
                 if (Constant.exitRoom){
                     Constant.wsService.prepareShutdown();

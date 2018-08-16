@@ -20,12 +20,12 @@
             android:background="@color/color_ff353535" />
 
         <RelativeLayout
-            android:background="@color/color_FF494949"
             android:id="@+id/land_rl_live_microphone_one"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
-            android:layout_centerInParent="true">
+            android:layout_centerInParent="true"
+            android:background="@color/color_FF494949"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -81,17 +81,17 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_alignParentTop="true"
             android:id="@+id/rl_teacher_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:visibility="gone">
 
             <TextView
-                android:layout_alignParentRight="true"
                 android:id="@+id/tv_teacher"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
                 android:background="@drawable/shape_bg_check"
                 android:padding="@dimen/dp2"
                 android:text="教师"

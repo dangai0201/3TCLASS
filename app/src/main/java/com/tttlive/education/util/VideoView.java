@@ -42,6 +42,7 @@ public class VideoView extends DragScaleView {
     private RelativeLayout student_head_video_land;
     private LinearLayout ll_video_tool;
     private TextView tv_video_close;
+    private TextView tv_teacher;
 
     private static final String W = "width";
     private static final String H = "height";
@@ -121,6 +122,7 @@ public class VideoView extends DragScaleView {
         live_stauts_phone.setVisibility(GONE);
         land_rl_live_microphone_one.setVisibility(GONE);
         this.rl_video_land = (RelativeLayout) video_utile_land;
+        tv_teacher = video_utile_land.findViewById(R.id.tv_teacher);
     }
 
     public void setVideo(long userId, int width, int height) {
@@ -310,4 +312,7 @@ public class VideoView extends DragScaleView {
         return ObjectAnimator.ofPropertyValuesHolder(this, holder1, holder2, holder3, holder4);
     }
 
+    public TextView getTvTeacher() {
+        return tv_teacher;
+    }
 }

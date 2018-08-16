@@ -13,22 +13,22 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:id="@+id/ll_no_class_background"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:gravity="center"
                 android:background="@mipmap/living_default_bg"
+                android:gravity="center"
                 android:orientation="vertical"
                 android:visibility="visible">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/living_default_img"/>
+                    android:src="@drawable/living_default_img" />
 
             </LinearLayout>
 
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <include layout="@layout/activity_network_status_land"/>
+            <include layout="@layout/activity_network_status_land" />
 
             <include layout="@layout/studio_title_land_utile" />
 
@@ -59,15 +59,15 @@
         </LinearLayout>
 
 
-
         <LinearLayout
             android:id="@+id/ll_video_tool_zoom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp20"
-            android:paddingTop="@dimen/dp5"
             android:paddingBottom="@dimen/dp5"
-            android:paddingRight="@dimen/dp5">
+            android:paddingRight="@dimen/dp5"
+            android:paddingTop="@dimen/dp5">
+
             <ImageView
                 android:id="@+id/iv_live_navbar_unfold"
                 android:layout_width="wrap_content"
