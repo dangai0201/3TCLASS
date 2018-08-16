@@ -9,6 +9,7 @@ package com.tttlive.education.ui.widget;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.support.v7.widget.GridLayoutManager;
@@ -19,6 +20,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tttlive.basic.education.R;
@@ -41,6 +43,8 @@ public class ShareWindow extends PopupWindow implements View.OnClickListener, Sh
     private String title;
     private String description;
     private String copyUrl;
+    private TextView tv_background;
+    private ShareAdapter adapter;
 
     private ShareWindow(Activity activity, String shareUrl, String iconUrl, String title, String description, String copyUrl) {
         super(activity);
@@ -56,18 +60,22 @@ public class ShareWindow extends PopupWindow implements View.OnClickListener, Sh
     private void initPop(Context context) {
         View contentView = LayoutInflater.from(context).inflate(R.layout.popu_share_layout, null);
         this.setContentView(contentView);
-        this.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        this.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
         this.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         this.setFocusable(true);
         this.setAnimationStyle(R.style.AnimBottomIn);
-        ColorDrawable dw = new ColorDrawable(0x00000000);
-        this.setBackgroundDrawable(dw);
+        ColorDrawable dw = new ColorDrawable( );
+        this.setBackgroundDrawable(new BitmapDrawable());
 
         RecyclerView recyclerView = contentView.findViewById(R.id.rv_list);
         btn_cancel = contentView.findViewById(R.id.share_btn_cancel);
+        tv_background = contentView.findViewById(R.id.tv_background);
         btn_cancel.setOnClickListener(this);
+        tv_background.setOnClickListener(this);
         recyclerView.setLayoutManager(new GridLayoutManager(context, 3));
-        recyclerView.setAdapter(new ShareAdapter());
+        adapter = new ShareAdapter();
+        adapter.setListener(this);
+        recyclerView.setAdapter(adapter);
 
     }
 
@@ -84,7 +92,7 @@ public class ShareWindow extends PopupWindow implements View.OnClickListener, Sh
 
     @Override
     public void onClick(View v) {
-        if (v == btn_cancel) {
+        if (v == btn_cancel || v == tv_background) {
             dismiss();
         }
 
@@ -93,13 +101,13 @@ public class ShareWindow extends PopupWindow implements View.OnClickListener, Sh
     @Override
     public void showAtLocation(View parent, int gravity, int x, int y) {
         super.showAtLocation(parent, gravity, x, y);
-        setBackgroundAlpha(0.7f);
+//        setBackgroundAlpha(0.7f);
     }
 
     @Override
     public void dismiss() {
         super.dismiss();
-        setBackgroundAlpha(1f);
+//        setBackgroundAlpha(1f);
     }
 
     @Override

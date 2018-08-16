@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/pop_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:orientation="vertical">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/tv_background"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:background="@color/color_transparent_40" />
+
+    <RelativeLayout
+        android:gravity="center"
+        android:layout_gravity="center"
         android:id="@+id/share_ll_topView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="5"
         android:background="@color/white"
-        android:orientation="vertical"
-        android:paddingBottom="10dp"
         android:paddingTop="10dp">
 
         <TextView
@@ -20,25 +27,27 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp20"
             android:text="分享"
-            android:textSize="14sp"
-            android:textColor="@color/color_live_chat_name"/>
+            android:textColor="@color/color_live_chat_name"
+            android:textSize="14sp" />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
 
         </android.support.v7.widget.RecyclerView>
-    </LinearLayout>
 
-    <Button
-        android:id="@+id/share_btn_cancel"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_below="@id/share_ll_topView"
-        android:background="@color/bg_color"
-        android:gravity="center"
-        android:text="取消"
-        android:textColor="@color/one_level_black"
-        android:textSize="14sp" />
+        <Button
+            android:id="@+id/share_btn_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/bg_color"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/one_level_black"
+            android:textSize="14sp" />
+    </RelativeLayout>
 
-</RelativeLayout>
+</LinearLayout>

@@ -6,7 +6,7 @@ package com.tttlive.education.ui;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -55,8 +55,7 @@ public class SharePopu extends PopupWindow {
         this.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         this.setFocusable(true);
         this.setAnimationStyle(R.style.AnimBottomIn);
-//        ColorDrawable dw = new ColorDrawable(0x00000000);
-        this.setBackgroundDrawable(new BitmapDrawable());
+        ColorDrawable dw = new ColorDrawable(0x00000000);
         mMenuView.setOnTouchListener(new View.OnTouchListener() {
 
             public boolean onTouch(View v, MotionEvent event) {

@@ -76,6 +76,7 @@ import com.tttlive.education.ui.room.socket.WsListener;
 import com.tttlive.education.ui.room.webviewtool.WebviewToolPopupWindowLand;
 import com.tttlive.education.ui.share.ShareInterface;
 import com.tttlive.education.ui.share.SharePresenter;
+import com.tttlive.education.ui.widget.ShareWindow;
 import com.tttlive.education.util.AlarmTimeUtils;
 import com.tttlive.education.util.BaseTools;
 import com.tttlive.education.util.CustomPopWindow;
@@ -221,6 +222,9 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
     private FireworksView fireworks;
     private NumAnim giftNumAnim;
     public SharePopu shareStudentPopu;
+    //分享弹窗
+    private ShareWindow shareWindow;
+
     private SharePresenter sharePresenter;
     private PingUtil mPingUtil;
     private TimeReceiver mTimeReceiver;
@@ -1408,7 +1412,12 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                 exitRoomDialog();
                 break;
             case R.id.land_image_view_share:
-                showSharePopu();
+//                showSharePopu();
+                if (shareWindow != null && shareWindow.isShowing()) {
+                    shareWindow.dismiss();
+                    return;
+                }
+                showShareWindow();
                 break;
             case R.id.land_img_chat:
                 if (!chatPop.isShow()) {
@@ -1659,6 +1668,9 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
 
         if (shareStudentPopu != null && shareStudentPopu.isShowing()) {
             shareStudentPopu.dismiss();
+        }
+        if (shareWindow != null && shareWindow.isShowing()) {
+            shareWindow.dismiss();
         }
 
         if (mVideoIjkPlayer != null) {
@@ -3365,6 +3377,25 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
 
         }
     }
+    /**
+     * 显示分享
+     */
+    private void showShareWindow() {
+        if (shareWindow == null) {
+            if (timeStart != null && timeStart.contains(".")) {
+                timeStart = timeStart.replace(".", "-");
+            }
+            shareWindow = new ShareWindow
+                    .Builder(this)
+                    .shareUrl(Constant.SHARE_TEACHER_URL)
+                    .iconUrl(Constant.SHARE_IMAGE_URL)
+                    .copyUrl(Constant.SHARE_TEACHER_URL)
+                    .title(title)
+                    .description(String.format("直播时间:%s", timeStart))
+                    .build();
+        }
 
+        shareWindow.showAtLocation(rl_student_land_main, Gravity.BOTTOM, 0, 0);
+    }
 
 }

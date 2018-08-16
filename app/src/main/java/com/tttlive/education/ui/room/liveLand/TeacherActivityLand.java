@@ -84,6 +84,7 @@ import com.tttlive.education.ui.room.webviewtool.WebviewToolPopupWindowLand;
 import com.tttlive.education.ui.share.ShareInterface;
 import com.tttlive.education.ui.share.SharePresenter;
 import com.tttlive.education.ui.widget.NetStatusView;
+import com.tttlive.education.ui.widget.ShareWindow;
 import com.tttlive.education.util.AlarmTimeUtils;
 import com.tttlive.education.util.CustomAnimationDrawableNew;
 import com.tttlive.education.util.DateUtils;
@@ -235,6 +236,10 @@ public class TeacherActivityLand extends BaseLiveActivity implements View.OnClic
     private PopupWindow answerPopWindow;
     private PopupWindow statisticsPopWindow;
     public SharePopu shareTeacherPopu;
+
+    //分享弹窗
+    private ShareWindow shareWindow;
+
     private PingUtil mPingUtil;
 
 
@@ -630,8 +635,11 @@ public class TeacherActivityLand extends BaseLiveActivity implements View.OnClic
         if (customBeanList != null && customBeanList.size() > 0) {
             customBeanList.clear();
         }
-        if (shareTeacherPopu != null && shareTeacherPopu.isShowing()) {
-            shareTeacherPopu.dismiss();
+//        if (shareTeacherPopu != null && shareTeacherPopu.isShowing()) {
+//            shareTeacherPopu.dismiss();
+//        }
+        if (shareWindow != null && shareWindow.isShowing()) {
+            shareWindow.dismiss();
         }
         mHandler.removeCallbacks(timerRunnable);
         roomJoinMap.clear();
@@ -661,9 +669,14 @@ public class TeacherActivityLand extends BaseLiveActivity implements View.OnClic
                 exitRoomDialog();
                 break;
             case R.id.land_image_view_share://弹出分享弹窗
-                if (shareTeacherPopu != null && shareTeacherPopu.isShowing())
-                    shareTeacherPopu.dismiss();
-                showSharePopu();
+//                if (shareTeacherPopu != null && shareTeacherPopu.isShowing())
+//                    shareTeacherPopu.dismiss();
+//                showSharePopu();
+                if (shareWindow != null && shareWindow.isShowing()) {
+                    shareWindow.dismiss();
+                    return;
+                }
+                showShareWindow();
                 break;
             case R.id.land_iv_radio_courseware://弹出课件列表
                 if (DateUtils.isFastClick()) {
@@ -2673,5 +2686,24 @@ public class TeacherActivityLand extends BaseLiveActivity implements View.OnClic
         }
     };
 
+    /**
+     * 显示分享
+     */
+    private void showShareWindow() {
+        if (shareWindow == null) {
+            if (timeStart != null && timeStart.contains(".")) {
+                timeStart = timeStart.replace(".", "-");
+            }
+            shareWindow = new ShareWindow
+                    .Builder(this)
+                    .shareUrl(Constant.SHARE_TEACHER_URL)
+                    .iconUrl(Constant.SHARE_IMAGE_URL)
+                    .copyUrl(Constant.SHARE_TEACHER_URL)
+                    .title(title)
+                    .description(String.format("直播时间:%s", timeStart))
+                    .build();
+        }
 
+        shareWindow.showAtLocation(findViewById(R.id.main), Gravity.BOTTOM, 0, 0);
+    }
 }
