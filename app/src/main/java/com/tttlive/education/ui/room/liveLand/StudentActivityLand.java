@@ -804,9 +804,9 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                             if (!upCustom.isMicClosed()) {
                                 for (int i1 = 0; i1 < mVideoViewList.size(); i1++) {
                                     if (mVideoViewList.get(i1).getFlagUserId().equals(String.valueOf(upCustom.getUserId()))) {
-                                        CurModelTools(i1);
                                         mVideoViewList.get(i1).getLive_stauts_phone().setVisibility(View.GONE);
                                         customBeanList.get(i).setMicClosed(false);
+                                        CurModelTools(i1);
                                     }
                                 }
                             }
@@ -814,9 +814,11 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                             if (upCustom.isMicClosed()) {
                                 for (int i1 = 0; i1 < mVideoViewList.size(); i1++) {
                                     if (mVideoViewList.get(i1).getFlagUserId().equals(String.valueOf(upCustom.getUserId()))) {
-                                        CurModelTools(i1);
-                                        mVideoViewList.get(i1).getLive_stauts_phone().setVisibility(View.VISIBLE);
+                                        if (!mVideoViewList.get(i1).getFlagUserId().equals(teachid)) {
+                                            mVideoViewList.get(i1).getLive_stauts_phone().setVisibility(View.VISIBLE);
+                                        }
                                         customBeanList.get(i).setMicClosed(true);
+                                        CurModelTools(i1);
                                     }
                                 }
                             }
@@ -827,10 +829,10 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                             if (!upCustom.isCameraClosed()) {
                                 for (int i1 = 0; i1 < mVideoViewList.size(); i1++) {
                                     if (mVideoViewList.get(i1).getFlagUserId().equals(String.valueOf(upCustom.getUserId()))) {
-                                        CurModelTools(i1);
                                         mVideoViewList.get(i1).getLive_stauts_camera().setVisibility(View.GONE);
                                         mVideoViewList.get(i1).getLand_rl_live_microphone_one().setVisibility(View.GONE);
                                         customBeanList.get(i).setCameraClosed(false);
+                                        CurModelTools(i1);
                                     }
                                 }
                             }
@@ -839,10 +841,12 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                             if (upCustom.isCameraClosed()) {
                                 for (int i1 = 0; i1 < mVideoViewList.size(); i1++) {
                                     if (mVideoViewList.get(i1).getFlagUserId().equals(String.valueOf(upCustom.getUserId()))) {
-                                        CurModelTools(i1);
-                                        mVideoViewList.get(i1).getLive_stauts_camera().setVisibility(View.VISIBLE);
+                                        if (!mVideoViewList.get(i1).getFlagUserId().equals(teachid)) {
+                                            mVideoViewList.get(i1).getLive_stauts_camera().setVisibility(View.VISIBLE);
+                                        }
                                         mVideoViewList.get(i1).getLand_rl_live_microphone_one().setVisibility(View.VISIBLE);
                                         customBeanList.get(i).setCameraClosed(true);
+                                        CurModelTools(i1);
                                     }
                                 }
 
@@ -856,9 +860,9 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                     if (!upCustom.isWhiteBoardAccess()) {
                         for (int i1 = 0; i1 < mVideoViewList.size(); i1++) {
                             if (mVideoViewList.get(i1).getFlagUserId().equals(String.valueOf(upCustom.getUserId()))) {
-                                CurModelTools(i1);
                                 mVideoViewList.get(i1).getLive_stauts_authorization().setVisibility(View.GONE);
                                 customBeanList.get(i).setWhiteBoardAccess(false);
+                                CurModelTools(i1);
                             }
                         }
                     }
@@ -867,9 +871,9 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
 
                         for (int i1 = 0; i1 < mVideoViewList.size(); i1++) {
                             if (mVideoViewList.get(i1).getFlagUserId().equals(String.valueOf(upCustom.getUserId()))) {
-                                CurModelTools(i1);
                                 mVideoViewList.get(i1).getLive_stauts_authorization().setVisibility(View.VISIBLE);
                                 customBeanList.get(i).setWhiteBoardAccess(true);
+                                CurModelTools(i1);
                             }
                         }
 
@@ -1832,13 +1836,15 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
 
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) student_view_web.getLayoutParams();
-        layoutParams.width = mapWidth;
         if (mapWidth * 9 / 16 > mapHeight) {
-            layoutParams.height = mapHeight;
+            layoutParams.height = mapHeight - rl_network_bar.getHeight();
+            layoutParams.width = layoutParams.height * 16/9;
         } else {
+            layoutParams.width = mapWidth;
             layoutParams.height = mapWidth * 9 / 16;
         }
-//        layoutParams.topMargin = rl_network_bar.getHeight();
+
+        Log.e(TAG_CLASS, "屏幕宽度 : " + mapWidth + " 屏幕高度  : " + layoutParams.height);
         Log.e(TAG_CLASS, "屏幕高度 11: " + rl_network_bar.getHeight());
         layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         student_view_web.setLayoutParams(layoutParams);
@@ -2771,8 +2777,8 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
     private void localAudioStype(String mUerId, int visible, boolean isAudio) {
         for (int i = 0; i < mVideoViewList.size(); i++) {
             if (mVideoViewList.get(i).getFlagUserId().equals(mUerId)) {
-                CurModelTools(i);
                 mVideoViewList.get(i).getLive_stauts_phone().setVisibility(visible);
+                CurModelTools(i);
             }
         }
 
@@ -2792,9 +2798,9 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
     private void localVideoStype(String mUerId, int visible, boolean isVideo) {
         for (int i = 0; i < mVideoViewList.size(); i++) {
             if (mVideoViewList.get(i).getFlagUserId().equals(mUerId)) {
-                CurModelTools(i);
                 mVideoViewList.get(i).getLive_stauts_camera().setVisibility(visible);
                 mVideoViewList.get(i).getLand_rl_live_microphone_one().setVisibility(visible);
+                CurModelTools(i);
 
             }
         }
@@ -2990,9 +2996,11 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                 if (customBean.getLm() == 1) {
                     for (int i = 0; i < mVideoViewList.size(); i++) {
                         if (mVideoViewList.get(i).getFlagUserId().equals(String.valueOf(customBean.getUserId()))) {
-                            CurModelTools(i);
-                            mVideoViewList.get(i).getLive_stauts_camera().setVisibility(View.VISIBLE);
+                            if (!mVideoViewList.get(i).getFlagUserId().equals(teachid)) {
+                                mVideoViewList.get(i).getLive_stauts_camera().setVisibility(View.VISIBLE);
+                            }
                             mVideoViewList.get(i).getLand_rl_live_microphone_one().setVisibility(View.VISIBLE);
+                            CurModelTools(i);
                         }
                     }
                 }
@@ -3003,8 +3011,10 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                 if (customBean.getLm() == 1) {
                     for (int i = 0; i < mVideoViewList.size(); i++) {
                         if (mVideoViewList.get(i).getFlagUserId().equals(String.valueOf(customBean.getUserId()))) {
+                            if (!mVideoViewList.get(i).getFlagUserId().equals(teachid)) {
+                                mVideoViewList.get(i).getLive_stauts_phone().setVisibility(View.VISIBLE);
+                            }
                             CurModelTools(i);
-                            mVideoViewList.get(i).getLive_stauts_phone().setVisibility(View.VISIBLE);
                         }
                     }
                 }
@@ -3015,8 +3025,8 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         if (customBean.isWhiteBoardAccess()) {
             for (int i = 0; i < mVideoViewList.size(); i++) {
                 if (mVideoViewList.get(i).getFlagUserId().equals(String.valueOf(customBean.getUserId()))) {
-                    CurModelTools(i);
                     mVideoViewList.get(i).getLive_stauts_authorization().setVisibility(View.VISIBLE);
+                    CurModelTools(i);
                 }
             }
         }
