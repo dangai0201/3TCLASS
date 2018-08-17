@@ -791,103 +791,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         //用户有信息更新
         Log.e(TAG_CLASS, " 用户信息更新 roomId : " + roomId + " sCustom " + sCustom);
         CustomBean upCustom = stGson.fromJson(sCustom, CustomBean.class);
-
-        for (int i = 0; i < customBeanList.size(); i++) {
-            if (upCustom.getUserId() == customBeanList.get(i).getUserId()) {
-                if (customBeanList.get(i).getLm() == 0) {
-                    if (upCustom.getLm() == 1) {
-                        showRemoteView(String.valueOf(upCustom.getUserId()), mUserInfo);
-                        customBeanList.get(i).setLm(1);
-                    }
-                } else if (customBeanList.get(i).getLm() == 1) {
-                    if (upCustom.getLm() == 0) {
-                        releaseLiveView(upCustom.getUserId());
-                        customBeanList.get(i).setLm(0);
-                    } else {
-                        if (customBeanList.get(i).isMicClosed()) {
-                            if (!upCustom.isMicClosed()) {
-                                for (int i1 = 0; i1 < mVideoViewList.size(); i1++) {
-                                    if (mVideoViewList.get(i1).getFlagUserId().equals(String.valueOf(upCustom.getUserId()))) {
-                                        mVideoViewList.get(i1).getLive_stauts_phone().setVisibility(View.GONE);
-                                        customBeanList.get(i).setMicClosed(false);
-                                        CurModelTools(i1);
-                                    }
-                                }
-                            }
-                        } else {
-                            if (upCustom.isMicClosed()) {
-                                for (int i1 = 0; i1 < mVideoViewList.size(); i1++) {
-                                    if (mVideoViewList.get(i1).getFlagUserId().equals(String.valueOf(upCustom.getUserId()))) {
-                                        if (!mVideoViewList.get(i1).getFlagUserId().equals(teachid)) {
-                                            mVideoViewList.get(i1).getLive_stauts_phone().setVisibility(View.VISIBLE);
-                                        }
-                                        customBeanList.get(i).setMicClosed(true);
-                                        CurModelTools(i1);
-                                    }
-                                }
-                            }
-
-                        }
-
-                        if (customBeanList.get(i).isCameraClosed()) {
-                            if (!upCustom.isCameraClosed()) {
-                                for (int i1 = 0; i1 < mVideoViewList.size(); i1++) {
-                                    if (mVideoViewList.get(i1).getFlagUserId().equals(String.valueOf(upCustom.getUserId()))) {
-                                        mVideoViewList.get(i1).getLive_stauts_camera().setVisibility(View.GONE);
-                                        mVideoViewList.get(i1).getLand_rl_live_microphone_one().setVisibility(View.GONE);
-                                        customBeanList.get(i).setCameraClosed(false);
-                                        CurModelTools(i1);
-                                    }
-                                }
-                            }
-
-                        } else {
-                            if (upCustom.isCameraClosed()) {
-                                for (int i1 = 0; i1 < mVideoViewList.size(); i1++) {
-                                    if (mVideoViewList.get(i1).getFlagUserId().equals(String.valueOf(upCustom.getUserId()))) {
-                                        if (!mVideoViewList.get(i1).getFlagUserId().equals(teachid)) {
-                                            mVideoViewList.get(i1).getLive_stauts_camera().setVisibility(View.VISIBLE);
-                                        }
-                                        mVideoViewList.get(i1).getLand_rl_live_microphone_one().setVisibility(View.VISIBLE);
-                                        customBeanList.get(i).setCameraClosed(true);
-                                        CurModelTools(i1);
-                                    }
-                                }
-
-                            }
-
-                        }
-                    }
-                }
-
-                if (customBeanList.get(i).isWhiteBoardAccess()) {
-                    if (!upCustom.isWhiteBoardAccess()) {
-                        for (int i1 = 0; i1 < mVideoViewList.size(); i1++) {
-                            if (mVideoViewList.get(i1).getFlagUserId().equals(String.valueOf(upCustom.getUserId()))) {
-                                mVideoViewList.get(i1).getLive_stauts_authorization().setVisibility(View.GONE);
-                                customBeanList.get(i).setWhiteBoardAccess(false);
-                                CurModelTools(i1);
-                            }
-                        }
-                    }
-                } else {
-                    if (upCustom.isWhiteBoardAccess()) {
-
-                        for (int i1 = 0; i1 < mVideoViewList.size(); i1++) {
-                            if (mVideoViewList.get(i1).getFlagUserId().equals(String.valueOf(upCustom.getUserId()))) {
-                                mVideoViewList.get(i1).getLive_stauts_authorization().setVisibility(View.VISIBLE);
-                                customBeanList.get(i).setWhiteBoardAccess(true);
-                                CurModelTools(i1);
-                            }
-                        }
-
-                    }
-
-                }
-                whiteboardStype(String.valueOf(upCustom.getUserId()), upCustom.isWhiteBoardAccess());
-            }
-
-        }
+        updateCustom(upCustom);
 
     }
 
@@ -1129,6 +1033,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         CharSequence sysTimeStr = DateFormat.format("HH:mm:ss", liveTime);
         network_stauts_time.setText(sysTimeStr);
         network_stauts_time.setVisibility(View.GONE);
+
         teacherEnd(snb.getData().getUserId());
 
     }
@@ -3059,7 +2964,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
             }
         }
 
-        if (customBeanList != null && customBeanList.size() > 0) {
+        if (customBeanList != null && customBeanList.size() > 0 && Integer.parseInt(mUserId) != Integer.parseInt(teachid)) {
             for (int i = 0; i < customBeanList.size(); i++) {
                 if (Integer.parseInt(mUserId) == customBeanList.get(i).getUserId()) {
                     customBeanList.remove(i);
@@ -3346,6 +3251,109 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
             land_iv_raise_menu.setBackground(getResources().getDrawable(R.drawable.icon_menu_normal));
             animation_tool = false;
             animatorSet.addListener(toolDisplacementAddListener);
+        }
+    }
+
+    /**
+     * 用户更新数据
+     * @param upCustom
+     */
+    private void updateCustom(CustomBean upCustom) {
+        for (int i = 0; i < customBeanList.size(); i++) {
+            if (upCustom.getUserId() == customBeanList.get(i).getUserId()) {
+                if (customBeanList.get(i).getLm() == 0) {
+                    if (upCustom.getLm() == 1) {
+                        showRemoteView(String.valueOf(upCustom.getUserId()), mUserInfo);
+                        customBeanList.get(i).setLm(1);
+                    }
+                } else if (customBeanList.get(i).getLm() == 1) {
+                    if (upCustom.getLm() == 0) {
+                        releaseLiveView(upCustom.getUserId());
+                        customBeanList.get(i).setLm(0);
+                    } else {
+                        if (customBeanList.get(i).isMicClosed()) {
+                            if (!upCustom.isMicClosed()) {
+                                for (int i1 = 0; i1 < mVideoViewList.size(); i1++) {
+                                    if (mVideoViewList.get(i1).getFlagUserId().equals(String.valueOf(upCustom.getUserId()))) {
+                                        mVideoViewList.get(i1).getLive_stauts_phone().setVisibility(View.GONE);
+                                        customBeanList.get(i).setMicClosed(false);
+                                        CurModelTools(i1);
+                                    }
+                                }
+                            }
+                        } else {
+                            if (upCustom.isMicClosed()) {
+                                for (int i1 = 0; i1 < mVideoViewList.size(); i1++) {
+                                    if (mVideoViewList.get(i1).getFlagUserId().equals(String.valueOf(upCustom.getUserId()))) {
+                                        if (!mVideoViewList.get(i1).getFlagUserId().equals(teachid)) {
+                                            mVideoViewList.get(i1).getLive_stauts_phone().setVisibility(View.VISIBLE);
+                                        }
+                                        customBeanList.get(i).setMicClosed(true);
+                                        CurModelTools(i1);
+                                    }
+                                }
+                            }
+
+                        }
+
+                        if (customBeanList.get(i).isCameraClosed()) {
+                            if (!upCustom.isCameraClosed()) {
+                                for (int i1 = 0; i1 < mVideoViewList.size(); i1++) {
+                                    if (mVideoViewList.get(i1).getFlagUserId().equals(String.valueOf(upCustom.getUserId()))) {
+                                        mVideoViewList.get(i1).getLive_stauts_camera().setVisibility(View.GONE);
+                                        mVideoViewList.get(i1).getLand_rl_live_microphone_one().setVisibility(View.GONE);
+                                        customBeanList.get(i).setCameraClosed(false);
+                                        CurModelTools(i1);
+                                    }
+                                }
+                            }
+
+                        } else {
+                            if (upCustom.isCameraClosed()) {
+                                for (int i1 = 0; i1 < mVideoViewList.size(); i1++) {
+                                    if (mVideoViewList.get(i1).getFlagUserId().equals(String.valueOf(upCustom.getUserId()))) {
+                                        if (!mVideoViewList.get(i1).getFlagUserId().equals(teachid)) {
+                                            mVideoViewList.get(i1).getLive_stauts_camera().setVisibility(View.VISIBLE);
+                                        }
+                                        mVideoViewList.get(i1).getLand_rl_live_microphone_one().setVisibility(View.VISIBLE);
+                                        customBeanList.get(i).setCameraClosed(true);
+                                        CurModelTools(i1);
+                                    }
+                                }
+
+                            }
+
+                        }
+                    }
+                }
+
+                if (customBeanList.get(i).isWhiteBoardAccess()) {
+                    if (!upCustom.isWhiteBoardAccess()) {
+                        for (int i1 = 0; i1 < mVideoViewList.size(); i1++) {
+                            if (mVideoViewList.get(i1).getFlagUserId().equals(String.valueOf(upCustom.getUserId()))) {
+                                mVideoViewList.get(i1).getLive_stauts_authorization().setVisibility(View.GONE);
+                                customBeanList.get(i).setWhiteBoardAccess(false);
+                                CurModelTools(i1);
+                            }
+                        }
+                    }
+                } else {
+                    if (upCustom.isWhiteBoardAccess()) {
+
+                        for (int i1 = 0; i1 < mVideoViewList.size(); i1++) {
+                            if (mVideoViewList.get(i1).getFlagUserId().equals(String.valueOf(upCustom.getUserId()))) {
+                                mVideoViewList.get(i1).getLive_stauts_authorization().setVisibility(View.VISIBLE);
+                                customBeanList.get(i).setWhiteBoardAccess(true);
+                                CurModelTools(i1);
+                            }
+                        }
+
+                    }
+
+                }
+                whiteboardStype(String.valueOf(upCustom.getUserId()), upCustom.isWhiteBoardAccess());
+            }
+
         }
     }
 
