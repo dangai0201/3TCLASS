@@ -291,10 +291,18 @@ public abstract class DragScaleView extends RelativeLayout implements View.OnTou
                     if (x <= MAX_DISTANCE_FOR_CLICK && y <= MAX_DISTANCE_FOR_CLICK) {
                         Log.e(TAG, "移动过小 不触发" + " x=" + x + "; y=" + y);
                     } else {
-                        AbsoluteLayout.LayoutParams layoutParams = (AbsoluteLayout.LayoutParams) getLayoutParams();
-                        layoutParams.x = getLeft();
-                        layoutParams.y = getTop();
-                        setLayoutParams(layoutParams);
+                        if (getLayoutParams() instanceof AbsoluteLayout.LayoutParams){
+                            AbsoluteLayout.LayoutParams layoutParams = (AbsoluteLayout.LayoutParams) getLayoutParams();
+                            layoutParams.x = getLeft();
+                            layoutParams.y = getTop();
+                            setLayoutParams(layoutParams);
+                        }
+                        if(getLayoutParams() instanceof RelativeLayout.LayoutParams) {
+                            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) getLayoutParams();
+                            layoutParams.leftMargin = getLeft();
+                            layoutParams.topMargin = getTop();
+                            setLayoutParams(layoutParams);
+                        }
 
                         onLayoutMove();
                     }

@@ -40,12 +40,14 @@ public class PopupWindowSyles {
     private String mNotice;
     private String title;
     private String timeStart;
+    private String inviteCode;
 
     //老师id
     private String masterUserId;
     private String type;
     private String courseTyoe;
     private String remark;
+    private String code;
 
     public PopupWindowSyles(Context context , Activity activity) {
         this.mContext = context;
@@ -54,7 +56,7 @@ public class PopupWindowSyles {
 
 
     public void popupWindowStylesTeacher(Context context,
-                                         int role, String userId, String courseId, String nickName,
+                                         String code, int role, String userId, String courseId, String nickName,
                                          String pushRtmp, String courseType, String title, String timeStart, String remark) {
 
         this.mContext = context;
@@ -67,10 +69,12 @@ public class PopupWindowSyles {
         this.remark = remark;
         this.title = title;
         this.timeStart = timeStart;
+        this.code = code;
+        this.code = code;
 
     }
 
-    public void popupWindowStylesStudent(Context context, InviteCodeLoginBean mInviteCodeBean) {
+    public void popupWindowStylesStudent(Context context, InviteCodeLoginBean mInviteCodeBean,String inviteCode) {
         this.mContext = context;
         this.role = Integer.parseInt(mInviteCodeBean.getRole());
         this.masterUserId = mInviteCodeBean.getMasterUserId();
@@ -83,6 +87,7 @@ public class PopupWindowSyles {
         this.pullRtmp = mInviteCodeBean.getPullRtmp();
         this.title = mInviteCodeBean.getTitle();
         this.timeStart = mInviteCodeBean.getStartTime();
+        this.inviteCode = inviteCode;
 
     }
 
@@ -104,6 +109,7 @@ public class PopupWindowSyles {
         popupWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0);
     }
 
+
     Handler handler = new Handler() {
         //接收消息，用于更新UI界面
         @Override
@@ -114,7 +120,7 @@ public class PopupWindowSyles {
             if (i == 100) {
 
                 if (role == 3) {
-                    mContext.startActivity(TeacherActivityLand.createIntent(mContext, role, userId,
+                    mContext.startActivity(TeacherActivityLand.createIntent(mContext,code, role, userId,
                             courseId, nickName, pushRtmp, courseTyoe, remark,title, timeStart));
 
                 } else {

@@ -364,7 +364,7 @@ public class InvitationActivity extends BaseActivity implements View.OnClickList
         } else if ("1".equals(role)) {
             if (Tools.isNetworkAvailable(mContext)){
                 Constant.popupType = true;
-                popupWindowSyles.popupWindowStylesStudent(this, inviteCodeLoginBean);
+                popupWindowSyles.popupWindowStylesStudent(this,inviteCodeLoginBean, et_invitation_code.getText().toString());
                 popupWindowSyles.showProgressBar(ll_invitation_main, this);
 //                et_invitation_code.setText("");
                 BaseLiveActivity.getWsIpLocationReq(appId, Integer.parseInt(userId));

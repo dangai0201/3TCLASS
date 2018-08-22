@@ -7,6 +7,7 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -231,10 +232,14 @@ public class VideoView extends DragScaleView {
 
 
     private void setWidth(int width) {
+
         ViewGroup.LayoutParams layoutParams = getLayoutParams();
-        layoutParams.width = width;
-        this.setLayoutParams(layoutParams);
-        invalidate();
+        if (layoutParams != null) {
+            layoutParams.width = width;
+            this.setLayoutParams(layoutParams);
+            invalidate();
+        }
+
     }
 
     private void setHeight(int height) {
@@ -314,5 +319,66 @@ public class VideoView extends DragScaleView {
 
     public TextView getTvTeacher() {
         return tv_teacher;
+    }
+
+    private int mParentWidth;
+    private int mParentHeight;
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        //获取SingleTouchView所在父布局的中心点
+        ViewGroup mViewGroup = (ViewGroup) getParent();
+        if (null != mViewGroup) {
+            mParentWidth = mViewGroup.getWidth();
+            mParentHeight = mViewGroup.getHeight();
+        }
+
+    }
+
+    private int lastX;
+    private int lastY;
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+
+        if (!touchable) {
+            return false;
+        }
+
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                lastX = (int) event.getX();
+                lastY = (int) event.getY();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                int dx = (int) (event.getX() - lastX);
+                int dy = (int) (event.getY() - lastY);
+                float x = getX() + dx;
+                float y = getY() + dy;
+
+                if (x < 0) {
+                    x = 0;
+                }
+                if (y < 0) {
+                    y = 0;
+                }
+                if (x > mParentWidth - getWidth()) {
+                    x = mParentWidth - getWidth();
+                }
+                if (y > mParentHeight - getHeight()) {
+                    y = mParentHeight - getHeight();
+                }
+                setX(x);
+                setY(y);
+
+                break;
+            case MotionEvent.ACTION_UP:
+                lastX = (int) event.getX();
+                lastY = (int) event.getY();
+                break;
+        }
+        return true;
     }
 }

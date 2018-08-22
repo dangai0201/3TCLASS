@@ -144,6 +144,7 @@ public class TeacherActivityLand extends BaseLiveActivity implements View.OnClic
     private String START_TIME_CYCLE = "START_TIME_CYCLE";
     private static String TAG_NAME = TeacherActivityLand.class.getSimpleName();
     private Context mContext;
+    private static final String CODE = "code";
     public static final String ROOM_TYPE = "live_type";
     public static final String ROOM_USER_ID = "user_id";
     public static final String ROOM_ID = "room_id";
@@ -180,6 +181,7 @@ public class TeacherActivityLand extends BaseLiveActivity implements View.OnClic
     private Handler mHandler = new Handler();
 
     private String tPageSize = "4";
+    private String code;
     private String teacher_room_id;
     private String teacher_user_id;
     private String teacher_room_type;
@@ -331,6 +333,7 @@ public class TeacherActivityLand extends BaseLiveActivity implements View.OnClic
     private LinearLayout tool_ll_view_displacement;
     private ImageView land_iv_raise_menu;
 
+
     /**
      * @param context
      * @param roomType 入会类型
@@ -338,7 +341,7 @@ public class TeacherActivityLand extends BaseLiveActivity implements View.OnClic
      * @param roomId
      * @return
      */
-    public static Intent createIntent(Context context, int roomType, String userId,
+    public static Intent createIntent(Context context, String code, int roomType, String userId,
                                       String roomId, String nickName, String tuUrl,
                                       String courseType, String remark,
                                       String title, String timeStart) {
@@ -351,6 +354,7 @@ public class TeacherActivityLand extends BaseLiveActivity implements View.OnClic
         intent.putExtra(ROOM_COURSE_TYPE, courseType);
         intent.putExtra(TITLE, title);
         intent.putExtra(TIME_START, timeStart);
+        intent.putExtra(CODE, code);
         return intent;
     }
 
@@ -486,6 +490,7 @@ public class TeacherActivityLand extends BaseLiveActivity implements View.OnClic
         teacher_room_id = mIntent.getStringExtra(ROOM_ID);
         teacher_user_id = mIntent.getStringExtra(ROOM_USER_ID);
         teacher_room_type = mIntent.getStringExtra(ROOM_TYPE);
+        code = mIntent.getStringExtra(CODE);
 
         netStatusView.setCourseName(title);
         teacher_user_image = "";
@@ -512,17 +517,31 @@ public class TeacherActivityLand extends BaseLiveActivity implements View.OnClic
             }
         }
 
-        SPTools.getInstance(this).save(teacher_room_id , teBangDingWeb);
+        SPTools.getInstance(this).save(teacher_room_id, teBangDingWeb);
 
         chatPop = new ChatPopupWindow(mContext, teacher_room_id, teacher_user_id, teacher_user_name, teacher_user_image);
         loadRoomVideo(teacher_user_id, teacher_room_id, teacher_room_type);
-        webViewInit();
+
         webviewTool("boardSetTool(\'clearAll2\')");
         inittrophyView();
 
         startTiemHeart();
         initBreceiver(mContext);
 
+        webViewInit();
+
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) teacher_view_web.getLayoutParams();
+        layoutParams.width = mapWidth;
+        Log.e("TAG", " netStatusView.getHeight() == " +  netStatusView.getHeight());
+        layoutParams.topMargin =  netStatusView.getHeight();
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        teacher_view_web.setLayoutParams(layoutParams);
     }
 
     /**
@@ -693,6 +712,7 @@ public class TeacherActivityLand extends BaseLiveActivity implements View.OnClic
                 break;
             case R.id.land_tv_start_live: //开始上课
                 mHandler.removeCallbacks(timerRunnable);
+                netStatusView.setCourseStatus(getResources().getString(R.string.network_stauts_has_classes));
                 startTimer("network");
                 startLive(teacher_room_id, teacher_user_id);
                 live_start_not = true;
@@ -895,7 +915,7 @@ public class TeacherActivityLand extends BaseLiveActivity implements View.OnClic
                 sendOverAnswer(teacher_room_id, "", ROOM_STATUS_INACTIVATED, teacher_user_id, "0");
                 break;
             case R.id.land_iv_raise_menu:
-                if (accordVideoView){
+                if (accordVideoView) {
                     ToolsAnimator();
                 }
                 break;
@@ -981,7 +1001,6 @@ public class TeacherActivityLand extends BaseLiveActivity implements View.OnClic
             leaveRoomMapList(leaveGson.fromJson(messageEvent.getMessage(), LeaveMassageBean.class), 1);
         }
     }
-
 
 
     @Override
@@ -1328,6 +1347,8 @@ public class TeacherActivityLand extends BaseLiveActivity implements View.OnClic
             } else {
                 //未开课
                 notStartLive(teacher_room_id, teacher_user_id, "0");
+                netStatusView.setCourseStatus(getResources().getString(R.string.network_stauts_not_classes));
+
             }
         }
 
@@ -1412,7 +1433,7 @@ public class TeacherActivityLand extends BaseLiveActivity implements View.OnClic
     @Override
     public void showNetworkException() {
         super.showNetworkException();
-        Log.e(TAG_NAME , " showNetworkException  ");
+        Log.e(TAG_NAME, " showNetworkException  ");
         disLoadDialog();
 
     }
@@ -2157,25 +2178,6 @@ public class TeacherActivityLand extends BaseLiveActivity implements View.OnClic
         webSettings.setDisplayZoomControls(false);
         webSettings.setAllowContentAccess(false);
 
-        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) teacher_view_web.getLayoutParams();
-//        layoutParams.width = mapHeight * 16 / 9;
-//        layoutParams.height = mapHeight;
-        layoutParams.width = mapWidth;
-        if (mapWidth * 9/16 > mapHeight){
-            layoutParams.height = mapHeight;
-        }else {
-            layoutParams.height = mapWidth * 9/16;
-        }
-        layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
-        teacher_view_web.setLayoutParams(layoutParams);
-
-        //        final int width = BaseTools.getWindowsWidth(this);
-        //        if (width > 960) {
-        //            teacher_view_web.setInitialScale((int) (960f / width * 100));
-        //        } else {
-        //            teacher_view_web.setInitialScale((int) (width / 960f * 100));
-        //        }
-
 
         final int height = mapHeight;
         if (height > 540) {
@@ -2568,24 +2570,24 @@ public class TeacherActivityLand extends BaseLiveActivity implements View.OnClic
      * 底部工具栏位移动画
      */
     private void ToolsAnimator() {
-        if (!animation_tool){
-            ObjectAnimator translationX = new ObjectAnimator().ofFloat(tool_ll_view_displacement ,"translationX",600f,0);
-            ObjectAnimator translationY = new ObjectAnimator().ofFloat(tool_ll_view_displacement,"translationY",0,0);
+        if (!animation_tool) {
+            ObjectAnimator translationX = new ObjectAnimator().ofFloat(tool_ll_view_displacement, "translationX", 600f, 0);
+            ObjectAnimator translationY = new ObjectAnimator().ofFloat(tool_ll_view_displacement, "translationY", 0, 0);
 
             AnimatorSet animatorSet = new AnimatorSet();  //组合动画
-            animatorSet.playTogether(translationX,translationY); //设置动画
+            animatorSet.playTogether(translationX, translationY); //设置动画
             animatorSet.setDuration(1000);  //设置动画时间
             animatorSet.start(); //启动
             land_iv_raise_menu.setBackground(getResources().getDrawable(R.drawable.icon_menu_hover));
             tool_ll_view_displacement.setVisibility(View.VISIBLE);
             animation_tool = true;
             animatorSet.addListener(toolDisplacementAddListener);
-        }else {
-            ObjectAnimator translationX = new ObjectAnimator().ofFloat(tool_ll_view_displacement ,"translationX",0,600f);
-            ObjectAnimator translationY = new ObjectAnimator().ofFloat(tool_ll_view_displacement,"translationY",0,0);
+        } else {
+            ObjectAnimator translationX = new ObjectAnimator().ofFloat(tool_ll_view_displacement, "translationX", 0, 600f);
+            ObjectAnimator translationY = new ObjectAnimator().ofFloat(tool_ll_view_displacement, "translationY", 0, 0);
 
             AnimatorSet animatorSet = new AnimatorSet();  //组合动画
-            animatorSet.playTogether(translationX,translationY); //设置动画
+            animatorSet.playTogether(translationX, translationY); //设置动画
             animatorSet.setDuration(1000);  //设置动画时间
             animatorSet.start(); //启动
             land_iv_raise_menu.setBackground(getResources().getDrawable(R.drawable.icon_menu_normal));
@@ -2598,27 +2600,27 @@ public class TeacherActivityLand extends BaseLiveActivity implements View.OnClic
      * 平移动画播放
      * 监听
      */
-    class ToolDisplacementAddListener implements  Animator.AnimatorListener {
+    class ToolDisplacementAddListener implements Animator.AnimatorListener {
 
         @Override
         public void onAnimationStart(Animator animation) {
-            Log.e(TAG_CLASS , "动画开始");
+            Log.e(TAG_CLASS, "动画开始");
         }
 
         @Override
         public void onAnimationEnd(Animator animation) {
-            Log.e(TAG_CLASS , "动画结束");
+            Log.e(TAG_CLASS, "动画结束");
         }
 
         @Override
         public void onAnimationCancel(Animator animation) {
-            Log.e(TAG_CLASS , "动画取消");
+            Log.e(TAG_CLASS, "动画取消");
 
         }
 
         @Override
         public void onAnimationRepeat(Animator animation) {
-            Log.e(TAG_CLASS , "动画重复");
+            Log.e(TAG_CLASS, "动画重复");
 
         }
     }
@@ -2694,11 +2696,12 @@ public class TeacherActivityLand extends BaseLiveActivity implements View.OnClic
             if (timeStart != null && timeStart.contains(".")) {
                 timeStart = timeStart.replace(".", "-");
             }
+            String shareUrl = String.format("%s?code=%s", Constant.SHARE_CLASS_ROOM_URL, code);
             shareWindow = new ShareWindow
                     .Builder(this)
-                    .shareUrl(Constant.SHARE_TEACHER_URL)
+                    .shareUrl(shareUrl)
                     .iconUrl(Constant.SHARE_IMAGE_URL)
-                    .copyUrl(Constant.SHARE_TEACHER_URL)
+                    .copyUrl(shareUrl)
                     .title(title)
                     .description(String.format("直播时间:%s", timeStart))
                     .build();

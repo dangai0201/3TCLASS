@@ -70,7 +70,7 @@ public class Constant {
     //用户协议链接地址
     public static String SERVER_CLAUSE_URL;
     //老师分享邀请码链接
-    public static final String SHARE_TEACHER_URL = "http://3tclass.3ttech.cn/course/teacher-authority?id=";
+    public static  String SHARE_TEACHER_URL = "http://3tclass.3ttech.cn/course/teacher-authority?id=";
     //分享端图片链接
     public static final String SHARE_IMAGE_URL = "http://3tlive.oss-cn-beijing.aliyuncs.com/share/144_ic_launcher_APP.png";
 

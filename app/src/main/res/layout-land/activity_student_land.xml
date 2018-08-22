@@ -41,6 +41,14 @@
 
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/rl_background_window"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_FF000000">
+
+        </RelativeLayout>
+
         <AbsoluteLayout
             android:id="@+id/rl_student_video_view"
             android:layout_width="match_parent"

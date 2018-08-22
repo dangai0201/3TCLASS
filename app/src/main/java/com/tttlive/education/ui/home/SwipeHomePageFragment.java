@@ -80,6 +80,7 @@ public class SwipeHomePageFragment extends BaseFragment implements HomePageUIint
     private static final String TITLE = "3T <font color='#2DE9FC'>C</font>lass";
     private String stuPublicode;
     private String userId;
+    private String code;
 
     public static SwipeHomePageFragment newInstance() {
         Bundle args = new Bundle();
@@ -217,6 +218,7 @@ public class SwipeHomePageFragment extends BaseFragment implements HomePageUIint
             String appId = mAdapter.getItem(position).getAppId();
             String title = mAdapter.getItem(position).getTitle();
             String timeStart = mAdapter.getItem(position).getTimeStart();
+            code = mAdapter.getItem(position).getTeacherInviteCode();
             stuPublicode = mAdapter.getItem(position).getPublicCode();
             Constant.app_id = appId;
             SPTools.getInstance(getContext()).save(Constant.app_id,appId);
@@ -240,7 +242,7 @@ public class SwipeHomePageFragment extends BaseFragment implements HomePageUIint
                     Constant.exitRoom = false;
                     Constant.popupType = true;
                     BaseLiveActivity.getWsIpLocationReq(appId, Integer.parseInt(userId));
-                    popupWindowSyles.popupWindowStylesTeacher(getContext(), roomType, userId, roomId, teacherName, pushRtmp, type, title, timeStart, "");
+                    popupWindowSyles.popupWindowStylesTeacher(getContext(), code,roomType, userId, roomId, teacherName, pushRtmp, type, title, timeStart, "");
                     popupWindowSyles.showProgressBar(main, getContext());
 
                     }else {
@@ -291,7 +293,7 @@ public class SwipeHomePageFragment extends BaseFragment implements HomePageUIint
                     Constant.exitRoom = false;
                     Constant.popupType = true;
                     BaseLiveActivity.getWsIpLocationReq(Constant.app_id, Integer.parseInt(userId));
-                    popupWindowSyles.popupWindowStylesTeacher(getContext(), roomType, userId, roomId, teacherName, pushRtmp, type, title, timeStart, "");
+                    popupWindowSyles.popupWindowStylesTeacher(getContext(),code, roomType, userId, roomId, teacherName, pushRtmp, type, title, timeStart, "");
                     popupWindowSyles.showProgressBar(main, getContext());
 //                    showLoadingDialog();
 //                    loginPresenter.inviteCodeLogin(stuPublicode, "");
@@ -363,7 +365,7 @@ public class SwipeHomePageFragment extends BaseFragment implements HomePageUIint
         if (role.equals("1")){
             Constant.exitRoom = false;
             Constant.popupType = true;
-            popupWindowSyles.popupWindowStylesStudent(mContext, inviteCodeLoginBean);
+            popupWindowSyles.popupWindowStylesStudent(mContext, inviteCodeLoginBean,"");
             popupWindowSyles.showProgressBar(main, getContext());
             BaseLiveActivity.getWsIpLocationReq(appId, Integer.parseInt(userId));
         }else {

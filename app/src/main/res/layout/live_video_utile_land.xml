@@ -132,7 +132,7 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:padding="@dimen/dp2"
-                    android:text="123456"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp12" />
             </LinearLayout>
