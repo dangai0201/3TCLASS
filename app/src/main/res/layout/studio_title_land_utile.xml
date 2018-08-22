@@ -27,8 +27,9 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:gravity="center"
                     android:id="@+id/land_page_textview_number"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/dp66"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp10"
                     android:background="@drawable/shape_page_num"
@@ -36,7 +37,6 @@
                     android:paddingLeft="@dimen/dp10"
                     android:paddingRight="@dimen/dp10"
                     android:paddingTop="@dimen/dp2"
-                    android:text="1 / 30"
                     android:textColor="@color/color_FF333333"
                     android:textSize="15sp"
                     android:visibility="gone" />

@@ -554,6 +554,13 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) {
 
+//            if(mapWidth *9 > mapHeight *16) {
+//                FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) rl_student_land_main.getLayoutParams();
+//                layoutParams.leftMargin = (mapWidth - (16 * parentHeight / 9)) / 2;
+//                layoutParams.rightMargin = (mapWidth - (16 * parentHeight / 9)) / 2;
+//                rl_student_land_main.setLayoutParams(layoutParams);
+//            }
+
 //            if (mapWidth * 9 > mapHeight * 16) {//宽高比大于16:9的屏幕
             parentHeight = mapHeight - rl_network_bar.getHeight();
             parentWidth = 16 * parentHeight / 9;
@@ -586,6 +593,8 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         if (curModel == MODEL_VIDEO) {
             leftMargin = (mapWidth - (16 * parentHeight / 9)) / 2;
             rightMargin = (mapWidth - (16 * parentHeight / 9)) / 2;
+//            leftMargin = 0;
+//            rightMargin = 0;
         }
         layoutParams.leftMargin = leftMargin;
         layoutParams.rightMargin = rightMargin;
@@ -1033,6 +1042,8 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
             mHandler.removeCallbacks(timerRunnable);
             startTimer("network");
             startLiveInit();
+
+            student_view_web.setVisibility(View.VISIBLE);
 
         }
     }
@@ -1767,7 +1778,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
      * 初始化webView
      */
     private void studentWebViewInit() {
-        loadWebView = true;
+
         String inviteCode = SPTools.getInstance(this).getString(SPTools.KEY_LOGIN_INVITE_CODE, "");//邀请码
         WebSettings webSettings = student_view_web.getSettings();
         webSettings.setSupportZoom(false);
@@ -1980,11 +1991,15 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                         if (startCourse) {
                             if (!page.equals("0/0") && !page.equals("null") && curModel == MODEL_NORMAL) {
                                 page_textview_number.setVisibility(View.VISIBLE);
+                                page = page.replace("/"," / ");
+                                page_textview_number.setText(page);
+                                loadWebView = true;
                             }
                         } else {
                             page_textview_number.setVisibility(View.GONE);
+                            loadWebView = false;
                         }
-                        page_textview_number.setText(page);
+
                     }
                 });
             } else {
@@ -2175,14 +2190,17 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
 
         }
 
-        ArrayList<ViewInfo> list = getViewInfoList(mVideoViewList.size());
-        for (int i = 0; i < mVideoViewList.size(); i++) {
-            int width = list.get(i).getWidth();
-            int height = list.get(i).getHeight();
-            int x = list.get(i).getX();
-            int y = list.get(i).getY();
-            mVideoViewList.get(i).setLayoutParams(new AbsoluteLayout.LayoutParams(width, height, x, y));
+        if(curModel == MODEL_VIDEO) {
+            ArrayList<ViewInfo> list = getViewInfoList(mVideoViewList.size());
+            for (int i = 0; i < mVideoViewList.size(); i++) {
+                int width = list.get(i).getWidth();
+                int height = list.get(i).getHeight();
+                int x = list.get(i).getX();
+                int y = list.get(i).getY();
+                mVideoViewList.get(i).setLayoutParams(new AbsoluteLayout.LayoutParams(width, height, x, y));
+            }
         }
+
 
 
     }
@@ -3023,6 +3041,9 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
      * @param userId
      */
     private void teacherEnd(String userId) {
+
+        //隐藏webView
+        student_view_web.setVisibility(View.GONE);
         setViewVisibilityByMode(curModel);
         setParentMargin();
         setVideoViewTouchMode();
