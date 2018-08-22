@@ -88,8 +88,6 @@ public class ViewInfo {
                 ", height=" + height +
                 ", x=" + x +
                 ", y=" + y +
-                ", translationX=" + translationX +
-                ", translationY=" + translationY +
                 '}';
     }
 }

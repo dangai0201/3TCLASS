@@ -526,7 +526,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         if (Constant.wsService != null) {
             Constant.wsService.sendRequest(bangDingWeb);
         } else {
-            if(sWebservice != null) {
+            if (sWebservice != null) {
                 sWebservice.sendRequest(bangDingWeb);
             }
         }
@@ -660,6 +660,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
 
     private boolean isJoinSuccess = false;
     private Handler handler = new Handler();
+
     //学生进入房间成功
     @Override
     public void enterRoomSuccess() {
@@ -678,7 +679,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
             public void run() {
                 isJoinSuccess = true;
             }
-        },2000);
+        }, 2000);
 
 
     }
@@ -1617,7 +1618,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         Constant.popupType = false;
         Constant.exitRoom = true;
         UMShareAPI.get(this).release();
-        if(handler != null) {
+        if (handler != null) {
             handler.removeCallbacksAndMessages(null);
         }
         isJoinSuccess = false;
@@ -2174,6 +2175,15 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
 
         }
 
+        ArrayList<ViewInfo> list = getViewInfoList(mVideoViewList.size());
+        for (int i = 0; i < mVideoViewList.size(); i++) {
+            int width = list.get(i).getWidth();
+            int height = list.get(i).getHeight();
+            int x = list.get(i).getX();
+            int y = list.get(i).getY();
+            mVideoViewList.get(i).setLayoutParams(new AbsoluteLayout.LayoutParams(width, height, x, y));
+        }
+
 
     }
 
@@ -2329,14 +2339,19 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                     if (i == 1) {
                         continue;
                     }
+//
                     AbsoluteLayout.LayoutParams layoutParams = new AbsoluteLayout.LayoutParams(width, height, x, y);
                     child.setLayoutParams(layoutParams);
+                    Log.e("TAG", "坐标：" + viewInfo.toString());
+
                 }
 
                 ViewInfo viewInfo = viewInfoList.get(1);
                 AbsoluteLayout.LayoutParams layoutParams =
                         new AbsoluteLayout.LayoutParams(viewInfo.getWidth(), viewInfo.getHeight(), viewInfo.getX(), viewInfo.getY());
                 rl_student_video_view.addView(videoView, layoutParams);
+
+                Log.e("TAG", "添加坐标：" + viewInfo.toString());
 
             } else {
                 int size = mVideoViewList.size();
@@ -2351,11 +2366,13 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                     VideoView child = mVideoViewList.get(i);
                     AbsoluteLayout.LayoutParams layoutParams = new AbsoluteLayout.LayoutParams(width, height, x, y);
                     child.setLayoutParams(layoutParams);
+                    Log.e("TAG", "别人进来坐标：" + viewInfo.toString());
                 }
                 ViewInfo viewInfo = getViewInfo(size - 1);
                 AbsoluteLayout.LayoutParams layoutParams =
                         new AbsoluteLayout.LayoutParams(viewInfo.getWidth(), viewInfo.getHeight(), viewInfo.getX(), viewInfo.getY());
                 rl_student_video_view.addView(videoView, layoutParams);
+                Log.e("TAG", "别人进来添加坐标：" + viewInfo.toString());
             }
         }
 
@@ -2854,7 +2871,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         }
     }
 
-        /**
+    /**
      * 有人员加入房间
      *
      * @param customBean
@@ -2873,12 +2890,12 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         Log.e(TAG_CLASS, "有人加入房间了。。。。。  " + customBean);
         if (!customBeanList.contains(customBean)) {
             customBeanList.add(customBean);
-        }else {
-            Log.e(TAG_CLASS,"重复对象");
+        } else {
+            Log.e(TAG_CLASS, "重复对象");
             return;
         }
 
-        if(!isJoinSuccess) {
+        if (!isJoinSuccess) {
             if (customBeanList.size() > 7) {
                 onBackPressed();
                 toastShort(R.string.msg_operation_number_max);
