@@ -554,13 +554,6 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) {
 
-//            if(mapWidth *9 > mapHeight *16) {
-//                FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) rl_student_land_main.getLayoutParams();
-//                layoutParams.leftMargin = (mapWidth - (16 * parentHeight / 9)) / 2;
-//                layoutParams.rightMargin = (mapWidth - (16 * parentHeight / 9)) / 2;
-//                rl_student_land_main.setLayoutParams(layoutParams);
-//            }
-
 //            if (mapWidth * 9 > mapHeight * 16) {//宽高比大于16:9的屏幕
             parentHeight = mapHeight - rl_network_bar.getHeight();
             parentWidth = 16 * parentHeight / 9;
@@ -593,8 +586,6 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         if (curModel == MODEL_VIDEO) {
             leftMargin = (mapWidth - (16 * parentHeight / 9)) / 2;
             rightMargin = (mapWidth - (16 * parentHeight / 9)) / 2;
-//            leftMargin = 0;
-//            rightMargin = 0;
         }
         layoutParams.leftMargin = leftMargin;
         layoutParams.rightMargin = rightMargin;
@@ -1042,7 +1033,6 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
             mHandler.removeCallbacks(timerRunnable);
             startTimer("network");
             startLiveInit();
-
             student_view_web.setVisibility(View.VISIBLE);
 
         }
@@ -1778,7 +1768,6 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
      * 初始化webView
      */
     private void studentWebViewInit() {
-
         String inviteCode = SPTools.getInstance(this).getString(SPTools.KEY_LOGIN_INVITE_CODE, "");//邀请码
         WebSettings webSettings = student_view_web.getSettings();
         webSettings.setSupportZoom(false);
@@ -1991,7 +1980,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                         if (startCourse) {
                             if (!page.equals("0/0") && !page.equals("null") && curModel == MODEL_NORMAL) {
                                 page_textview_number.setVisibility(View.VISIBLE);
-                                page = page.replace("/"," / ");
+                                page = page.replace("/", " / ");
                                 page_textview_number.setText(page);
                                 loadWebView = true;
                             }
@@ -1999,7 +1988,6 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                             page_textview_number.setVisibility(View.GONE);
                             loadWebView = false;
                         }
-
                     }
                 });
             } else {
@@ -2190,7 +2178,9 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
 
         }
 
-        if(curModel == MODEL_VIDEO) {
+
+//        if (curModel == MODEL_VIDEO) {
+            Log.e("TAG", "复位");
             ArrayList<ViewInfo> list = getViewInfoList(mVideoViewList.size());
             for (int i = 0; i < mVideoViewList.size(); i++) {
                 int width = list.get(i).getWidth();
@@ -2198,9 +2188,20 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                 int x = list.get(i).getX();
                 int y = list.get(i).getY();
                 mVideoViewList.get(i).setLayoutParams(new AbsoluteLayout.LayoutParams(width, height, x, y));
+                Log.e("TAG", new ViewInfo(width, height, x, y).toString());
             }
-        }
+//        }
 
+
+        if (curModel == MODEL_NORMAL) {
+
+            for (int i = 0; i < mVideoViewList.size(); i++) {
+                int x = i % 4 * singleWidth;
+                int y = i >= 4 ? singleHeight : 0;
+                mVideoViewList.get(i).getValueAnimator(singleWidth, singleHeight, x, y).start();
+            }
+
+        }
 
 
     }
@@ -2392,6 +2393,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                 rl_student_video_view.addView(videoView, layoutParams);
                 Log.e("TAG", "别人进来添加坐标：" + viewInfo.toString());
             }
+
         }
 
     }
@@ -3041,8 +3043,6 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
      * @param userId
      */
     private void teacherEnd(String userId) {
-
-        //隐藏webView
         student_view_web.setVisibility(View.GONE);
         setViewVisibilityByMode(curModel);
         setParentMargin();

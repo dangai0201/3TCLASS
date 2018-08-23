@@ -1,6 +1,12 @@
 apply plugin: 'com.android.application'
 apply plugin: 'bugly'
 apply plugin: 'newlens'
+
+def buildTime() {
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMdd')
+    return formattedDate
+}
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -18,6 +24,19 @@ android {
     }
     buildTypes {
         release {
+            //配置自定义打包名称
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    def fileName
+
+                    if (variant.buildType.name.equals('release')) {
+                        fileName = "3TClass_${variant.mergedFlavor.versionName}_release_${buildTime()}.apk"
+                    } else if (variant.buildType.name.equals('debug')) {
+                        fileName = "3TClass_${variant.mergedFlavor.versionName}_debug_${buildTime()}.apk"
+                    }
+                    outputFileName = fileName;
+                }
+            }
             minifyEnabled false
             signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

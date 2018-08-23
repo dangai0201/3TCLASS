@@ -25,6 +25,10 @@
             android:paddingBottom="@dimen/dp2"
             android:paddingTop="@dimen/dp2">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
             <FrameLayout
                 android:id="@+id/land_fl_personnel_live"
                 android:layout_width="wrap_content"
