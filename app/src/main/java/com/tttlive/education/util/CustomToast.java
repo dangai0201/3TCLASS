@@ -44,7 +44,7 @@ public class CustomToast extends Toast {
         context = context.getApplicationContext();
         CustomToast toast = new CustomToast(context);
         /*设置Toast的位置*/
-        toast.setGravity(Gravity.TOP, 0, 0);
+        toast.setGravity(Gravity.CENTER, 0, 0);
         toast.setDuration(duration);
         /*让Toast显示为我们自定义的样子*/
         toast.setView(getToastView(context, text));

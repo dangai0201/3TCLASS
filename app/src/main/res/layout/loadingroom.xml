@@ -7,6 +7,13 @@
     android:orientation="vertical">
     <!--style:设置进度条的样式，这里为直线进度条-->
 
+    <ImageView
+        android:padding="@dimen/dp5"
+        android:id="@+id/iv_close"
+        android:src="@drawable/icon_close_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <LinearLayout
         android:id="@+id/ll_pop_load"
         android:layout_width="match_parent"
@@ -31,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="56%"
+                android:text="0%"
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp18" />
 

@@ -37,7 +37,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:background="@color/transparent" />
+                android:background="@color/transparent"
+                android:scrollbars="none" />
 
         </RelativeLayout>
 
@@ -80,7 +81,7 @@
                 android:id="@+id/iv_live_navbar_unfold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/living_navbar_unfold_icon" />
+                android:background="@drawable/living_navbar_collapse_icon" />
         </LinearLayout>
 
         <include

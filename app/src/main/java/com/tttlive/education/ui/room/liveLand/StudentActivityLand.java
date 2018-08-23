@@ -1423,12 +1423,13 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                         courVideo.setVisibility(View.GONE);
                         isWindowVisible = false;
                         courVideo.startAnimation(animationIn);
-                        iv_student_live_navbar_unfold.setBackground(getResources().getDrawable(R.drawable.living_navbar_collapse_icon));
+                        iv_student_live_navbar_unfold.setBackground(getResources().getDrawable(R.drawable.living_navbar_unfold_icon));
+
                     } else {
                         isWindowVisible = true;
                         courVideo.setVisibility(View.VISIBLE);
                         courVideo.startAnimation(animationOut);
-                        iv_student_live_navbar_unfold.setBackground(getResources().getDrawable(R.drawable.living_navbar_unfold_icon));
+                        iv_student_live_navbar_unfold.setBackground(getResources().getDrawable(R.drawable.living_navbar_collapse_icon));
                     }
                 }
                 break;
@@ -1779,15 +1780,27 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         webSettings.setLoadWithOverviewMode(true);
         webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
 
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) student_view_web.getLayoutParams();
+        if (mapWidth * 9 / 16 > mapHeight) {
+            layoutParams.height = mapHeight - rl_network_bar.getHeight();
+            layoutParams.width = layoutParams.height * 16/9;
+        } else {
+            layoutParams.width = mapWidth;
+            layoutParams.height = mapWidth * 9 / 16;
+        }
 
-        final int height = BaseTools.getWindowsHeight(this);
-        Log.e(TAG_CLASS, "屏幕高度 : " + mapHeight);
+        Log.e(TAG_CLASS, "屏幕宽度 : " + mapWidth + " 屏幕高度  : " + layoutParams.height);
+        Log.e(TAG_CLASS, "屏幕高度 11: " + rl_network_bar.getHeight());
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        student_view_web.setLayoutParams(layoutParams);
+
+         int height = BaseTools.getWindowsHeight(this);
+
         if (height > 540) {
             student_view_web.setInitialScale((int) (540f / height * 100));
         } else {
             student_view_web.setInitialScale((int) (height / 540f * 100));
         }
-
         student_view_web.loadUrl(Constant.DocUrl + "?inviteCode=" + inviteCode + "&courseId=" + roomId + "&role=3&userId=" + mUerId + "&appId=" + Constant.app_id);
         Log.e(TAG_CLASS, "WebUrl : " + Constant.DocUrl + "?inviteCode=" + "&courseId=" + roomId + "&role=3&userId=" + teachid + "&appId=" + Constant.app_id);
         student_view_web.setWebViewClient(studentWebViewClient);
@@ -2073,6 +2086,12 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
             showRemoteView(teachid, mUserInfo);
         }
         ll_no_class_background.setVisibility(View.GONE);
+        if(curModel == MODEL_VIDEO) {
+            rl_background_window.setVisibility(View.VISIBLE);
+        }else {
+            rl_background_window.setVisibility(View.GONE);
+        }
+
 
 
     }
@@ -2868,7 +2887,12 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
             iv_student_live_navbar_unfold.setVisibility(View.GONE);
             page_textview_number.setVisibility(View.GONE);
             land_iv_tool_whiteboard.setVisibility(View.GONE);
-            rl_background_window.setVisibility(View.VISIBLE);
+            if(startCourse) {
+                rl_background_window.setVisibility(View.VISIBLE);
+            }else {
+                rl_background_window.setVisibility(View.GONE);
+            }
+
         }
 
     }
@@ -3043,7 +3067,9 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
      * @param userId
      */
     private void teacherEnd(String userId) {
+        iv_raise_hand.setClickable(true);
         student_view_web.setVisibility(View.GONE);
+        page_textview_number.setVisibility(View.GONE);
         setViewVisibilityByMode(curModel);
         setParentMargin();
         setVideoViewTouchMode();
@@ -3101,8 +3127,9 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                 playerManager.stop();
             }
         }
-
-        page_textview_number.setVisibility(View.GONE);
+        network_stauts_classes_tv.setText(getResources().getString(R.string.network_stauts_not_classes));
+        network_stauts_time.setText("");
+        mHandler.removeCallbacks(timerRunnable);
 
     }
 

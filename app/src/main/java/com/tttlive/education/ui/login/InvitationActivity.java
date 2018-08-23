@@ -394,6 +394,7 @@ public class InvitationActivity extends BaseActivity implements View.OnClickList
      */
     @Override
     public void inviteCodeLoginFailure(BaseResponse<Object> response) {
+
           showPopupWindow(response.getMessage());
     }
 

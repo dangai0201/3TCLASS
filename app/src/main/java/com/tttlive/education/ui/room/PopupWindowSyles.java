@@ -1,13 +1,14 @@
 package com.tttlive.education.ui.room;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
-import android.os.Handler;
-import android.os.Message;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -23,10 +24,12 @@ import com.tttlive.education.util.StatusBarUtil;
  * 进入直播间进度页
  */
 
-public class PopupWindowSyles {
+public class PopupWindowSyles implements View.OnClickListener {
     private PopupWindow popupWindow;
     private ProgressBar pb_progress_bar;
     private TextView tv_main_text;
+    private ImageView iv_close;
+    private MyThread myThread;
 
     private Context mContext;
     private Activity mActiviity;
@@ -48,8 +51,10 @@ public class PopupWindowSyles {
     private String courseTyoe;
     private String remark;
     private String code;
+    private ObjectAnimator animator;
 
-    public PopupWindowSyles(Context context , Activity activity) {
+
+    public PopupWindowSyles(Context context, Activity activity) {
         this.mContext = context;
         this.mActiviity = activity;
     }
@@ -74,7 +79,7 @@ public class PopupWindowSyles {
 
     }
 
-    public void popupWindowStylesStudent(Context context, InviteCodeLoginBean mInviteCodeBean,String inviteCode) {
+    public void popupWindowStylesStudent(Context context, InviteCodeLoginBean mInviteCodeBean, String inviteCode) {
         this.mContext = context;
         this.role = Integer.parseInt(mInviteCodeBean.getRole());
         this.masterUserId = mInviteCodeBean.getMasterUserId();
@@ -92,7 +97,7 @@ public class PopupWindowSyles {
     }
 
     public void showProgressBar(View view, Context context) {
-        StatusBarUtil.setStatusBarColor(mActiviity , context.getResources().getColor(R.color.color_082234));
+        StatusBarUtil.setStatusBarColor(mActiviity, context.getResources().getColor(R.color.color_082234));
         //自定义PopupWindow的布局
         View contentView = LayoutInflater.from(context).inflate(R.layout.loadingroom, null);
         //初始化PopupWindow,并为其设置布局文件
@@ -102,42 +107,103 @@ public class PopupWindowSyles {
         pb_progress_bar = contentView.findViewById(R.id.pb_progress_bar);
 
         tv_main_text = contentView.findViewById(R.id.tv_main_text);
-
-        new MyThread().start();
+        iv_close = contentView.findViewById(R.id.iv_close);
+        iv_close.setOnClickListener(this);
+//        if(myThread == null) {
+//            myThread = new MyThread();
+//        }
+//        myThread.start();
+        showProgress();
 
         //设置PopupWindow显示的位置
         popupWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0);
     }
 
 
-    Handler handler = new Handler() {
-        //接收消息，用于更新UI界面
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            int i = msg.what;
-            tv_main_text.setText(i + "%");
-            if (i == 100) {
+//    Handler handler = new Handler() {
+//        //接收消息，用于更新UI界面
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//            int i = msg.what;
+//            tv_main_text.setText(i + "%");
+//            if (i == 100) {
+//
+//                if (role == 3) {
+//                    mContext.startActivity(TeacherActivityLand.createIntent(mContext,code, role, userId,
+//                            courseId, nickName, pushRtmp, courseTyoe, remark,title, timeStart));
+//
+//                } else {
+//                    mContext.startActivity(StudentActivityLand.createIntent(mContext,
+//                            role, masterUserId, userId, courseId, type, nickName, titleName, mNotice, pullRtmp,title,timeStart));
+//
+//                }
+//                StatusBarUtil.setStatusBarColor(mActiviity , mContext.getResources().getColor(R.color.transparent));
+//                try {
+//                    Thread.sleep(500);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                popupWindow.dismiss();
+//            }
+//        }
+//    };
 
-                if (role == 3) {
-                    mContext.startActivity(TeacherActivityLand.createIntent(mContext,code, role, userId,
-                            courseId, nickName, pushRtmp, courseTyoe, remark,title, timeStart));
-
-                } else {
-                    mContext.startActivity(StudentActivityLand.createIntent(mContext,
-                            role, masterUserId, userId, courseId, type, nickName, titleName, mNotice, pullRtmp,title,timeStart));
-
-                }
-                StatusBarUtil.setStatusBarColor(mActiviity , mContext.getResources().getColor(R.color.transparent));
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                popupWindow.dismiss();
+    @Override
+    public void onClick(View v) {
+        if (v == iv_close && popupWindow != null) {
+            tv_main_text.setText(0 + "%");
+            pb_progress_bar.setProgress(0);
+            popupWindow.dismiss();
+            if (animator != null) {
+                animator.cancel();
             }
+//            if(handler != null) {
+//                handler.removeCallbacksAndMessages(null);
+//            }
+//            if(myThread != null) {
+//                myThread.interrupt();
+//            }
         }
-    };
+    }
+
+    private void showProgress() {
+        animator = ObjectAnimator
+                .ofInt(pb_progress_bar, "progress", 100)
+                .setDuration(5000);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                int progress = (int) animation.getAnimatedValue("progress");
+                tv_main_text.setText(progress + "%");
+                pb_progress_bar.setProgress(progress);
+
+                if (progress == 100) {
+
+                    if (role == 3) {
+                        mContext.startActivity(TeacherActivityLand.createIntent(mContext, code, role, userId,
+                                courseId, nickName, pushRtmp, courseTyoe, remark, title, timeStart));
+
+                    } else {
+                        mContext.startActivity(StudentActivityLand.createIntent(mContext,
+                                role, masterUserId, userId, courseId, type, nickName, titleName, mNotice, pullRtmp, title, timeStart));
+
+                    }
+                    StatusBarUtil.setStatusBarColor(mActiviity, mContext.getResources().getColor(R.color.transparent));
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    popupWindow.dismiss();
+                }
+
+            }
+        });
+        animator.start();
+
+
+    }
 
 
     class MyThread extends Thread {
@@ -147,7 +213,7 @@ public class PopupWindowSyles {
             for (int i = 0; i <= 100; i++) {
                 pb_progress_bar.setProgress(i);
                 //在子线程中发送消息
-                handler.sendEmptyMessage(i);
+//                handler.sendEmptyMessage(i);
                 try {
                     Thread.sleep(50);
                 } catch (InterruptedException e) {
