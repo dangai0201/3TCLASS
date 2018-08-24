@@ -9,13 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-import com.tttlive.education.constant.Constant;
 import com.tttlive.basic.education.R;
+import com.tttlive.education.constant.Constant;
 
 import java.lang.reflect.Field;
 
@@ -86,11 +85,11 @@ public class CustomToast extends Toast {
         View v = inflate.inflate(R.layout.custom_toast, null);
         TextView text = (TextView) v.findViewById(R.id.toast_text);
         text.setText(msg);
-        LinearLayout.LayoutParams paramsToast;
+        RelativeLayout.LayoutParams paramsToast;
         if (Constant.EQUIPMENT_WIDTH == 0){
-            paramsToast = new LinearLayout.LayoutParams(getWidth(context), ViewGroup.LayoutParams.MATCH_PARENT);
+            paramsToast = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         }else {
-            paramsToast = new LinearLayout.LayoutParams(Constant.EQUIPMENT_WIDTH, ViewGroup.LayoutParams.MATCH_PARENT);
+            paramsToast = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         }
         text.setLayoutParams(paramsToast);
         return v;

@@ -7,6 +7,7 @@ def buildTime() {
     def formattedDate = date.format('yyyyMMdd')
     return formattedDate
 }
+
 android {
     compileSdkVersion 26
     defaultConfig {

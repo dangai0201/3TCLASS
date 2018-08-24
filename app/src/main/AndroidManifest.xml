@@ -61,7 +61,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!--适配全面屏手机-->
+        <!-- 适配全面屏手机 -->
         <meta-data
             android:name="android.max_aspect"
             android:value="2.1" />
@@ -180,6 +180,7 @@
                 android:resource="@xml/filepath" />
         </provider>
 
+        <activity android:name="com.tttlive.education.ui.room.liveLand.HelpActivity"></activity>
     </application>
 
 </manifest>
