@@ -14,7 +14,6 @@ public class HelpActivity extends BaseActivity {
 
     @Override
     protected void findView() {
-
     }
 
     @Override

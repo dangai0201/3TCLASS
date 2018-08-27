@@ -1039,7 +1039,18 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
             student_view_web.setVisibility(View.VISIBLE);
 
         }
+        for(int i = 0; i < customBeanList.size(); i++) {
+            if(mVideoViewList.get(i).getFlagUserId().equals(teachid)) {
+                if(customBeanList.get(i).isCameraClosed()) {
+                    mVideoViewList.get(i).getLive_stauts_camera().setVisibility(View.GONE);
+                    mVideoViewList.get(i).getLand_rl_live_microphone_one().setVisibility(View.VISIBLE);
+                }else {
+                    mVideoViewList.get(i).getLive_stauts_camera().setVisibility(View.GONE);
+                    mVideoViewList.get(i).getLand_rl_live_microphone_one().setVisibility(View.GONE);
+                }
+            }
 
+        }
 
     }
 
@@ -1492,6 +1503,8 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                 break;
             case R.id.iv_help:
                 toastShort("求助");
+
+                startActivity(new Intent(this,HelpActivity.class));
                 break;
         }
 

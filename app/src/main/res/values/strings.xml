@@ -178,6 +178,7 @@
 
     <string name="model_video">老师切换为视频模式</string>
     <string name="model_normal">老师切换为课件模式</string>
+    <string name="hint_question">请尽量详细的描述课堂中所发生的问题，方便工作人员能快速的定位问题并帮您解决</string>
 
 
 </resources>
