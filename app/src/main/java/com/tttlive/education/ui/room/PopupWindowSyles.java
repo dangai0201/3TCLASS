@@ -29,7 +29,6 @@ public class PopupWindowSyles implements View.OnClickListener {
     private ProgressBar pb_progress_bar;
     private TextView tv_main_text;
     private ImageView iv_close;
-    private MyThread myThread;
 
     private Context mContext;
     private Activity mActiviity;
@@ -109,10 +108,6 @@ public class PopupWindowSyles implements View.OnClickListener {
         tv_main_text = contentView.findViewById(R.id.tv_main_text);
         iv_close = contentView.findViewById(R.id.iv_close);
         iv_close.setOnClickListener(this);
-//        if(myThread == null) {
-//            myThread = new MyThread();
-//        }
-//        myThread.start();
         showProgress();
 
         //设置PopupWindow显示的位置
@@ -120,34 +115,6 @@ public class PopupWindowSyles implements View.OnClickListener {
     }
 
 
-//    Handler handler = new Handler() {
-//        //接收消息，用于更新UI界面
-//        @Override
-//        public void handleMessage(Message msg) {
-//            super.handleMessage(msg);
-//            int i = msg.what;
-//            tv_main_text.setText(i + "%");
-//            if (i == 100) {
-//
-//                if (role == 3) {
-//                    mContext.startActivity(TeacherActivityLand.createIntent(mContext,code, role, userId,
-//                            courseId, nickName, pushRtmp, courseTyoe, remark,title, timeStart));
-//
-//                } else {
-//                    mContext.startActivity(StudentActivityLand.createIntent(mContext,
-//                            role, masterUserId, userId, courseId, type, nickName, titleName, mNotice, pullRtmp,title,timeStart));
-//
-//                }
-//                StatusBarUtil.setStatusBarColor(mActiviity , mContext.getResources().getColor(R.color.transparent));
-//                try {
-//                    Thread.sleep(500);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//                popupWindow.dismiss();
-//            }
-//        }
-//    };
 
     @Override
     public void onClick(View v) {
@@ -158,12 +125,6 @@ public class PopupWindowSyles implements View.OnClickListener {
             if (animator != null) {
                 animator.cancel();
             }
-//            if(handler != null) {
-//                handler.removeCallbacksAndMessages(null);
-//            }
-//            if(myThread != null) {
-//                myThread.interrupt();
-//            }
         }
     }
 
@@ -201,28 +162,6 @@ public class PopupWindowSyles implements View.OnClickListener {
             }
         });
         animator.start();
-
-
     }
-
-
-    class MyThread extends Thread {
-        @Override
-        public void run() {
-            super.run();
-            for (int i = 0; i <= 100; i++) {
-                pb_progress_bar.setProgress(i);
-                //在子线程中发送消息
-//                handler.sendEmptyMessage(i);
-                try {
-                    Thread.sleep(50);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }
-    }
-
 
 }

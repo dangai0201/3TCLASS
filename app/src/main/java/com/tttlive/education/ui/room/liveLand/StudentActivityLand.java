@@ -45,6 +45,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.tttlive.basic.education.R;
+import com.tttlive.education.adapter.CourseWareAdapter;
 import com.tttlive.education.adapter.ProfessionRecyclerViewAdapter;
 import com.tttlive.education.base.BaseResponse;
 import com.tttlive.education.constant.Constant;
@@ -52,6 +53,7 @@ import com.tttlive.education.ui.Interface.RoomInterface;
 import com.tttlive.education.ui.SharePopu;
 import com.tttlive.education.ui.room.BaseLiveActivity;
 import com.tttlive.education.ui.room.ChatPopupWindow;
+import com.tttlive.education.ui.room.DocsListbean;
 import com.tttlive.education.ui.room.PlayerManager;
 import com.tttlive.education.ui.room.RoomMessageType;
 import com.tttlive.education.ui.room.RoomMsg;
@@ -76,10 +78,12 @@ import com.tttlive.education.ui.room.socket.WsListener;
 import com.tttlive.education.ui.room.webviewtool.WebviewToolPopupWindowLand;
 import com.tttlive.education.ui.share.ShareInterface;
 import com.tttlive.education.ui.share.SharePresenter;
+import com.tttlive.education.ui.widget.CourseWareWindow;
 import com.tttlive.education.ui.widget.ShareWindow;
 import com.tttlive.education.util.AlarmTimeUtils;
 import com.tttlive.education.util.BaseTools;
 import com.tttlive.education.util.CustomPopWindow;
+import com.tttlive.education.util.DateUtils;
 import com.tttlive.education.util.FireworksView;
 import com.tttlive.education.util.GitfSpecialsStop;
 import com.tttlive.education.util.ImagePathUtil;
@@ -154,6 +158,9 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
 
     private Gson stGson = new Gson();
 
+    //课件集合
+    private ArrayList<DocsListbean.ListBean> listbean = new ArrayList<>();
+
     private ArrayList<SendTextMessageBean> msgList = new ArrayList<>();//聊天消息列表
     private ArrayList<VideoView> mVideoViewList = new ArrayList<>();
     private Map<Integer, CustomBean> personelMapList = new LinkedHashMap<>();
@@ -196,6 +203,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
     private boolean mAudeoClose = false;  //开关,麦克风,默认关闭
     private boolean animation_tool = false;
     private boolean loadWebView = false;//课件是否显示
+    private boolean isAnimation = false;
 
     private int mapWidth;
     private int mapHeight;
@@ -225,6 +233,9 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
     public SharePopu shareStudentPopu;
     //分享弹窗
     private ShareWindow shareWindow;
+
+    //课件弹窗
+    private CourseWareWindow courseWareWindow;
 
     private SharePresenter sharePresenter;
     private PingUtil mPingUtil;
@@ -315,6 +326,10 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
     private RelativeLayout rl_background_window;
     private ImageView iv_help;
 
+    private ImageView iv_previous_page;
+    private ImageView iv_next_page;
+    private ImageView iv_animation_view;
+    private TextView land_tv_start_live;
     private static final String TITLE = "title";
     private static final String TIME_START = "timeStart";
     private String title;
@@ -329,6 +344,8 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
 
     private int singleWidth;
     private int singleHeight;
+
+    private StudentActivityLand.MdocOnItemClickListener mdocOnItemClickListener = new StudentActivityLand.MdocOnItemClickListener();
 
     /**
      * @param context
@@ -453,6 +470,12 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         rl_background_window = findViewById(R.id.rl_background_window);
         iv_help = findViewById(R.id.iv_help);
 
+        iv_previous_page = findViewById(R.id.land_iv_previous_page);
+        iv_next_page = findViewById(R.id.land_iv_next_page);
+        iv_animation_view = findViewById(R.id.land_iv_animation_view);
+        land_tv_start_live = findViewById(R.id.land_tv_start_live);
+        land_tv_start_live.setVisibility(View.GONE);
+
         if (LIVE_LARGE_CLASS.equals(mroomType)) {
             //大班课
             ll_tool_right.setVisibility(View.GONE);
@@ -492,6 +515,10 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         land_iv_raise_menu.setOnClickListener(this);
         iv_live_camera_flip.setOnClickListener(this);
         iv_help.setOnClickListener(this);
+        iv_radio_courseware.setOnClickListener(this);
+        iv_next_page.setOnClickListener(this);
+        iv_previous_page.setOnClickListener(this);
+        iv_animation_view.setOnClickListener(this);
 
         network_stauts_course_name.setText(title_name);
         if (!TextUtils.isEmpty(mNotice)) {
@@ -944,8 +971,10 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
             iv_raise_hand.setBackground(getResources().getDrawable(R.drawable.icon_hand_normal));
             if (mWhiteBoard) {
                 land_iv_tool_whiteboard.setVisibility(View.VISIBLE);
+                iv_radio_courseware.setVisibility(View.VISIBLE);
             } else {
                 land_iv_tool_whiteboard.setVisibility(View.GONE);
+                iv_radio_courseware.setVisibility(View.GONE);
             }
             land_iv_raise_menu.setVisibility(View.GONE);
             mLiveLm = 0;
@@ -1039,17 +1068,23 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
             student_view_web.setVisibility(View.VISIBLE);
 
         }
-        for(int i = 0; i < customBeanList.size(); i++) {
-            if(mVideoViewList.get(i).getFlagUserId().equals(teachid)) {
-                if(customBeanList.get(i).isCameraClosed()) {
+        for (int i = 0; i < customBeanList.size(); i++) {
+            if (mVideoViewList.get(i).getFlagUserId().equals(teachid)) {
+                if (customBeanList.get(i).isCameraClosed()) {
                     mVideoViewList.get(i).getLive_stauts_camera().setVisibility(View.GONE);
                     mVideoViewList.get(i).getLand_rl_live_microphone_one().setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     mVideoViewList.get(i).getLive_stauts_camera().setVisibility(View.GONE);
                     mVideoViewList.get(i).getLand_rl_live_microphone_one().setVisibility(View.GONE);
                 }
             }
 
+        }
+
+        if (isAnimation) {
+            iv_animation_view.setVisibility(View.VISIBLE);
+        } else {
+            iv_animation_view.setVisibility(View.GONE);
         }
 
     }
@@ -1210,11 +1245,13 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
             land_iv_tool_whiteboard.setBackground(getResources().getDrawable(R.drawable.icon_pen_normal));
             if (curModel == MODEL_NORMAL) {
                 land_iv_tool_whiteboard.setVisibility(View.VISIBLE);
+                iv_radio_courseware.setVisibility(View.VISIBLE);
             }
             mWhiteBoard = true;
         } else {
             mWhiteBoard = false;
             land_iv_tool_whiteboard.setVisibility(View.GONE);
+            iv_radio_courseware.setVisibility(View.GONE);
             witeTool();
         }
 
@@ -1501,12 +1538,112 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
             case R.id.land_iv_raise_menu:
                 ToolsAnimator();
                 break;
+
+            case R.id.land_iv_radio_courseware://弹出课件列表
+                if (DateUtils.isFastClick()) {
+                    showPopupCourseBottom(rl_student_land_main);
+                }
+                break;
+            case R.id.land_iv_animation_view:
+                //开始动画
+                webviewTool("nextStep()");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        webviewPage("getCurrentTotalPage()");
+                    }
+                }, 500);
+
+                break;
+            case R.id.land_iv_previous_page:
+                //上一页
+                webviewTool("previousPage()");
+                webviewPage("getCurrentTotalPage()");
+                break;
+            case R.id.land_iv_next_page:
+                //下一页
+                webviewTool("nextPage()");
+                webviewPage("getCurrentTotalPage()");
+                break;
             case R.id.iv_help:
                 toastShort("求助");
 
-                startActivity(new Intent(this,HelpActivity.class));
+                HelpActivity.actionStart(this, 1, 1, Integer.parseInt(teachid), 1, 1);
                 break;
         }
+
+    }
+
+    /**
+     * 课件列表弹窗
+     *
+     * @param view
+     */
+    private void showPopupCourseBottom(View view) {
+        if (courseWareWindow == null) {
+            courseWareWindow = new CourseWareWindow(this, teachid);
+            courseWareWindow.setOnCourseItemClickListener(mdocOnItemClickListener);
+        }
+        courseWareWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0);
+
+    }
+
+    /**
+     * 课件点击事件
+     */
+    private class MdocOnItemClickListener implements CourseWareAdapter.CourseWareViewItemClickListener {
+
+        @Override
+        public void onItemClick(View view, int position) {
+            Gson gson = new Gson();
+            listbean = courseWareWindow.getCourseListBean();
+            if (listbean != null && listbean.size() > 0) {
+                if (listbean.get(position).getPage().equals("0")) {
+                    toastShort(getResources().getString(R.string.current_courseware_empty));
+                    return;
+                }
+                String docdata = gson.toJson(listbean.get(position));
+                courseWareWindow.onItemClick(position, true);
+                if (TextUtils.isEmpty(listbean.get(position).getHtmlUrl())) {
+                    isAnimation = false;
+                    iv_animation_view.setVisibility(View.GONE);
+                } else {
+                    iv_animation_view.setVisibility(View.VISIBLE);
+                    isAnimation = true;
+                }
+                iv_previous_page.setVisibility(View.VISIBLE);
+                iv_next_page.setVisibility(View.VISIBLE);
+                ll_start_live.setVisibility(View.VISIBLE);
+                DocOpenCount(docdata);
+            }
+
+        }
+    }
+
+    /**
+     * 发送课件详情到JS调用
+     *
+     * @param docdata
+     */
+    private void DocOpenCount(String docdata) {
+
+        //调js
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            student_view_web.evaluateJavascript("javascript:docsOpen(\'" + docdata + "\')", new ValueCallback<String>() {
+                @Override
+                public void onReceiveValue(String value) {
+                    Log.i(TAG_CLASS, " js回调  " + value);
+                }
+            });
+        } else {
+            student_view_web.loadUrl("javascript:docsOpen(\'" + docdata + "\')");
+        }
+        webviewPage("getCurrentTotalPage()");
+        if (mWebviewToolPopupWindow != null) {
+            //mWebviewToolPopupWindow.setCurrentWebViewTool();
+            mWebviewToolPopupWindow.trunPage();
+        }
+
 
     }
 
@@ -2031,6 +2168,26 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
     }
 
     /**
+     * webview 白板工具栏
+     */
+    private void webviewTool(String tool) {
+        if (student_view_web != null) {
+            String js = "javascript:" + tool;
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                student_view_web.evaluateJavascript(js, new ValueCallback<String>() {
+                    @Override
+                    public void onReceiveValue(String value) {
+                        Log.e(TAG_CLASS + " webview", value);
+                    }
+                });
+            } else {
+                student_view_web.loadUrl(js);
+            }
+        }
+    }
+
+    /**
      * WebViewClient
      * 加载webView
      */
@@ -2215,7 +2372,6 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
             Log.e("TAG", new ViewInfo(width, height, x, y).toString());
         }
 
-
         if (curModel == MODEL_NORMAL) {
 
             for (int i = 0; i < mVideoViewList.size(); i++) {
@@ -2225,7 +2381,6 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
             }
 
         }
-
 
     }
 
@@ -2817,6 +2972,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
             iv_student_live_navbar_unfold.setVisibility(View.VISIBLE);
             int visible = mWhiteBoard ? View.VISIBLE : View.GONE;
             land_iv_tool_whiteboard.setVisibility(visible);
+            iv_radio_courseware.setVisibility(visible);
             rl_background_window.setVisibility(View.GONE);
             if (loadWebView) {
                 page_textview_number.setVisibility(View.VISIBLE);
@@ -2826,6 +2982,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
             iv_student_live_navbar_unfold.setVisibility(View.GONE);
             page_textview_number.setVisibility(View.GONE);
             land_iv_tool_whiteboard.setVisibility(View.GONE);
+            iv_radio_courseware.setVisibility(View.GONE);
             if (startCourse) {
                 rl_background_window.setVisibility(View.VISIBLE);
             } else {
@@ -3010,6 +3167,8 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         iv_raise_hand.setClickable(true);
         student_view_web.setVisibility(View.GONE);
         page_textview_number.setVisibility(View.GONE);
+        iv_next_page.setVisibility(View.GONE);
+        iv_previous_page.setVisibility(View.GONE);
         setViewVisibilityByMode(curModel);
         setParentMargin();
         setVideoViewTouchMode();
@@ -3044,6 +3203,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
 
         land_iv_raise_menu.setBackground(getResources().getDrawable(R.drawable.icon_menu_normal));
         land_iv_tool_whiteboard.setVisibility(View.GONE);
+        iv_radio_courseware.setVisibility(View.GONE);
         land_iv_raise_menu.setVisibility(View.GONE);
         iv_raise_hand.setVisibility(View.GONE);
         ll_no_class_background.setVisibility(View.VISIBLE);

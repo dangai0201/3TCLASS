@@ -102,6 +102,9 @@ dependencies {
     compile 'com.networkbench.newlens.agent.android:nbs.newlens.agent:2.7.0'
     //时间选择器
     compile 'com.contrarywind:Android-PickerView:3.2.7'
+    compile 'com.contrarywind:wheelview:4.0.8'
+
+//    compile 'com.contrarywind:Android-PickerView:4.1.6'
     //eventbus
     compile 'org.greenrobot:eventbus:3.0.0'
     //websocket加载服务器地址
