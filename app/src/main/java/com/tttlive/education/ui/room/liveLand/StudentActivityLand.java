@@ -30,6 +30,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.OvershootInterpolator;
+import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -59,6 +60,7 @@ import com.tttlive.education.ui.room.RoomMessageType;
 import com.tttlive.education.ui.room.RoomMsg;
 import com.tttlive.education.ui.room.RoomPresenter;
 import com.tttlive.education.ui.room.RoomUIinterface;
+import com.tttlive.education.ui.room.bean.CourseWareData;
 import com.tttlive.education.ui.room.bean.CustomBean;
 import com.tttlive.education.ui.room.bean.GegBannedBean;
 import com.tttlive.education.ui.room.bean.LeaveMassageBean;
@@ -344,6 +346,8 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
 
     private int singleWidth;
     private int singleHeight;
+
+    //whiteboardAccess和closeLmCall 课件授权显示
 
     private StudentActivityLand.MdocOnItemClickListener mdocOnItemClickListener = new StudentActivityLand.MdocOnItemClickListener();
 
@@ -971,7 +975,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
             iv_raise_hand.setBackground(getResources().getDrawable(R.drawable.icon_hand_normal));
             if (mWhiteBoard) {
                 land_iv_tool_whiteboard.setVisibility(View.VISIBLE);
-                iv_radio_courseware.setVisibility(View.VISIBLE);
+                iv_radio_courseware.setVisibility(View.GONE);
             } else {
                 land_iv_tool_whiteboard.setVisibility(View.GONE);
                 iv_radio_courseware.setVisibility(View.GONE);
@@ -1245,7 +1249,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
             land_iv_tool_whiteboard.setBackground(getResources().getDrawable(R.drawable.icon_pen_normal));
             if (curModel == MODEL_NORMAL) {
                 land_iv_tool_whiteboard.setVisibility(View.VISIBLE);
-                iv_radio_courseware.setVisibility(View.VISIBLE);
+                iv_radio_courseware.setVisibility(View.GONE);
             }
             mWhiteBoard = true;
         } else {
@@ -1951,6 +1955,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         Log.e(TAG_CLASS, "屏幕高度 11: " + rl_network_bar.getHeight());
         layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         student_view_web.setLayoutParams(layoutParams);
+        student_view_web.addJavascriptInterface(new JsCallAndroidInterface(this), "android");
 
         int height = BaseTools.getWindowsHeight(this);
 
@@ -1959,8 +1964,8 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         } else {
             student_view_web.setInitialScale((int) (height / 540f * 100));
         }
-        student_view_web.loadUrl(Constant.DocUrl + "?inviteCode=" + inviteCode + "&courseId=" + roomId + "&role=3&userId=" + mUerId + "&appId=" + Constant.app_id);
-        Log.e(TAG_CLASS, "WebUrl : " + Constant.DocUrl + "?inviteCode=" + "&courseId=" + roomId + "&role=3&userId=" + teachid + "&appId=" + Constant.app_id);
+        student_view_web.loadUrl(Constant.DocUrl + "?inviteCode=" + inviteCode + "&courseId=" + roomId + "&role=1&userId=" + mUerId + "&appId=" + Constant.app_id);
+        Log.e(TAG_CLASS, "WebUrl : " + Constant.DocUrl + "?inviteCode=" + "&courseId=" + roomId + "&role=1&userId=" + teachid + "&appId=" + Constant.app_id);
         student_view_web.setWebViewClient(studentWebViewClient);
     }
 
@@ -2147,7 +2152,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                     @Override
                     public void onReceiveValue(String value) {
                         String page = value.replace("\"", "");
-                        Log.e(TAG_CLASS + " webViewPage : ", value + "    " + page);
+                        Log.e(TAG_CLASS + " webViewPage  ", value + "    " + page);
                         if (startCourse) {
                             if (!page.equals("0/0") && !page.equals("null") && curModel == MODEL_NORMAL) {
                                 page_textview_number.setVisibility(View.VISIBLE);
@@ -2192,6 +2197,7 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
      * 加载webView
      */
     private class StudentWebViewClient extends WebViewClient {
+
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -2359,11 +2365,11 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
             }
 
         }
-
-
+        int visible = isWindowVisible ? View.VISIBLE : View.GONE;
         Log.e("TAG", "复位");
         ArrayList<ViewInfo> list = getViewInfoList(mVideoViewList.size());
         for (int i = 0; i < mVideoViewList.size(); i++) {
+            mVideoViewList.get(i).setVisibility(visible);
             int width = list.get(i).getWidth();
             int height = list.get(i).getHeight();
             int x = list.get(i).getX();
@@ -2375,12 +2381,16 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         if (curModel == MODEL_NORMAL) {
 
             for (int i = 0; i < mVideoViewList.size(); i++) {
+
+                mVideoViewList.get(i).setVisibility(visible);
                 int x = i % 4 * singleWidth;
                 int y = i >= 4 ? singleHeight : 0;
                 mVideoViewList.get(i).getValueAnimator(singleWidth, singleHeight, x, y).start();
             }
 
         }
+
+
 
     }
 
@@ -3613,4 +3623,34 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
         shareWindow.showAtLocation(rl_student_land_main, Gravity.BOTTOM, 0, 0);
     }
 
+    private void webViewChange(String jsData) {
+        CourseWareData courseWareData = stGson.fromJson(jsData, CourseWareData.class);
+        String slideId = courseWareData.getSlideId();
+//        String docCurrentPage = courseWareData.getDocCurrentPage();
+//        String docTotalPage = courseWareData.getDocTotalPage();
+//        String page = docCurrentPage + "/" + docTotalPage;
+//        Log.e("TAG", "page == " + page);
+//        page_textview_number.setText(page);
+        if(slideId == null || "".equals(slideId)) {
+            page_textview_number.setVisibility(View.GONE);
+        }else {
+            page_textview_number.setVisibility(View.VISIBLE);
+        }
+        webviewPage("getCurrentTotalPage()");
+    }
+
+    public  class JsCallAndroidInterface {
+        private WeakReference<StudentActivityLand> x5WebViewActivity;
+
+        public JsCallAndroidInterface(StudentActivityLand context) {
+            x5WebViewActivity = new WeakReference<>(context);
+        }
+
+        //通过这个@JavascriptInterface转化成绑定的“android”对象下的同名函数，js代码可以直接调用
+        @JavascriptInterface
+        public void webChange(String data) {
+            Log.e("TAG", "js传给Android的数据：" + data);
+            x5WebViewActivity.get().webViewChange(data);
+        }
+    }
 }
