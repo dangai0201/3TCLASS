@@ -43,9 +43,9 @@ public class Constant {
     public static final String BuglyKey = "f27a557d57";
     //API接口地址
     //测试环境
-//    public static String BaseUrl = "http://dev.api.edu.3ttech.cn";
+    public static String BaseUrl = "http://dev.api.edu.3ttech.cn";
     //预发环境
-    public static String BaseUrl = "https://pre.api.edu.3ttech.cn";
+//    public static String BaseUrl = "https://pre.api.edu.3ttech.cn";
     //生产环境
 //    public static String BaseUrl = "https://api.edu.3ttech.cn";
     //白板地址

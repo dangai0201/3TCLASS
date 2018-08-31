@@ -128,8 +128,10 @@ public class HelpActivity extends BaseActivity implements HelpInterface, TextWat
 
     @Override
     public void onSendSuccess(BaseResponse<Object> response) {
+         if(response.getCode() == 0) {
+             finish();
+         }
 
-        finish();
     }
 
     @Override
@@ -153,7 +155,6 @@ public class HelpActivity extends BaseActivity implements HelpInterface, TextWat
         intent.getLongExtra(QueryString.LESSON_ID, 0);
         intent.getLongExtra(QueryString.COURSE_ID, 0);
         intent.getLongExtra(QueryString.TEACHER_ID, 0);
-        intent.getLongExtra(QueryString.EMERGENCY, 0);
         intent.getLongExtra(QueryString.SID, 0);
         intent.getLongExtra(QueryString.SUBSCRIBE_ID, 0);
     }

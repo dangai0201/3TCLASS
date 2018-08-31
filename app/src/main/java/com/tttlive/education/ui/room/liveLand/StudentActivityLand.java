@@ -1369,10 +1369,15 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                 int x = i % 4 * singleWidth;
                 int y = i >= 4 ? singleHeight : 0;
                 VideoView videoView = mVideoViewList.get(i);
+//                if (isWindowVisible) {
+//                    videoView.setVisibility(View.VISIBLE);
+//                } else {
+//                    videoView.setVisibility(View.GONE);
+//                }
                 if (isWindowVisible) {
-                    videoView.setVisibility(View.VISIBLE);
+                    videoView.setAlpha(1);
                 } else {
-                    videoView.setVisibility(View.GONE);
+                    videoView.setAlpha(0);
                 }
                 videoView.getValueAnimator(singleWidth, singleHeight, x, y).start();
             }
@@ -1476,16 +1481,26 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
                 for (int i = 0; i < mVideoViewList.size(); i++) {
 
                     VideoView courVideo = mVideoViewList.get(i);
-                    if (courVideo.getVisibility() == View.VISIBLE) {
-                        courVideo.setVisibility(View.GONE);
+//                    if (courVideo.getVisibility() == View.VISIBLE) {
+//                        courVideo.setVisibility(View.GONE);
+//                        isWindowVisible = false;
+//                        courVideo.startAnimation(animationIn);
+//                        iv_student_live_navbar_unfold.setBackground(getResources().getDrawable(R.drawable.living_navbar_unfold_icon));
+//
+//                    } else {
+//                        isWindowVisible = true;
+//                        courVideo.setVisibility(View.VISIBLE);
+//                        courVideo.startAnimation(animationOut);
+//                        iv_student_live_navbar_unfold.setBackground(getResources().getDrawable(R.drawable.living_navbar_collapse_icon));
+//                    }
+                    if (courVideo.getAlpha() == 1) {
                         isWindowVisible = false;
-                        courVideo.startAnimation(animationIn);
+                        courVideo.animate().alpha(0).setDuration(1000).start();
                         iv_student_live_navbar_unfold.setBackground(getResources().getDrawable(R.drawable.living_navbar_unfold_icon));
 
                     } else {
                         isWindowVisible = true;
-                        courVideo.setVisibility(View.VISIBLE);
-                        courVideo.startAnimation(animationOut);
+                        courVideo.animate().alpha(1).setDuration(1000).start();
                         iv_student_live_navbar_unfold.setBackground(getResources().getDrawable(R.drawable.living_navbar_collapse_icon));
                     }
                 }
@@ -2366,10 +2381,12 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
 
         }
         int visible = isWindowVisible ? View.VISIBLE : View.GONE;
+        int alpha = isWindowVisible ? 1 : 0;
         Log.e("TAG", "复位");
         ArrayList<ViewInfo> list = getViewInfoList(mVideoViewList.size());
         for (int i = 0; i < mVideoViewList.size(); i++) {
-            mVideoViewList.get(i).setVisibility(visible);
+//            mVideoViewList.get(i).setVisibility(visible);
+            mVideoViewList.get(i).setAlpha(alpha);
             int width = list.get(i).getWidth();
             int height = list.get(i).getHeight();
             int x = list.get(i).getX();
@@ -2382,7 +2399,8 @@ public class StudentActivityLand extends BaseLiveActivity implements PlayerManag
 
             for (int i = 0; i < mVideoViewList.size(); i++) {
 
-                mVideoViewList.get(i).setVisibility(visible);
+//                mVideoViewList.get(i).setVisibility(visible);
+                mVideoViewList.get(i).setAlpha(alpha);
                 int x = i % 4 * singleWidth;
                 int y = i >= 4 ? singleHeight : 0;
                 mVideoViewList.get(i).getValueAnimator(singleWidth, singleHeight, x, y).start();
